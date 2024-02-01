@@ -3,6 +3,8 @@ import { Combobox } from "@/components/etc/combobox";
 import { FrameCard } from "@/components/views/frame-card";
 import { getPopularFrames } from "@/lib/frames";
 
+export const revalidate = 0;
+
 const ExplorePage = async () => {
   const frameData = await getPopularFrames();
 

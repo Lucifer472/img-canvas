@@ -3,6 +3,8 @@ import { Title } from "@/components/views/title";
 
 import { getLatestFrames } from "@/lib/frames";
 
+export const revalidate = 0;
+
 const HomePage = async () => {
   const frameData = await getLatestFrames();
 
