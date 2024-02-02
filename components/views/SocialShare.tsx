@@ -41,7 +41,7 @@ export const FrameSharePop = ({ label, img }: FrameSharePopProps) => {
     <Dialog>
       <DialogTrigger>
         <div className="flex items-center justify-between w-[340px] bg-emerald-500 hover:bg-emerald-600 rounded-full p-2 text-white">
-          <span className="ml-2">{label}</span>
+          <span className="ml-2 text-xs">{label}</span>
           <Share2 className="p-1 bg-emerald-400 rounded-full" />
         </div>
       </DialogTrigger>
@@ -84,13 +84,13 @@ export const FrameSharePop = ({ label, img }: FrameSharePopProps) => {
             or Copy using button given below
           </span>
         </div>
-        <DialogFooter className="rounded-lg px-7">
+        <DialogFooter className="rounded-lg px-4">
           <Button
             variant={"outline"}
             className="w-full flex items-center justify-between"
             onClick={handleCopy}
           >
-            <span>{label}</span>
+            <span className="text-xs">{label}</span>
             <CopyCheckIcon />
           </Button>
         </DialogFooter>
