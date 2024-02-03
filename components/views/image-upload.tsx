@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState, useTransition } from "react";
-
 import { Poppins } from "next/font/google";
+import toast from "react-hot-toast";
 import { CameraIcon, RotateCw } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -78,7 +78,7 @@ export const ImageView = ({
         formData.delete("img");
       }
       formData.append("img", file);
-      formData.append("folder", "frames");
+      formData.append("folder", "users");
     }
 
     if (formData.get("img")) {
@@ -94,13 +94,8 @@ export const ImageView = ({
           }
 
           if (res.status === 400) {
-            res.text().then((r) => {
-              if (r === "File Alredy Exist") {
-                setUserImg(
-                  `https://img.missiongujarat.in/i/frames/${file?.name}`
-                );
-              }
-            });
+            setUserImage(null);
+            toast.error("Something Went Wrong!");
           }
         });
       });
