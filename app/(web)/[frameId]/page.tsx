@@ -10,7 +10,7 @@ import { FrameSharePop } from "@/components/views/SocialShare";
 
 const FramePage = async ({ params }: { params: { frameId: string } }) => {
   const frame = await getFrame(params.frameId);
-  const popular = await getPopularFrames();
+  const popular = await getPopularFrames(0);
 
   if (!frame) return null;
 
