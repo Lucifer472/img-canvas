@@ -30,6 +30,14 @@ export const FrameCard = ({
   profilePic,
   nameUser,
 }: FrameCard) => {
+  const truncateString = (str: string, maxLength: number) => {
+    if (str.length <= maxLength) {
+      return str;
+    } else {
+      return str.substring(0, maxLength - 3) + "...";
+    }
+  };
+
   return (
     <Link
       href={"/" + id}
@@ -52,7 +60,7 @@ export const FrameCard = ({
             poppins.className
           )}
         >
-          {name}
+          {truncateString(name, 15)}
         </h2>
         <div className="flex items-center justify-center gap-x-2">
           <Avatar className="w-6 h-6">

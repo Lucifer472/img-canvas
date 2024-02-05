@@ -8,6 +8,12 @@ const nextConfig = {
         pathname: "/i/**",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        pathname: "/a/**",
+        port: "",
+      },
     ],
   },
 };

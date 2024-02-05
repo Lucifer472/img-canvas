@@ -77,66 +77,6 @@ const ProfilePage = async () => {
                 profilePic={f.user.image}
               />
             ))}
-            {frameData.map((f) => (
-              <FrameCard
-                key={f.id}
-                id={f.id}
-                createdAt={f.createdAt}
-                img={f.img}
-                name={f.name}
-                supporter={f.supporter}
-                nameUser={f.user.name as string}
-                profilePic={f.user.image}
-              />
-            ))}
-            {frameData.map((f) => (
-              <FrameCard
-                key={f.id}
-                id={f.id}
-                createdAt={f.createdAt}
-                img={f.img}
-                name={f.name}
-                supporter={f.supporter}
-                nameUser={f.user.name as string}
-                profilePic={f.user.image}
-              />
-            ))}
-            {frameData.map((f) => (
-              <FrameCard
-                key={f.id}
-                id={f.id}
-                createdAt={f.createdAt}
-                img={f.img}
-                name={f.name}
-                supporter={f.supporter}
-                nameUser={f.user.name as string}
-                profilePic={f.user.image}
-              />
-            ))}
-            {frameData.map((f) => (
-              <FrameCard
-                key={f.id}
-                id={f.id}
-                createdAt={f.createdAt}
-                img={f.img}
-                name={f.name}
-                supporter={f.supporter}
-                nameUser={f.user.name as string}
-                profilePic={f.user.image}
-              />
-            ))}
-            {frameData.map((f) => (
-              <FrameCard
-                key={f.id}
-                id={f.id}
-                createdAt={f.createdAt}
-                img={f.img}
-                name={f.name}
-                supporter={f.supporter}
-                nameUser={f.user.name as string}
-                profilePic={f.user.image}
-              />
-            ))}
           </div>
         </div>
       </div>
