@@ -77,3 +77,27 @@ export const addSupport = async (
     },
   });
 };
+
+export const findFrames = async (skip: number, search: string) => {
+  try {
+    const data = await db.frames.findMany({
+      skip: skip,
+      take: 8,
+      orderBy: {
+        supporter: "desc",
+      },
+      where: {
+        name: {
+          contains: search,
+        },
+      },
+      include: {
+        user: true, // Assuming your relationship is named "user"
+      },
+    });
+
+    return data;
+  } catch (error) {
+    return null;
+  }
+};

@@ -24,8 +24,8 @@ const ExplorePage = async () => {
             img={f.img}
             name={f.name}
             supporter={f.supporter}
-            nameUser={f.user.name}
-            profilePic={f.user.profilePic}
+            nameUser={f.user.name as string}
+            profilePic={f.user.image as string}
           />
         ))}
       </div>

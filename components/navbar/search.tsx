@@ -1,5 +1,6 @@
 "use client";
 import { SearchIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,8 +11,10 @@ export const SearchBar = () => {
   const [search, setSearch] = useState<string | null>(null);
   const [focus, setFocus] = useState(false);
 
+  const router = useRouter();
+
   const handleSearch = () => {
-    console.log(search);
+    router.push("/search/" + search);
   };
 
   return (
@@ -25,7 +28,7 @@ export const SearchBar = () => {
         type="text"
         placeholder="search here..."
         className="border-none focus:outline-none hover:outline-none bg-transparent"
-        onKeyDown={(e: any) => setSearch(e.target.value)}
+        onKeyUp={(e: any) => setSearch(e.target.value)}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
       />

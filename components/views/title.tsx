@@ -9,8 +9,8 @@ const poppins = Poppins({
 
 interface TitleProps {
   title: string;
-  link: string;
-  linkText: string;
+  link?: string;
+  linkText?: string;
   label?: string;
 }
 
@@ -23,15 +23,17 @@ export const Title = ({ title, link, linkText, label }: TitleProps) => {
         >
           {title}
         </h1>
-        <Link
-          href={link}
-          className={cn(
-            "text-sm sm:text-normal md:text-lg text-emerald-600",
-            poppins.className
-          )}
-        >
-          {linkText}
-        </Link>
+        {link && linkText && (
+          <Link
+            href={link}
+            className={cn(
+              "text-sm sm:text-normal md:text-lg text-emerald-600",
+              poppins.className
+            )}
+          >
+            {linkText}
+          </Link>
+        )}
       </div>
       {label && (
         <p className="text-muted-foreground text-xs sm:text-sm md:text-normal">

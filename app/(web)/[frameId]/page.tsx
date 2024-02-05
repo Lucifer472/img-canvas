@@ -19,7 +19,7 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
       <div className="flex flex-col items-center gap-y-8 py-8 basic-container w-full h-full">
         <div className="w-full h-full flex flex-col gap-y-4 items-center">
           <Image
-            src={frame.user.profilePic}
+            src={frame.user.image as string}
             alt="Profile Image"
             width={80}
             height={80}

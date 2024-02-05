@@ -33,10 +33,10 @@ export const FrameCard = ({
   return (
     <Link
       href={"/" + id}
-      className="border border-slate-100 rounded-md shadow-sm w-[320px] h-[500px] xss:w-[230px] xss:h-[390px] hover:shadow-lg"
+      className="border border-slate-100 rounded-md shadow-sm w-[340px] h-[525px] xss:w-[230px] xss:h-[390px] hover:shadow-lg"
     >
       <div className="w-full flex flex-col items-start gap-y-4 p-2">
-        <div className="relative w-[320px] h-[320px] xss:w-[210px] xss:h-[210px]">
+        <div className="relative w-[340px] h-[340px] xss:w-[210px] xss:h-[210px]">
           <div className="absolute w-[320px] h-[320px] xss:w-[210px] xss:h-[210px] overflow-hidden">
             <Image
               src={img}
