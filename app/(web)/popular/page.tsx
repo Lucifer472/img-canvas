@@ -5,8 +5,8 @@ import { getPopularFrames } from "@/lib/frames";
 
 export const revalidate = 0;
 
-const ExplorePage = async () => {
-  const frameData = await getPopularFrames();
+const PopularPage = async () => {
+  const frameData = await getPopularFrames(0);
 
   if (!frameData) return null;
 
@@ -33,4 +33,4 @@ const ExplorePage = async () => {
   );
 };
 
-export default ExplorePage;
+export default PopularPage;

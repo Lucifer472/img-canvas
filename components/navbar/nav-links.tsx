@@ -28,7 +28,7 @@ export const NavLinks = ({ user }: { user: Session | null }) => {
           {user ? (
             <>
               <Link
-                href={"/profile"}
+                href={"/profile/" + user.user?.id}
                 className="w-full py-2 px-2 hover:bg-emerald-100/60 font-medium"
               >
                 My Account

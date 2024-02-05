@@ -23,3 +23,9 @@ export const links = [
     label: "Popular",
   },
 ];
+
+export const timeFormatOptions = {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+};

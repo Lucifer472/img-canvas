@@ -1,12 +1,19 @@
 import { Combobox } from "@/components/etc/combobox";
 
 import { FrameCard } from "@/components/views/frame-card";
-import { getLatestFrames } from "@/lib/frames";
+import { getPopularFrames } from "@/lib/frames";
+import { redirect } from "next/navigation";
 
 export const revalidate = 0;
 
-const ExplorePage = async () => {
-  const frameData = await getLatestFrames(0);
+const PopularPage = async ({ params }: { params: { page: string } }) => {
+  const page = params.page;
+  if (!page) redirect("/popular");
+
+  const pageNumber = parseInt(page);
+  if (isNaN(pageNumber)) redirect("/popular");
+
+  const frameData = await getPopularFrames(pageNumber);
 
   if (!frameData) return null;
 
@@ -25,7 +32,7 @@ const ExplorePage = async () => {
             name={f.name}
             supporter={f.supporter}
             nameUser={f.user.name as string}
-            profilePic={f.user.image}
+            profilePic={f.user.image as string}
           />
         ))}
       </div>
@@ -33,4 +40,4 @@ const ExplorePage = async () => {
   );
 };
 
-export default ExplorePage;
+export default PopularPage;

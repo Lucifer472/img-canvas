@@ -6,7 +6,7 @@ import { getLatestFrames } from "@/lib/frames";
 export const revalidate = 0;
 
 const HomePage = async () => {
-  const frameData = await getLatestFrames();
+  const frameData = await getLatestFrames(0);
 
   if (!frameData) return null;
 

@@ -1,9 +1,10 @@
 import db from "@/lib/db";
 
-export const getLatestFrames = async () => {
+export const getLatestFrames = async (skip: number) => {
   try {
     const data = await db.frames.findMany({
-      take: 20,
+      skip: skip,
+      take: 15,
       orderBy: {
         createdAt: "desc",
       },
@@ -18,10 +19,11 @@ export const getLatestFrames = async () => {
   }
 };
 
-export const getPopularFrames = async () => {
+export const getPopularFrames = async (skip: number) => {
   try {
     const data = await db.frames.findMany({
-      take: 8,
+      skip: skip,
+      take: 15,
       orderBy: {
         supporter: "desc",
       },
@@ -82,7 +84,7 @@ export const findFrames = async (skip: number, search: string) => {
   try {
     const data = await db.frames.findMany({
       skip: skip,
-      take: 8,
+      take: 15,
       orderBy: {
         supporter: "desc",
       },
@@ -93,6 +95,30 @@ export const findFrames = async (skip: number, search: string) => {
       },
       include: {
         user: true, // Assuming your relationship is named "user"
+      },
+    });
+
+    return data;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const findFramesWithId = async (skip: number, userName: string) => {
+  try {
+    const data = await db.frames.findMany({
+      skip: skip,
+      take: 16,
+      orderBy: {
+        supporter: "desc",
+      },
+      where: {
+        user: {
+          username: userName,
+        },
+      },
+      include: {
+        user: true,
       },
     });
 
