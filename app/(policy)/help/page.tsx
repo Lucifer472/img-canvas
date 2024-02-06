@@ -7,6 +7,7 @@ const poppins = Poppins({
   weight: ["600", "800"],
   subsets: ["latin"],
 });
+export const revalidate = 360000; // revalidate at most every hour
 
 const HelpPage = () => {
   return (

@@ -6,6 +6,8 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
+export const revalidate = 360000;
+
 const TermsPage = () => {
   return (
     <section className="w-full h-full flex flex-col items-start gap-y-4 py-6 basic-container px-0 sm:px-2 md:px-4 xl:px-0">

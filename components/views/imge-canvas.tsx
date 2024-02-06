@@ -161,38 +161,41 @@ const ImageCanvas = ({
 
       setStartPosition({ x: e.clientX, y: e.clientY });
     },
-    [dragging, startPosition]
+    [dragging, startPosition, setPosition]
   );
 
   const handleMouseUp = useCallback(() => {
     setDragging(false);
   }, []);
 
-  const handleWheel = useCallback((e: React.WheelEvent) => {
-    e.preventDefault();
-    // Check if the mouse is over the canvas
-    const canvas = canvasRef.current;
-    if (canvas) {
-      const rect = canvas.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
+  const handleWheel = useCallback(
+    (e: React.WheelEvent) => {
+      e.preventDefault();
+      // Check if the mouse is over the canvas
+      const canvas = canvasRef.current;
+      if (canvas) {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
 
-      if (
-        mouseX >= 0 &&
-        mouseX <= canvas.width &&
-        mouseY >= 0 &&
-        mouseY <= canvas.height
-      ) {
-        // Mouse is over the canvas, handle scaling
-        const scaleFactor = e.deltaY > 0 ? 1.1 : 0.9;
-        // @ts-ignore
-        setScale((prevScale: number) => prevScale * scaleFactor);
-      } else {
-        // Mouse is outside the canvas, let the window scroll
-        window.scrollBy(0, e.deltaY);
+        if (
+          mouseX >= 0 &&
+          mouseX <= canvas.width &&
+          mouseY >= 0 &&
+          mouseY <= canvas.height
+        ) {
+          // Mouse is over the canvas, handle scaling
+          const scaleFactor = e.deltaY > 0 ? 1.1 : 0.9;
+          // @ts-ignore
+          setScale((prevScale: number) => prevScale * scaleFactor);
+        } else {
+          // Mouse is outside the canvas, let the window scroll
+          window.scrollBy(0, e.deltaY);
+        }
       }
-    }
-  }, []);
+    },
+    [setScale]
+  );
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -271,7 +274,7 @@ const ImageCanvas = ({
         setPinchDistance(distance);
       }
     },
-    [dragging, startPosition, pinchDistance]
+    [dragging, startPosition, pinchDistance, setPosition, setScale]
   );
 
   const handleTouchEnd = useCallback(() => {

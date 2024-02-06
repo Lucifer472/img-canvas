@@ -1,10 +1,11 @@
+import { redirect } from "next/navigation";
 import { Combobox } from "@/components/etc/combobox";
+import { Pagination } from "@/components/etc/pagination";
 
 import { FrameCard } from "@/components/views/frame-card";
 import { getPopularFrames } from "@/lib/frames";
-import { redirect } from "next/navigation";
 
-export const revalidate = 0;
+export const revalidate = 360;
 
 const PopularPage = async ({ params }: { params: { page: string } }) => {
   const page = params.page;
@@ -13,7 +14,9 @@ const PopularPage = async ({ params }: { params: { page: string } }) => {
   const pageNumber = parseInt(page);
   if (isNaN(pageNumber)) redirect("/popular");
 
-  const frameData = await getPopularFrames(pageNumber);
+  const skip = pageNumber - 1;
+
+  const frameData = await getPopularFrames(skip * 15);
 
   if (!frameData) return null;
 
@@ -36,6 +39,12 @@ const PopularPage = async ({ params }: { params: { page: string } }) => {
           />
         ))}
       </div>
+      <Pagination
+        baseLink="/popular"
+        isBack={pageNumber === 1}
+        isNext={frameData.length === 15}
+        page={pageNumber}
+      />
     </section>
   );
 };

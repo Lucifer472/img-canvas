@@ -1,9 +1,10 @@
 import { Combobox } from "@/components/etc/combobox";
+import { Pagination } from "@/components/etc/pagination";
 
 import { FrameCard } from "@/components/views/frame-card";
 import { getLatestFrames } from "@/lib/frames";
 
-export const revalidate = 0;
+export const revalidate = 360;
 
 const ExplorePage = async () => {
   const frameData = await getLatestFrames(0);
@@ -29,6 +30,7 @@ const ExplorePage = async () => {
           />
         ))}
       </div>
+      <Pagination baseLink="/explore" isBack={true} isNext={true} page={1} />
     </section>
   );
 };

@@ -1,9 +1,10 @@
 import { Combobox } from "@/components/etc/combobox";
+import { Pagination } from "@/components/etc/pagination";
 
 import { FrameCard } from "@/components/views/frame-card";
 import { getPopularFrames } from "@/lib/frames";
 
-export const revalidate = 0;
+export const revalidate = 360;
 
 const PopularPage = async () => {
   const frameData = await getPopularFrames(0);
@@ -29,6 +30,7 @@ const PopularPage = async () => {
           />
         ))}
       </div>
+      <Pagination baseLink="/popular" isBack={true} isNext={true} page={1} />
     </section>
   );
 };
