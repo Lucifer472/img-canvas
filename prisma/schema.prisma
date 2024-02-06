@@ -12,7 +12,7 @@ datasource db {
 
 
 model Frames{
-  id    String          @id    @default(cuid())
+  id    String          @id 
 
   img   String          @db.Text 
   name  String          

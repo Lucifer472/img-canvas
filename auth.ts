@@ -3,6 +3,8 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 
 import authConfig from "@/auth.config";
 import db from "@/lib/db";
+import { addUserName, findUserbyEmail } from "./lib/user";
+import { extractUsername } from "./lib/utils";
 
 export const {
   handlers: { GET, POST },
@@ -16,6 +18,19 @@ export const {
     error: "/login",
   },
   callbacks: {
+    async signIn({ user }) {
+      const mainUser = await findUserbyEmail(user.email as string);
+      if (mainUser) {
+        if (mainUser.username) {
+          return true;
+        }
+        const username = extractUsername(mainUser.email);
+
+        await addUserName(mainUser.email, username);
+        return true;
+      }
+      return false;
+    },
     // @ts-ignore
     async session({ session, token }) {
       if (session.user) {

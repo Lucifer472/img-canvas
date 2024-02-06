@@ -13,3 +13,14 @@ export function datehandler(date: Date) {
   const formattedDate = `${day}-${month}-${year}`;
   return formattedDate;
 }
+
+export const extractUsername = (email: string) => {
+  const atIndex = email.indexOf("@");
+
+  if (atIndex !== -1) {
+    return email.slice(0, atIndex);
+  }
+
+  // If '@' is not present, return the entire email
+  return email;
+};
