@@ -127,3 +127,27 @@ export const findFramesWithId = async (skip: number, userName: string) => {
     return null;
   }
 };
+
+export const createFrameUsingId = async (
+  id: string,
+  img: string,
+  name: string,
+  desc: string,
+  userId: string
+) => {
+  try {
+    const data = await db.frames.create({
+      data: {
+        id,
+        img,
+        name,
+        desc,
+        userId,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    return null;
+  }
+};

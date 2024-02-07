@@ -7,6 +7,7 @@ import { datehandler } from "@/lib/utils";
 import { ImageView } from "@/components/views/image-upload";
 import { PopularFrames } from "@/components/views/PopularFrames";
 import { FrameSharePop } from "@/components/views/SocialShare";
+import Link from "next/link";
 
 const FramePage = async ({ params }: { params: { frameId: string } }) => {
   const frame = await getFrame(params.frameId);
@@ -25,9 +26,13 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
             height={80}
             className="object-cover w-20 h-20 rounded-full"
           />
-          <span className="text-sm text-center font-medium hover:border-b border-black cursor-pointer">
+          <Link
+            href={"/profile/" + frame.user.id}
+            className="text-sm text-center font-medium hover:border-b border-black cursor-pointer"
+          >
             {frame.user.name}
-          </span>
+          </Link>
+          <h2 className="text-2xl font-medium">{frame.name}</h2>
           <div className="flex items-center justify-center gap-x-2">
             <UsersIcon className="w-6 h-6 text-black" />
             <span className="text-[14px] text-gray-800">
@@ -39,7 +44,10 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
             </span>
           </div>
           <p className="text-sm text-gray-800">{frame.desc}</p>
-          <FrameSharePop label={"tbw.zn/" + frame.id} img={frame.img} />
+          <FrameSharePop
+            label={"photosframemaker.com/" + frame.id}
+            img={frame.img}
+          />
         </div>
         <ImageView
           img={frame.img}
