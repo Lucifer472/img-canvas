@@ -2,6 +2,12 @@ import { FrameForm } from "@/components/auth/frame-form";
 import { cn } from "@/lib/utils";
 import { Poppins } from "next/font/google";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Create | Photos Frame Maker",
+};
+
 const poppins = Poppins({
   weight: ["600"],
   subsets: ["latin"],

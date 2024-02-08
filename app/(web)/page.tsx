@@ -10,8 +10,50 @@ const HomePage = async () => {
 
   if (!frameData) return null;
 
+  const jsonLd = `
+  {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home Page",
+        "item": "https://photosframemaker.com/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Explore Page",
+        "item": "https://photosframemaker.com/explore"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Popular Page",
+        "item": "https://photosframemaker.com/popular"
+      },{
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Help Page",
+        "item": "https://photosframemaker.com/help"
+      },{
+        "@type": "ListItem",
+        "position": 5,
+        "name": "Login Page",
+        "item": "https://photosframemaker.com/login"
+      },{
+        "@type": "ListItem",
+        "position": 6,
+        "name": "Terms & Condition Page",
+        "item": "https://photosframemaker.com/terms"
+      }]
+    }
+  `;
+
   return (
     <section className="w-full h-full flex flex-col items-start gap-y-4 py-6 basic-container">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd }}
+      ></script>
       <Title
         label=" Campaigns that gained the most supports in the last 24 hours."
         link="/explore"

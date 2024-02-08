@@ -1,5 +1,11 @@
 import { LoginModal } from "@/components/auth/login-form";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Login Page | Photos Frame Maker",
+};
+
 export const dynamic = "force-static";
 
 const LoginPage = () => {

@@ -1,7 +1,7 @@
 import { Poppins } from "next/font/google";
 import { redirect } from "next/navigation";
 import Image from "next/image";
-import { CalendarRange, Megaphone, Users2 } from "lucide-react";
+import { CalendarRange, Users2 } from "lucide-react";
 
 import { DropDownMenu } from "@/components/etc/dropdown-menu";
 import { FrameCard } from "@/components/views/frame-card";
@@ -11,10 +11,26 @@ import { cn } from "@/lib/utils";
 import { findFramesWithId } from "@/lib/frames";
 import { timeFormatOptions } from "@/constant";
 
+import type { Metadata } from "next";
+
 const poppins = Poppins({
   weight: ["500"],
   subsets: ["latin"],
 });
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { profileId: string };
+}): Promise<Metadata> {
+  const userData = await findUser(params.profileId);
+
+  const newTitle = userData?.name + " | Photos Frame Maker";
+
+  return {
+    title: newTitle,
+  };
+}
 
 const ProfilePage = async ({ params }: { params: { profileId: string } }) => {
   const profileId = params.profileId;
@@ -26,8 +42,30 @@ const ProfilePage = async ({ params }: { params: { profileId: string } }) => {
 
   const frameData = await findFramesWithId(0, userData.username as string);
 
+  const jsonLd = `
+  {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home Page",
+        "item": "https://photosframemaker.com/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "${userData.name}",
+        "item": "https://photosframemaker.com/profile/${params.profileId}"
+      }]
+    }
+  `;
+
   return (
     <div className="w-full h-full flex flex-col gap-y-4 bg-gray-100">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd }}
+      ></script>
       <div className="w-full py-2 bg-white">
         <div className="basic-container flex justify-between items-center p-2">
           <div className="flex items-center justify-center max-w-[250px] gap-x-4">

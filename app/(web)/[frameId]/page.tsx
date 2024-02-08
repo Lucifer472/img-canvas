@@ -9,14 +9,52 @@ import { PopularFrames } from "@/components/views/PopularFrames";
 import { FrameSharePop } from "@/components/views/SocialShare";
 import Link from "next/link";
 
+import type { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { frameId: string };
+}): Promise<Metadata> {
+  const frame = await getFrame(params.frameId);
+
+  const newTitle = frame?.name + " | Photos Frame Maker";
+
+  return {
+    title: newTitle,
+  };
+}
+
 const FramePage = async ({ params }: { params: { frameId: string } }) => {
   const frame = await getFrame(params.frameId);
   const popular = await getPopularFrames(0);
 
   if (!frame) return null;
 
+  const jsonLd = `
+  {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home Page",
+        "item": "https://photosframemaker.com/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "${frame?.name}",
+        "item": "https://photosframemaker.com/${frame?.id}"
+      }]
+    }
+  `;
+
   return (
     <section className="w-full h-full bg-emerald-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd }}
+      ></script>
       <div className="flex flex-col items-center gap-y-8 py-8 basic-container w-full h-full">
         <div className="w-full h-full flex flex-col gap-y-4 items-center">
           <Image

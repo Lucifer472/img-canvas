@@ -3,6 +3,12 @@ import { Poppins } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Help | Photos Frame Maker",
+};
+
 const poppins = Poppins({
   weight: ["600", "800"],
   subsets: ["latin"],
