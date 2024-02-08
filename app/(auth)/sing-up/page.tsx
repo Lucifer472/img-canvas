@@ -1,6 +1,6 @@
 import { LoginModal } from "@/components/auth/login-form";
 
-export const revalidate = 360000;
+export const dynamic = "force-static";
 
 const SingUpPage = () => {
   return (

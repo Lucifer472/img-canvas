@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-export const revalidate = 3600000;
+export const dynamic = "force-static";
 
 const ProfilePage = () => {
   redirect("/");

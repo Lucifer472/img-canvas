@@ -75,7 +75,7 @@ export const FrameForm = () => {
         }
       });
     }
-  }, [file, formData]);
+  }, [file, formData, form]);
 
   const handleUrlChange = (e: any) => {
     // Replace characters that are not alphanumeric, spaces, or dashes with an empty string

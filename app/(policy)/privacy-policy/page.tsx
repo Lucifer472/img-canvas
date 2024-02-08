@@ -6,7 +6,7 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-export const revalidate = 360000;
+export const dynamic = "force-static";
 
 const PrivacyPolicy = () => {
   return (
@@ -24,108 +24,230 @@ const PrivacyPolicy = () => {
       </span>
       <div className="max-w-[750px] mx-auto flex flex-col items-start gap-y-4 w-full">
         <p className="w-full text-left">
-          PT Twibbonize Teknologi Indonesia (“we”, “us”, or “our”) operates
-          twibbonize.com. Our Privacy Policy governs your visit to
-          twibbonize.com and describes how we collect, maintain and disclose
-          information that results from your use of our services.
+          TruepubMedia Solution Private Limited, operating photosframemaker.com,
+          values your privacy. This policy outlines how we collect, maintain,
+          and disclose information resulting from your use of our services.
         </p>
-        <p className="w-full text-left">
-          Your privacy is important to us. It is Twibbonize’s policy to respect
-          your privacy and comply with applicable laws and regulations regarding
-          any personal information we collect about you, including across our
-          website, https://www.twibbonize.com, and other sites we own and
-          operate.
-        </p>
-        <p className="w-full text-left">
-          Personal information is any information about you that can be used to
-          identify you. This includes information about you personally (such as
-          your name, address, and date of birth), your device, and even
-          information about how you use websites or online services.
-        </p>
-        <p className="w-full text-left">
-          If our site contains links to third-party sites and services, please
-          be aware that these sites and services have their own privacy
-          policies. After following a link to any third-party content, you
-          should read the privacy policy information they post about how they
-          collect and use personal information. This Privacy Policy does not
-          apply to your activities after you leave our site. By using
-          Twibbonize, you consent to the collection and use of information in
-          accordance with this policy. Unless otherwise defined in this Privacy
-          Policy, the terms used in this Privacy Policy have the same meanings
-          as in our Terms of Service.
-        </p>
+
         <h2 className={cn("text-xl font-[600]", poppins.className)}>
           Information We Collect
         </h2>
         <p className="w-full text-left">
-          Information we collect falls into one of two categories: “voluntarily
-          provided” information and “automatically collected” information.
+          Voluntarily Provided Information: Actively provided by you during the
+          use of our services.
         </p>
         <p className="w-full text-left">
-          “Voluntarily provided” information refers to any information you
-          knowingly and actively provide us when using or participating in any
-          of our services and promotions.
-        </p>
-        <p className="w-full text-left">
-          “Automatically collected” information refers to any information
-          automatically sent by your devices in the course of accessing our
-          products and services.
+          Automatically Collected Information: Data sent by your devices while
+          accessing our products and services.
         </p>
         <h2 className={cn("text-xl font-[600]", poppins.className)}>
           Log Data
         </h2>
         <p className="w-full text-left">
-          When you visit our website, our servers may automatically log standard
-          data provided by your web browser. It may include your device’s
-          Internet Protocol (IP) address, your browser type and version, the
-          pages you visit, the time and date of your visit, the time spent on
-          each page, and other details about your visit.
+          When you visit our website, servers may log standard data provided by
+          your web browser, including IP address, browser type, pages visited,
+          etc.
         </p>
-        <p className="w-full text-left">
-          Additionally, if you encounter certain errors while using the site, we
-          may automatically collect data about the error and the circumstances
-          surrounding the error. This data may include technical details about
-          your device, what you were trying to do when the error occurred, and
-          other technical information related to the problem. You may or may not
-          receive notification of the error, even at the time it occurred, that
-          the error has occurred, or what the nature of the error is.
-        </p>
-        <p className="w-full text-left">
-          Please note that while this information may not be personally
-          identifiable by itself, it is possible to combine it with other data
-          to personally identify individuals.
-        </p>
-
-        {/* Fair Use Section */}
         <h2 className={cn("text-xl font-[600]", poppins.className)}>
           Device Data
         </h2>
         <p className="w-full text-left">
-          When you visit our website or interact with our services, we may
-          automatically collect data about your device, such as:
+          Automatically collected data about your device, including type,
+          operating system, unique identifier, settings, location, and internet
+          speed.
         </p>
-        <ul className="flex flex-col items-start gap-y-4 list-decimal ml-4">
-          <li>Device Type.</li>
-          <li>Operating System.</li>
-          <li>Unique Device Identifier.</li>
-          <li>Device settings.</li>
-          <li>Geographic location data.</li>
-          <li>Internet Speed</li>
-        </ul>
-        <p className="w-full text-left">
-          The data we collect may depend on the individual settings of your
-          device and software. We recommend checking the policies of your device
-          manufacturer or software provider to learn what information they
-          provide us.
-        </p>
-        {/* Prohibited Activity Section */}
         <h2 className={cn("text-xl font-[600]", poppins.className)}>
           Personal information
         </h2>
         <p className="w-full text-left">
-          We may ask for personal information — for example, when you submit
-          content to us or when you contact us — which may include one or more
-          of the following
+          May include name, email, social media profile, payment preferences,
+          collected when you submit content, contact us, or engage with our
+          services.
+        </p>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          User Generated Content:
+        </h2>
+        <p className="w-full text-left">
+          Material voluntarily provided by users for publication on our website
+          or social media channels.
+        </p>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          Legitimate Reasons to Process Personal Information:
+        </h2>
+        <p className="w-full text-left">
+          We collect and use personal information only when we have a legitimate
+          reason, reasonably necessary to provide our services.
+        </p>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          Information Collection and Use:
+        </h2>
+        <p className="w-full text-left">
+          Collected when registering, participating in competitions, signing up
+          for updates, using our platform, creating content, purchasing
+          packages, contacting us, or mentioning us on social media.
+        </p>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          Security of Your Personal Information:
+        </h2>
+        <p className="w-full text-left">
+          We protect personal information to prevent loss, theft, unauthorized
+          access, or modification. While we aim for security, no method is 100%
+          secure.
+        </p>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          How Long We Keep Your Personal Information:
+        </h2>
+        <p className="w-full text-left">
+          Retained only as long as necessary, considering purposes like
+          compliance, analysis, legal obligations, or archiving.
+        </p>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          Kids Privacy:
+        </h2>
+        <p className="w-full text-left">
+          We don&apos;t direct services to children under 13, and we don&apos;t
+          knowingly collect personal information from them.
+        </p>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          Disclosure of Personal Information to Third Parties:
+        </h2>
+        <p className="w-full text-left">
+          May disclose to third parties, including service providers,
+          affiliates, sponsors, regulatory authorities, or in legal proceedings.
+          Third-party services include Google Analytics, Google AdSense and
+          Weplan Analytics.
+        </p>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          International Transfer of Personal Information:
+        </h2>
+        <p className="w-full text-left">
+          Information may be stored or processed in other locations where
+          partners maintain facilities. Transfer is done in accordance with
+          legal requirements and this Privacy Policy.
+        </p>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          Your Rights and Controlling Your Personal Information:
+        </h2>
+        <ul className="flex flex-col items-start gap-y-4 list-decimal ml-4">
+          <li>
+            Choice: You&lsquo;re not obligated to provide personal information,
+            but it may affect your site or service use.
+          </li>
+          <li>
+            Access: You can request details of the personal information we hold
+            about you.
+          </li>
+          <li>
+            Correction: We&lsquo;ll correct inaccurate information upon request.
+          </li>
+          <li>
+            Non-discrimination: Exercising rights won&apos;t result in
+            discrimination.
+          </li>
+          <li>
+            Data breach notice: We comply with laws regarding data breaches.
+          </li>
+          <li>
+            Complaints: If you believe there&apos;s a violation, contact us or a
+            regulatory body.
+          </li>
+          <li>
+            Unsubscribe: To opt out of communications, contact us or use the
+            provided opt-out facility.
+          </li>
+        </ul>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          Cookies and Business Transfer:
+        </h2>
+        <p className="w-full text-left">
+          Use of Cookies: We use cookies to collect information about your
+          activity on our sites. Cookies are small data pieces stored on your
+          computer, accessed during visits to understand your preferences. Refer
+          to our Cookie Policy for details.
+        </p>
+        <p className="w-full text-left">
+          Business Transfer: In case of acquisition or bankruptcy, data,
+          including personal information, may be transferred to acquiring
+          parties. You acknowledge such transfers, and acquirers will use data
+          following this policy.
+        </p>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          Limits of Our Policy:
+        </h2>
+        <p className="w-full text-left">
+          Our site may link to external sites with different privacy policies.
+          We aren&apos;t responsible for their content and practices..
+        </p>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          Changes to This Policy:
+        </h2>
+        <p className="w-full text-left">
+          We may update the privacy policy at our discretion. Changes will be
+          posted on the same link used to access the policy.
+        </p>
+        <p className="w-full text-left">
+          Significant changes may prompt notifications to users, with details
+          and links to updated policies.
+        </p>
+        <p className="w-full text-left">
+          Consent or opt-in/out options will be provided when required by law.
+        </p>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          Additional Disclosures for Australian Privacy Act (AU) Compliance:
+        </h2>
+        <p className="w-full text-left">
+          Third parties may not be governed by the Australian Privacy Act, and
+          you won&apos;t seek redress under the Act for their acts contrary to
+          Privacy Principles.
+        </p>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          Additional Disclosures for General Data Protection Regulation (GDPR)
+          Compliance (EU):
+        </h2>
+        <p className="w-full text-left">
+          Data Controller/Processor: Photosframemaker is the Data
+          Controller/Processor for the personal information provided.
+        </p>
+        <p className="w-full text-left">
+          Legal Basis for Processing: Personal information is collected and used
+          lawfully, fairly, and transparently. Legal basis includes consent,
+          execution of contracts, legitimate interests, and compliance with the
+          law.
+        </p>
+        <p className="w-full text-left">
+          International Transfers: Transfers outside the European Economic Area
+          (EEA) will be safeguarded with appropriate measures.
+        </p>
+        <p className="w-full text-left">
+          Your Rights: Rights include restricting processing, objecting to
+          processing, data portability, and deletion. Exceptions to deletion
+          exist for legal reasons.
+        </p>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          Additional Disclosures for California (US) Compliance:
+        </h2>
+        <p className="w-full text-left">
+          California Collection Notice: Categories of personal information
+          collected in the past 12 months listed. Used for business purposes,
+          including providing and administering services.
+        </p>
+        <p className="w-full text-left">
+          Right to Know and Erase: California residents have the right to
+          request information about collected personal information and its
+          deletion. To exercise these rights, contact us.
+        </p>
+        <p className="w-full text-left">
+          Shine the Light: California residents can request information about
+          sharing personal information with third parties for direct marketing
+          purposes. Submit requests with &quot;California Privacy Rights
+          Request.&quot;
+        </p>
+        <h2 className={cn("text-xl font-[600]", poppins.className)}>
+          Contact Us:
+        </h2>
+        <p className="w-full text-left">
+          For privacy-related questions or concerns, contact us, Customer
+          Excellence Officer,at truepubmedia@gmail.com.
         </p>
       </div>
     </section>
