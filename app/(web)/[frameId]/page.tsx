@@ -87,7 +87,7 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
           </div>
           <p className="text-sm text-gray-800">{frame.desc}</p>
           <FrameSharePop
-            label={"photosframemaker.com/" + frame.id}
+            label={"https://photosframemaker.com/" + frame.id}
             img={frame.img}
           />
         </div>

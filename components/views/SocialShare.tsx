@@ -23,7 +23,7 @@ interface FrameSharePopProps {
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["500", "700"],
+  weight: ["500", "600"],
 });
 
 export const FrameSharePop = ({ label, img }: FrameSharePopProps) => {
@@ -40,12 +40,12 @@ export const FrameSharePop = ({ label, img }: FrameSharePopProps) => {
   return (
     <Dialog>
       <DialogTrigger>
-        <div className="flex items-center justify-between w-[340px] bg-emerald-500 hover:bg-emerald-600 rounded-full p-2 text-white">
-          <span className="ml-2 text-xs">{label}</span>
+        <div className="flex items-center justify-between w-[280px] sm:w-[340px] bg-emerald-500 hover:bg-emerald-600 rounded-full p-2 text-white">
+          <span className="ml-2 text-[10px] xss:text-xs">{label}</span>
           <Share2 className="p-1 bg-emerald-400 rounded-full" />
         </div>
       </DialogTrigger>
-      <DialogContent className="min-w-[300px] max-w-[400px] w-full h-[600px] p-0 rounded-lg">
+      <DialogContent className="min-w-[280px] max-w-[400px] w-[90%] min-h-[600px] p-0 rounded-lg">
         <DialogHeader className="flex w-full h-full items-center justify-center bg-slate-200 rounded-t-lg">
           <Image
             src={img}
@@ -57,13 +57,21 @@ export const FrameSharePop = ({ label, img }: FrameSharePopProps) => {
         </DialogHeader>
         <div className="bg-white flex flex-col items-center w-full gap-y-4">
           <h2
-            className={cn("text-xl text-center font-[700]", poppins.className)}
+            className={cn(
+              "text-xl text-center font-[600] px-2",
+              poppins.className
+            )}
           >
             Share this campaign to social media
           </h2>
 
           <div className="flex items-center justify-center gap-x-2">
-            <Link href={"/"}>
+            <Link
+              href={
+                "https://www.facebook.com/sharer/sharer.php?u=" +
+                encodeURIComponent(label)
+              }
+            >
               <Image
                 src={"/facebook.svg"}
                 alt="Facebook"
@@ -71,8 +79,16 @@ export const FrameSharePop = ({ label, img }: FrameSharePopProps) => {
                 height={60}
               />
             </Link>
-            <Link href={"/"}>
+            <Link
+              href={
+                "https://twitter.com/intent/tweet?url=" +
+                encodeURIComponent(label)
+              }
+            >
               <Image src={"/x.svg"} alt="Facebook" width={70} height={70} />
+            </Link>
+            <Link href={"whatsapp://send?text=" + encodeURIComponent(label)}>
+              <Image src={"/wp-2.svg"} alt="Facebook" width={60} height={60} />
             </Link>
           </div>
           <span
@@ -84,14 +100,14 @@ export const FrameSharePop = ({ label, img }: FrameSharePopProps) => {
             or Copy using button given below
           </span>
         </div>
-        <DialogFooter className="rounded-lg px-4">
+        <DialogFooter className="rounded-lg mb-4 px-4">
           <Button
             variant={"outline"}
             className="w-full flex items-center justify-between"
             onClick={handleCopy}
           >
-            <span className="text-xs">{label}</span>
-            <CopyCheckIcon />
+            <span className="text-[10px] xss:text-xs">{label}</span>
+            <CopyCheckIcon className="w-4 h-4 xss:w-6 xss:h-6" />
           </Button>
         </DialogFooter>
       </DialogContent>
