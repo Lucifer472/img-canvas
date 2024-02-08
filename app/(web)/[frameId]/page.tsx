@@ -22,6 +22,9 @@ export async function generateMetadata({
 
   return {
     title: newTitle,
+    openGraph: {
+      images: [frame?.img as string],
+    },
   };
 }
 
