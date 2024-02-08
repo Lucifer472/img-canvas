@@ -22,6 +22,7 @@ export async function generateMetadata({
 
   return {
     title: newTitle,
+    description: frame?.desc,
     openGraph: {
       images: [frame?.img as string],
     },
