@@ -44,7 +44,7 @@ export const LoginModal = ({
     <div className="max-w-[350px] w-full py-6 px-4 rounded-md bg-white shadow-lg border border-slate-100">
       <div className="w-full h-full flex items-start justify-start flex-col gap-y-4">
         <Link href={"/"} className="w-full flex items-center justify-center">
-          <Image src={"/logo.svg"} alt="Logo" width={180} height={180} />
+          <Image src={"/logo.png"} alt="Logo" width={180} height={180} />
         </Link>
         <h1
           className={cn(
