@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "Custom Photo Frames, Personalized Framing, Online Photo Frame Creator, DIY Frame Design, Creative Picture Frames, Customizable Photo Gifts, Occasion-Specific Frames, Wedding Photo Frames, Birthday Picture Frames, Holiday Frame Designs, Memory Preservation Tools, Special Event Framing, Elegant Photo Borders, Artistic Frame Templates, Unique Memory Displays, Cherished Moment Frames, Creative Memory Preservation, Easy Online Frame Editor, Custom Text on Frames, Seamless Photo Storytelling",
   openGraph: {
     images: [
-      "https://img.missiongujarat.in/i/blogs/Screenshot 2024-02-08 at 12.18.56â¯PM.png",
+      "https://img.missiongujarat.in/i/blogs/Screenshot 2024-02-09 at 6.24.06â¯PM.png",
     ],
   },
   metadataBase: new URL(process.env.NEXTAUTH_URL as string),

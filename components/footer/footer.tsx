@@ -12,7 +12,7 @@ const Footer = () => {
           className="flex flex-col items-center gap-y-2 hover:bg-emerald-100 p-6 rounded-lg"
         >
           <span className="text-emerald-600">Made With</span>
-          <Image src={"/logo.svg"} alt="Logo" width={140} height={30}></Image>
+          <Image src={"/logo.png"} alt="Logo" width={140} height={30}></Image>
         </Link>
         <ul className="flex items-center justify-center gap-x-4 flex-wrap">
           <li>
