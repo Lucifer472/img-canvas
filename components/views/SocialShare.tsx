@@ -37,11 +37,21 @@ export const FrameSharePop = ({ label, img }: FrameSharePopProps) => {
     }
   };
 
+  const truncateString = (str: string, maxLength: number) => {
+    if (str.length <= maxLength) {
+      return str;
+    } else {
+      return str.substring(0, maxLength - 3) + "...";
+    }
+  };
+
   return (
     <Dialog>
       <DialogTrigger>
         <div className="flex items-center justify-between w-[280px] sm:w-[340px] bg-sky-500 hover:bg-sky-600 rounded-full p-2 text-white">
-          <span className="ml-2 text-[10px] xss:text-xs">{label}</span>
+          <span className="ml-2 text-[10px] xss:text-xs">
+            {truncateString(label, 40)}
+          </span>
           <Share2 className="p-1 bg-sky-400 rounded-full" />
         </div>
       </DialogTrigger>
@@ -106,7 +116,9 @@ export const FrameSharePop = ({ label, img }: FrameSharePopProps) => {
             className="w-full flex items-center justify-between"
             onClick={handleCopy}
           >
-            <span className="text-[10px] xss:text-xs">{label}</span>
+            <span className="text-[10px] xss:text-xs">
+              {truncateString(label, 48)}
+            </span>
             <CopyCheckIcon className="w-4 h-4 xss:w-6 xss:h-6" />
           </Button>
         </DialogFooter>

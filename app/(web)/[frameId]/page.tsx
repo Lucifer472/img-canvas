@@ -74,7 +74,7 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
           >
             {frame.user.name}
           </Link>
-          <h2 className="text-2xl font-medium">{frame.name}</h2>
+          <h2 className="text-2xl font-medium text-center">{frame.name}</h2>
           <div className="flex items-center justify-center gap-x-2">
             <UsersIcon className="w-6 h-6 text-black" />
             <span className="text-[14px] text-gray-800">
@@ -85,7 +85,7 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
               {datehandler(frame.createdAt)}
             </span>
           </div>
-          <p className="text-sm text-gray-800">{frame.desc}</p>
+          <p className="text-sm text-gray-800 text-center">{frame.desc}</p>
           <FrameSharePop
             label={"https://photosframemaker.com/" + frame.id}
             img={frame.img}
