@@ -86,7 +86,7 @@ export const LoginModal = ({
           {text}
           <Link
             href={link}
-            className="text-emerald-500 hover:border-b border-emerald-500"
+            className="text-sky-500 hover:border-b border-sky-500"
           >
             {linkLabel}
           </Link>

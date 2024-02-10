@@ -40,9 +40,9 @@ export const FrameSharePop = ({ label, img }: FrameSharePopProps) => {
   return (
     <Dialog>
       <DialogTrigger>
-        <div className="flex items-center justify-between w-[280px] sm:w-[340px] bg-emerald-500 hover:bg-emerald-600 rounded-full p-2 text-white">
+        <div className="flex items-center justify-between w-[280px] sm:w-[340px] bg-sky-500 hover:bg-sky-600 rounded-full p-2 text-white">
           <span className="ml-2 text-[10px] xss:text-xs">{label}</span>
-          <Share2 className="p-1 bg-emerald-400 rounded-full" />
+          <Share2 className="p-1 bg-sky-400 rounded-full" />
         </div>
       </DialogTrigger>
       <DialogContent className="min-w-[280px] max-w-[400px] w-[90%] min-h-[600px] p-0 rounded-lg">

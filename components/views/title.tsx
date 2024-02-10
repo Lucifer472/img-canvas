@@ -27,7 +27,7 @@ export const Title = ({ title, link, linkText, label }: TitleProps) => {
           <Link
             href={link}
             className={cn(
-              "text-sm sm:text-normal md:text-lg text-emerald-600",
+              "text-sm sm:text-normal md:text-lg text-sky-600",
               poppins.className
             )}
           >

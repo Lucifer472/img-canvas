@@ -20,8 +20,8 @@ export const SearchBar = () => {
   return (
     <div
       className={cn(
-        "max-w-[350px] w-full h-[50px] flex items-center justify-center border-2 border-slate-200 rounded-full hover:border-emerald-400 px-2 mx-2",
-        focus && "border-emerald-400"
+        "max-w-[350px] w-full h-[50px] flex items-center justify-center border-2 border-slate-200 rounded-full hover:border-sky-400 px-2 mx-2",
+        focus && "border-sky-400"
       )}
     >
       <Input
@@ -33,7 +33,7 @@ export const SearchBar = () => {
         onBlur={() => setFocus(false)}
       />
       <Button
-        className="bg-green-600 hover:bg-green-600 rounded-full p-3"
+        className="bg-sky-600 hover:bg-sky-600 rounded-full p-3"
         size={"sm"}
         variant={"ghost"}
         onClick={handleSearch}

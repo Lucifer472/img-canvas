@@ -54,7 +54,7 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
   `;
 
   return (
-    <section className="w-full h-full bg-emerald-50">
+    <section className="w-full h-full bg-sky-50">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLd }}

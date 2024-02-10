@@ -20,7 +20,7 @@ export const MobileNav = ({ user }: { user: Session | null }) => {
         )}
       >
         <HomeIcon
-          className={cn("w-8 h-8", pathname === "/" && "text-emerald-500")}
+          className={cn("w-8 h-8", pathname === "/" && "text-sky-500")}
         />
         <span>Home</span>
       </Link>
@@ -33,8 +33,8 @@ export const MobileNav = ({ user }: { user: Session | null }) => {
         <CompassIcon
           className={cn(
             "w-8 h-8",
-            pathname === "/explore" && "text-emerald-500",
-            pathname === "/popular" && "text-emerald-500"
+            pathname === "/explore" && "text-sky-500",
+            pathname === "/popular" && "text-sky-500"
           )}
         />
         <span>Trending</span>
@@ -48,7 +48,7 @@ export const MobileNav = ({ user }: { user: Session | null }) => {
         <PlusSquareIcon
           className={cn(
             "w-8 h-8",
-            pathname === "/create" && "text-emerald-500"
+            pathname === "/create" && "text-sky-500"
           )}
         />
         <span>Create</span>
@@ -62,8 +62,8 @@ export const MobileNav = ({ user }: { user: Session | null }) => {
         <User
           className={cn(
             "w-8 h-8",
-            pathname === "/login" && "text-emerald-500",
-            pathname === "/profile" && "text-emerald-500"
+            pathname === "/login" && "text-sky-500",
+            pathname === "/profile" && "text-sky-500"
           )}
         />
         <span>{user ? "Account" : "Login"}</span>

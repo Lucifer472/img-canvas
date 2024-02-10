@@ -38,21 +38,21 @@ const HelpPage = () => {
         <div className="col-span-1 flex flex-col items-center justify-center gap-y-4 w-full border-r border-black my-4">
           <Image src={"/wp.svg"} alt="Wp" width={60} height={60} />
           <span>WhatsApp</span>
-          <Link href={"tel"} className="text-emerald-600">
+          <Link href={"tel"} className="text-sky-600">
             +62 812 8000 7325
           </Link>
         </div>
         <div className="col-span-1 flex flex-col items-center justify-center gap-y-4 w-full border-r border-black my-4">
           <Image src={"/call.svg"} alt="Wp" width={60} height={60} />
           <span>Hotline</span>
-          <Link href={"tel"} className="text-emerald-600">
+          <Link href={"tel"} className="text-sky-600">
             +62 812 8000 7325
           </Link>
         </div>
         <div className="col-span-1 flex flex-col items-center justify-center gap-y-4 w-full  my-4">
           <Image src={"/email.svg"} alt="Wp" width={60} height={60} />
           <span>E-Mail</span>
-          <Link href={"tel"} className="text-emerald-600">
+          <Link href={"tel"} className="text-sky-600">
             hi@twibbonize.com
           </Link>
         </div>

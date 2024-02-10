@@ -29,13 +29,13 @@ export const NavLinks = ({ user }: { user: Session | null }) => {
             <>
               <Link
                 href={"/profile/" + user.user?.id}
-                className="w-full py-2 px-2 hover:bg-emerald-100/60 font-medium"
+                className="w-full py-2 px-2 hover:bg-sky-100/60 font-medium"
               >
                 My Account
               </Link>
               <div
                 onClick={() => LogOutMethod()}
-                className="w-full py-2 px-2 hover:bg-emerald-100/60 cursor-pointer"
+                className="w-full py-2 px-2 hover:bg-sky-100/60 cursor-pointer"
               >
                 Sing Out
               </div>
@@ -44,13 +44,13 @@ export const NavLinks = ({ user }: { user: Session | null }) => {
             <>
               <Link
                 href={"/sing-up"}
-                className="w-full py-2 px-2 hover:bg-emerald-100/60 font-medium"
+                className="w-full py-2 px-2 hover:bg-sky-100/60 font-medium"
               >
                 Sign up
               </Link>
               <Link
                 href={"/login"}
-                className="w-full py-2 px-2 hover:bg-emerald-100/60"
+                className="w-full py-2 px-2 hover:bg-sky-100/60"
               >
                 Log In
               </Link>
