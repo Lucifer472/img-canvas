@@ -37,7 +37,11 @@ export const LoginModal = ({
   }, [searchParams]);
 
   const handleGoogle = () => {
-    LoginMethod();
+    LoginMethod("google");
+  };
+
+  const handleFacebook = () => {
+    LoginMethod("facebook");
   };
 
   return (
@@ -72,6 +76,7 @@ export const LoginModal = ({
             <div className="w-full h-[1px] bg-slate-200"></div>
           </div>
           <Button
+            onClick={handleFacebook}
             variant={"outline"}
             size={"lg"}
             className="w-full min-h-[50px]"
