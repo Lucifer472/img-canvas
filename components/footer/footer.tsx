@@ -1,7 +1,8 @@
-import { footerLinks } from "@/constant";
-import { Flag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { footerLinks } from "@/constant";
+
+import { ReportCampain } from "@/components/etc/Report-Camp";
 
 const Footer = () => {
   return (
@@ -16,13 +17,7 @@ const Footer = () => {
         </Link>
         <ul className="flex items-center justify-center gap-x-4 flex-wrap">
           <li>
-            <Link
-              href={"/"}
-              className="flex items-center gap-x-1 hover:underline"
-            >
-              <Flag />
-              Report Campaign
-            </Link>
+            <ReportCampain />
           </li>
           {footerLinks.map((l) => (
             <li key={l.label}>

@@ -77,4 +77,30 @@
   .basic-container {
     @apply max-w-7xl mx-auto px-2 md:px-3 lg:px-4 xl:px-0;
   }
+
+  .download-animation {
+    animation: download 5s ease-in 1s forwards;
+  }
+
+  .text-clip {
+    animation: textClip 5s ease-in 1s forwards;
+  }
+
+  @keyframes download {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 0%;
+    }
+  }
+
+  @keyframes textClip {
+    0% {
+      clip-path: inset(0 0 0 0%);
+    }
+    100% {
+      clip-path: inset(0 0 0 100%);
+    }
+  }
 }

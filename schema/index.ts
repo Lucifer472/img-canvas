@@ -22,3 +22,10 @@ export const FrameSchema = z.object({
     message: "Minimum 6 latters Required",
   }),
 });
+
+export const ReportSchema = z.object({
+  subject: z.string().min(1).max(50),
+  email: z.string().email(),
+  mess: z.string().min(50).max(255),
+  campLink: z.string().min(10),
+});

@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { Poppins } from "next/font/google";
 import toast from "react-hot-toast";
-import { CameraIcon, RotateCw } from "lucide-react";
+import { CameraIcon, ChevronLeft, RotateCw } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -38,6 +38,8 @@ export const ImageView = ({
   const [userImg, setUserImg] = useState<string | null>(null);
   const [cw, setCw] = useState(0);
   const [finalFile, setFinalFile] = useState<any>(null);
+  const [down, setDown] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [isHd, setIsHd] = useState(false);
 
@@ -125,6 +127,18 @@ export const ImageView = ({
     }
   }, [finalFile, isHd]);
 
+  const previewDownload = () => {
+    setDown(!down);
+    if (down === true) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+    setTimeout(() => {
+      setLoading(false);
+    }, 6500);
+  };
+
   const handleDownload = () => {
     supportAdded(id, userId, prevSup, prevSupd).then(() => {
       if (finalFile) {
@@ -198,82 +212,140 @@ export const ImageView = ({
 
   return (
     <div className="flex flex-col gap-y-2 xss:gap-y-6 items-center bg-white min-w-[320px] xss:w-[480px] sm:w-[540px] h-full rounded-md py-4 px-1 xss:py-8 xss:px-4">
-      <ImageCanvas
-        cw={cw}
-        setFile={setFinalFile}
-        img1={img}
-        img2={userImg}
-        scale={scale}
-        position={position}
-        setPosition={setPosition}
-        setScale={setScale}
-      />
-      <Input
-        className="hidden"
-        type="file"
-        id="upload-img"
-        disabled={isPending}
-        onChange={(e: any) => setFile(e.target?.files[0])}
-      />
-      {!file ? (
-        <Button disabled={isPending} asChild>
-          <Label
-            htmlFor="upload-img"
-            className="flex items-center justify-center gap-x-2 py-6 px-4 w-[320px] xss:w-[460px] sm:w-[490px] mt-4"
+      {down ? (
+        <div className="flex flex-col items-center w-full px-2">
+          <div className="w-[300px] h-[300px] my-4 bg-red-500"></div>
+          <div
+            className={cn(
+              "relative w-full my-1 h-[80px] overflow-hidden",
+              loading ? "block" : "hidden"
+            )}
           >
-            <CameraIcon />
-            <span className={cn("text-xl", poppins.className)}>
-              Choose A Photo
-            </span>
-          </Label>
-        </Button>
-      ) : (
-        <div className="flex flex-col items-start justify-start w-full gap-y-4">
-          <div className="w-full flex flex-col xss:flex-row gap-y-2 xss:gap-y-0 items-center justify-evenly">
-            <Button
-              className="flex items-center gap-1 min-w-[22%] h-[45px] bg-emerald-100 hover:bg-emerald-200 text-emerald-600"
-              size={"lg"}
-              onClick={() => setCw((prev) => prev + 15)}
-            >
-              <RotateCw />
-              <span>Roate</span>
-            </Button>
-            <Label
-              className="flex items-center justify-center gap-x-2 h-[45px] p-4 rounded-md bg-emerald-100 hover:bg-emerald-200  text-emerald-600"
-              htmlFor="hd"
-              onClick={() => setIsHd(true)}
-            >
-              HD Image Qulity
-              <Checkbox id="hd" checked={isHd} />
-            </Label>
-            <Label
-              className="flex items-center justify-center gap-x-2 h-[45px] p-4 rounded-md bg-emerald-100 hover:bg-emerald-200  text-emerald-600"
-              htmlFor="removeW"
-            >
-              Remove Watermark
-              <Checkbox id="removeW" />
-            </Label>
-          </div>
-          <div className="w-full flex items-center justify-start gap-x-2">
-            <Label
-              htmlFor="upload-img"
-              onClick={() => setIsHd(false)}
-              className="bg-white p-4 rounded-md border-2 border-emerald-600 cursor-pointer"
-            >
-              <CameraIcon className="w-6 h-6 text-emerald-600" />
-            </Label>
-            <Button
-              size={"lg"}
+            <div className="w-full my-1 h-[80px] bg-sky-100  absolute top-0 left-0"></div>
+            <div className="w-full my-1 h-[80px] bg-sky-500 z-10 absolute top-0 left-[-100%] download-animation"></div>
+            <span
               className={cn(
-                "w-full min-h-[60px] text-white bg-emerald-600 hover:bg-emerald-800 text-xl",
+                "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-xl text-white w-full text-center",
                 poppins.className
               )}
-              onClick={() => handleDownload()}
+            >
+              Processing Photo...
+            </span>
+            <span
+              className={cn(
+                "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-xl text-clip w-full text-center",
+                poppins.className
+              )}
+            >
+              Processing Photo...
+            </span>
+          </div>
+          <div
+            className={cn(
+              "w-full items-center justify-start gap-x-2",
+              !loading ? "flex" : "hidden"
+            )}
+          >
+            <Button
+              onClick={previewDownload}
+              className="flex items-center justify-start gap-x-2 py-6 text-sky-500 hover:text-sky-600 bg-transparent hover:bg-transparent"
+              variant={"outline"}
+              size={"lg"}
+            >
+              <ChevronLeft />
+              <span className="pr-2">Back</span>
+            </Button>
+            <Button
+              onClick={handleDownload}
+              className={cn(
+                "text-lg w-full py-6 bg-sky-500 hover:bg-sky-600",
+                poppins.className
+              )}
             >
               Download
             </Button>
           </div>
         </div>
+      ) : (
+        <>
+          <ImageCanvas
+            cw={cw}
+            setFile={setFinalFile}
+            img1={img}
+            img2={userImg}
+            scale={scale}
+            position={position}
+            setPosition={setPosition}
+            setScale={setScale}
+          />
+          <Input
+            className="hidden"
+            type="file"
+            id="upload-img"
+            disabled={isPending}
+            onChange={(e: any) => setFile(e.target?.files[0])}
+          />
+          {!file ? (
+            <Button disabled={isPending} asChild>
+              <Label
+                htmlFor="upload-img"
+                className="flex items-center justify-center gap-x-2 py-6 px-4 w-[320px] xss:w-[460px] sm:w-[490px] mt-4"
+              >
+                <CameraIcon />
+                <span className={cn("text-xl", poppins.className)}>
+                  Choose A Photo
+                </span>
+              </Label>
+            </Button>
+          ) : (
+            <div className="flex flex-col items-start justify-start w-full gap-y-4">
+              <div className="w-full flex flex-col xss:flex-row gap-y-2 xss:gap-y-0 items-center justify-evenly">
+                <Button
+                  className="flex items-center gap-1 min-w-[22%] h-[45px] bg-emerald-100 hover:bg-emerald-200 text-emerald-600"
+                  size={"lg"}
+                  onClick={() => setCw((prev) => prev + 15)}
+                >
+                  <RotateCw />
+                  <span>Roate</span>
+                </Button>
+                <Label
+                  className="flex items-center justify-center gap-x-2 h-[45px] p-4 rounded-md bg-emerald-100 hover:bg-emerald-200  text-emerald-600"
+                  htmlFor="hd"
+                  onClick={() => setIsHd(true)}
+                >
+                  HD Image Qulity
+                  <Checkbox id="hd" checked={isHd} />
+                </Label>
+                <Label
+                  className="flex items-center justify-center gap-x-2 h-[45px] p-4 rounded-md bg-emerald-100 hover:bg-emerald-200  text-emerald-600"
+                  htmlFor="removeW"
+                >
+                  Remove Watermark
+                  <Checkbox id="removeW" />
+                </Label>
+              </div>
+              <div className="w-full flex items-center justify-start gap-x-2">
+                <Label
+                  htmlFor="upload-img"
+                  onClick={() => setIsHd(false)}
+                  className="bg-white p-4 rounded-md border-2 border-emerald-600 cursor-pointer"
+                >
+                  <CameraIcon className="w-6 h-6 text-emerald-600" />
+                </Label>
+                <Button
+                  size={"lg"}
+                  className={cn(
+                    "w-full min-h-[60px] text-white bg-emerald-600 hover:bg-emerald-800 text-xl",
+                    poppins.className
+                  )}
+                  onClick={previewDownload}
+                >
+                  Download
+                </Button>
+              </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
