@@ -5,7 +5,7 @@ export const revalidate = 300000;
 
 // @ts-ignore
 export default async function sitemap(): MetadataRoute.Sitemap {
-  const url = "http://localhost:3000/";
+  const url = "https://photosframemaker.com/";
 
   const frames = await findAllFrameUrl();
 
