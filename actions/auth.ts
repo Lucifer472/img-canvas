@@ -3,7 +3,7 @@
 import { signIn, signOut } from "@/auth";
 
 export const LoginMethod = async (provider: "google" | "facebook") => {
-  await signIn("google", {
+  await signIn(provider, {
     redirect: true,
     redirectTo: "/",
   });
