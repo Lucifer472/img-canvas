@@ -30,7 +30,7 @@ export async function generateMetadata({
 }
 
 const FramePage = async ({ params }: { params: { frameId: string } }) => {
-  const frame = await getFrame(params.frameId);
+  const frame = await getFrame(decodeURIComponent(params.frameId));
   const popular = await getPopularFrames(0);
 
   if (!frame) return null;

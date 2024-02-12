@@ -151,3 +151,18 @@ export const createFrameUsingId = async (
     return null;
   }
 };
+
+// ALL FRAMES URL
+export const findAllFrameUrl = async () => {
+  try {
+    const data = await db.frames.findMany({
+      take: 1000,
+      select: {
+        id: true,
+      },
+    });
+    return data;
+  } catch (error) {
+    return null;
+  }
+};

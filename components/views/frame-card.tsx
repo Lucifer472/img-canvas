@@ -40,7 +40,7 @@ export const FrameCard = ({
 
   return (
     <Link
-      href={"/" + id}
+      href={"/" + encodeURIComponent(id)}
       className="border border-slate-100 rounded-md shadow-sm w-[340px] h-[525px] xss:w-[230px] xss:h-[390px] hover:shadow-lg"
     >
       <div className="w-full flex flex-col items-start gap-y-4 p-2">
