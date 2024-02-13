@@ -27,6 +27,7 @@ const Footer = () => {
             </li>
           ))}
         </ul>
+        <span>Made in Bharat 🇮🇳 with ❤️ Love</span>
       </div>
     </footer>
   );
