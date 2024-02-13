@@ -1,8 +1,7 @@
-import { LoginModal } from "@/components/auth/login-form";
+import type { Metadata } from "next";
+import { RegisterModal } from "@/components/auth/sing-form";
 
 export const dynamic = "force-static";
-
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Sing Up | Photos Frame Maker",
@@ -10,8 +9,8 @@ export const metadata: Metadata = {
 
 const SingUpPage = () => {
   return (
-    <div className="w-full h-screen min-h-[600px] flex items-center justify-center">
-      <LoginModal
+    <div className="w-full my-8 min-h-[600px] flex items-center justify-center">
+      <RegisterModal
         label="Sing up For an Account"
         text="Alredy Have an Account?"
         link="/login"

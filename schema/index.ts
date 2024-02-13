@@ -29,3 +29,15 @@ export const ReportSchema = z.object({
   mess: z.string().min(50).max(255),
   campLink: z.string().min(10),
 });
+
+export const SingUpSchema = z.object({
+  name: z.string().min(3).max(25),
+  username: z.string().min(3).max(20),
+  password: z.string().min(6),
+  img: z.string(),
+});
+
+export const loginSchema = z.object({
+  username: z.string().min(3).max(20),
+  password: z.string().min(6),
+});

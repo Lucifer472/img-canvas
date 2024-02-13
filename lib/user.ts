@@ -23,6 +23,16 @@ export const findUserbyEmail = async (email: string) => {
   return data;
 };
 
+export const findUserbyUsername = async (username: string) => {
+  const data = await db.user.findUnique({
+    where: {
+      username,
+    },
+  });
+
+  return data;
+};
+
 export const addUserName = async (email: string, username: string) => {
   const data = await db.user.update({
     where: {
@@ -30,6 +40,27 @@ export const addUserName = async (email: string, username: string) => {
     },
     data: {
       username,
+    },
+  });
+
+  return data;
+};
+
+export const addNewUser = async (
+  image: string,
+  password: string,
+  name: string,
+  username: string
+) => {
+  const email = username + "@photosframemaker.com";
+  const data = await db.user.create({
+    data: {
+      image,
+      emailVerified: new Date(),
+      password,
+      name,
+      username,
+      email,
     },
   });
 

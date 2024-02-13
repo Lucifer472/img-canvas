@@ -1,14 +1,13 @@
 "use client";
-import { useEffect, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-
-import { useSearchParams } from "next/navigation";
-import { Poppins } from "next/font/google";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
+import { Poppins } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -22,38 +21,74 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { LoginMethod } from "@/actions/auth";
+import { registerAction } from "@/actions/user";
 
-import { loginSchema } from "@/schema";
+import { SingUpSchema } from "@/schema";
 
 const poppins = Poppins({
   weight: ["400"],
   subsets: ["latin"],
 });
 
-interface LoginModalProps {
+interface RegisterModalProps {
   label: string;
   text: string;
   linkLabel: string;
   link: string;
 }
 
-export const LoginModal = ({
+export const RegisterModal = ({
   label,
   text,
   linkLabel,
   link,
-}: LoginModalProps) => {
+}: RegisterModalProps) => {
   const searchParams = useSearchParams();
+  const [file, setFile] = useState<any>(null);
+  const [img, setImg] = useState("/img-upload-demo.jpg");
 
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof SingUpSchema>>({
+    resolver: zodResolver(SingUpSchema),
     defaultValues: {
+      img: img,
+      name: "",
       password: "",
       username: "",
     },
   });
+
+  const formData = useMemo(() => {
+    const data = new FormData();
+    data.append("folder", "frames");
+    if (file) {
+      data.append("img", file);
+    }
+    return data;
+  }, [file]);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (file) {
+      startTransition(() => {
+        fetch("https://img.missiongujarat.in/api/upload", {
+          method: "POST",
+          body: formData,
+        }).then((res) => {
+          if (res.ok) {
+            res.text().then((res) => {
+              setImg(res);
+              form.setValue("img", res);
+            });
+          } else {
+            toast.error("Something Went Wrong!");
+          }
+        });
+      });
+    }
+  }, [file, formData, form]);
 
   useEffect(() => {
     if (searchParams.get("error")) {
@@ -69,8 +104,23 @@ export const LoginModal = ({
     LoginMethod("facebook");
   };
 
-  const onSubmit = (v: z.infer<typeof loginSchema>) => {
-    LoginMethod("credentials", v.username, v.password);
+  const onSubmit = (v: z.infer<typeof SingUpSchema>) => {
+    registerAction(v).then((res) => {
+      if (res.sucess) {
+        toast.success("User Added!");
+        router.push("/login");
+      }
+
+      if (res.error) {
+        toast.error(res.error);
+        if (res.error === "Username Alredy Exists!") {
+          form.setError("username", {
+            message: "Username Alredy Exist!",
+            type: "required",
+          });
+        }
+      }
+    });
   };
 
   return (
@@ -93,6 +143,21 @@ export const LoginModal = ({
               onSubmit={form.handleSubmit(onSubmit)}
               className="flex items-start flex-col gap-y-4 my-2 w-full"
             >
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Name</FormLabel>
+                    <Input
+                      placeholder="John Doe"
+                      {...field}
+                      className="w-full"
+                    />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="username"
@@ -124,13 +189,30 @@ export const LoginModal = ({
                   </FormItem>
                 )}
               />
+              <div className="w-full">
+                <span className="block my-2">Profile Upload:</span>
+                <Input
+                  type="file"
+                  id="frame-img"
+                  name="frame-img"
+                  disabled={isPending}
+                  className="hidden"
+                  onChange={(e: any) => setFile(e.target.files?.[0])}
+                />
+                <FormLabel
+                  htmlFor="frame-img"
+                  className="w-[250px] h-[250px] mx-auto relative block rounded-md border-2 border-slate-100 cursor-pointer"
+                >
+                  <Image src={img} alt="Demo" fill className="rounded-md" />
+                </FormLabel>
+              </div>
               <Button
                 disabled={isPending}
                 size={"lg"}
                 className="w-full"
                 type="submit"
               >
-                Login
+                Create Account
               </Button>
             </form>
           </Form>

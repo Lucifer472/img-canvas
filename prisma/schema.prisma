@@ -53,6 +53,7 @@ model User{
   email     String       @unique
   emailVerified DateTime? @default(now())
   username  String?     @db.VarChar(45)  @unique
+  password String?
   image  String         @db.Text
   supported   Int       @default(0)
 
