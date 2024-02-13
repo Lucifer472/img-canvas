@@ -69,7 +69,9 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
             className="object-cover w-20 h-20 rounded-full"
           />
           <Link
-            href={"/profile/" + frame.user.id}
+            href={
+              "/profile/" + encodeURIComponent(frame.user.username as string)
+            }
             className="text-sm text-center font-medium hover:border-b border-black cursor-pointer"
           >
             {frame.user.name}

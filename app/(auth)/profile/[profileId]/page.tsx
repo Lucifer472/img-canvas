@@ -6,7 +6,7 @@ import { CalendarRange, Users2 } from "lucide-react";
 import { DropDownMenu } from "@/components/etc/dropdown-menu";
 import { FrameCard } from "@/components/views/frame-card";
 
-import { findUser } from "@/lib/user";
+import { findUserbyUsername } from "@/lib/user";
 import { cn } from "@/lib/utils";
 import { findFramesWithId } from "@/lib/frames";
 import { timeFormatOptions } from "@/constant";
@@ -23,7 +23,9 @@ export async function generateMetadata({
 }: {
   params: { profileId: string };
 }): Promise<Metadata> {
-  const userData = await findUser(params.profileId);
+  const userData = await findUserbyUsername(
+    decodeURIComponent(params.profileId)
+  );
 
   const newTitle = userData?.name + " | Photos Frame Maker";
 
@@ -33,10 +35,10 @@ export async function generateMetadata({
 }
 
 const ProfilePage = async ({ params }: { params: { profileId: string } }) => {
-  const profileId = params.profileId;
+  const profileId = decodeURIComponent(params.profileId);
   if (!profileId) redirect("/");
 
-  const userData = await findUser(profileId);
+  const userData = await findUserbyUsername(profileId);
 
   if (!userData) redirect("/");
 
