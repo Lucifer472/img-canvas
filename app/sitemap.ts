@@ -1,4 +1,5 @@
 import { findAllFrameUrl } from "@/lib/frames";
+import { findAllUserUsername } from "@/lib/user";
 import { MetadataRoute } from "next";
 
 export const revalidate = 300000;
@@ -8,8 +9,10 @@ export default async function sitemap(): MetadataRoute.Sitemap {
   const url = "https://photosframemaker.com/";
 
   const frames = await findAllFrameUrl();
+  const users = await findAllUserUsername();
 
   const data: any = [];
+  const data2: any = [];
 
   if (frames) {
     frames.forEach((f) => {
@@ -18,6 +21,17 @@ export default async function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(),
         changeFrequency: "yearly",
         priority: 0.9,
+      });
+    });
+  }
+
+  if (users) {
+    users.forEach((u) => {
+      data2.push({
+        url: url + "profile/" + encodeURIComponent(u.username as string),
+        lastModified: new Date(),
+        changeFrequency: "yearly",
+        priority: 0.8,
       });
     });
   }
@@ -72,5 +86,6 @@ export default async function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     ...data,
+    ...data2,
   ];
 }

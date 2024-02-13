@@ -66,3 +66,18 @@ export const addNewUser = async (
 
   return data;
 };
+
+// ALL FRAMES URL
+export const findAllUserUsername = async () => {
+  try {
+    const data = await db.user.findMany({
+      take: 1000,
+      select: {
+        username: true,
+      },
+    });
+    return data;
+  } catch (error) {
+    return null;
+  }
+};
