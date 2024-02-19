@@ -272,7 +272,7 @@ const ImageCanvas = ({
         );
 
         // Calculate the pinch scale factor based on the initial and current pinch distances
-        const scaleFactor = distance / (pinchDistance * 8);
+        const scaleFactor = distance / pinchDistance;
         // @ts-ignore
         setScale((prevScale) => prevScale * scaleFactor);
 
