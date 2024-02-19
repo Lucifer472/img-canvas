@@ -146,7 +146,7 @@ const ImageCanvas = ({
         setFile(canvas);
       }
     }
-  }, [frameImage, userImage, scale, position, setFile, cw]);
+  }, [frameImage, userImage, scale, position, setFile, cw, initialRender]);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     setDragging(true);
@@ -272,7 +272,7 @@ const ImageCanvas = ({
         );
 
         // Calculate the pinch scale factor based on the initial and current pinch distances
-        const scaleFactor = (distance * 8) / pinchDistance;
+        const scaleFactor = distance / (pinchDistance * 8);
         // @ts-ignore
         setScale((prevScale) => prevScale * scaleFactor);
 
