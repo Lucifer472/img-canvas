@@ -34,6 +34,7 @@ const ImageCanvas = ({
   const [height, setHeight] = useState(500);
 
   const [windowWidth, setWindowWidth] = useState(1000);
+  const [initialRender, setInitialRender] = useState(true);
 
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
@@ -99,9 +100,14 @@ const ImageCanvas = ({
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         if (userImage) {
-          let drawWidth = userImage.width * scale;
-          let drawHeight = userImage.height * scale;
+          let drawWidth = initialRender
+            ? userImage.width / 2
+            : userImage.width * scale;
+          let drawHeight = initialRender
+            ? userImage.height / 2
+            : userImage.height * scale;
 
+          setInitialRender(false);
           // Save the current state of the context
           ctx.save();
 
@@ -266,7 +272,7 @@ const ImageCanvas = ({
         );
 
         // Calculate the pinch scale factor based on the initial and current pinch distances
-        const scaleFactor = distance / pinchDistance;
+        const scaleFactor = (distance * 8) / pinchDistance;
         // @ts-ignore
         setScale((prevScale) => prevScale * scaleFactor);
 

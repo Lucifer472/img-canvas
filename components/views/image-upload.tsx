@@ -13,6 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import ImageCanvas from "@/components/views/imge-canvas";
 
 import { supportAdded } from "@/actions/frames";
+import Loader from "../loader";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -52,7 +53,7 @@ export const ImageView = ({
   const [frameImage, setFrameImage] = useState<HTMLImageElement | null>(null);
   const [userImage, setUserImage] = useState<HTMLImageElement | null>(null);
 
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
 
   const formData = useMemo(() => {
     return new FormData();
@@ -84,22 +85,22 @@ export const ImageView = ({
     }
 
     if (formData.get("img")) {
-      startTransition(() => {
-        fetch("https://img.missiongujarat.in/api/upload", {
-          method: "POST",
-          body: formData,
-        }).then((res) => {
-          if (res.status === 200) {
-            res.text().then((r) => {
-              setUserImg(r);
-            });
-          }
+      setIsPending(true);
+      fetch("https://img.missiongujarat.in/api/upload", {
+        method: "POST",
+        body: formData,
+      }).then((res) => {
+        if (res.status === 200) {
+          res.text().then((r) => {
+            setUserImg(r);
+          });
+        }
 
-          if (res.status === 400) {
-            setUserImage(null);
-            toast.error("Something Went Wrong!");
-          }
-        });
+        if (res.status === 400) {
+          setUserImage(null);
+          toast.error("Something Went Wrong!");
+        }
+        setIsPending(false);
       });
     }
   }, [file, formData]);
@@ -212,6 +213,7 @@ export const ImageView = ({
 
   return (
     <div className="flex flex-col gap-y-2 xss:gap-y-6 items-center bg-white min-w-[320px] xss:w-[480px] sm:w-[540px] h-full rounded-md py-4 px-1 xss:py-8 xss:px-4">
+      <Loader isOpen={isPending} />
       {down ? (
         <div className="flex flex-col items-center w-full px-2">
           <div className="w-[300px] h-[300px] my-4 bg-red-500"></div>
@@ -299,21 +301,20 @@ export const ImageView = ({
             </Button>
           ) : (
             <div className="flex flex-col items-start justify-start w-full gap-y-4">
-              <div className="w-full flex flex-col xss:flex-row gap-y-2 xss:gap-y-0 items-center justify-evenly">
+              <div className="w-full flex gap-x-2 items-center justify-evenly">
                 <Button
-                  className="flex items-center gap-1 min-w-[22%] h-[45px] bg-emerald-100 hover:bg-emerald-200 text-emerald-600"
+                  className="flex items-center gap-1 px-4 h-[45px] bg-emerald-100 hover:bg-emerald-200 text-emerald-600"
                   size={"lg"}
                   onClick={() => setCw((prev) => prev + 15)}
                 >
                   <RotateCw />
-                  <span>Roate</span>
                 </Button>
                 <Label
-                  className="flex items-center justify-center gap-x-2 h-[45px] p-4 rounded-md bg-emerald-100 hover:bg-emerald-200  text-emerald-600"
+                  className="flex items-center justify-center gap-x-2 h-[45px] py-4 px-2 rounded-md bg-emerald-100 hover:bg-emerald-200  text-emerald-600"
                   htmlFor="hd"
-                  onClick={() => setIsHd(true)}
+                  onClick={() => setIsHd(!isHd)}
                 >
-                  HD Image Qulity
+                  HD Quality
                   <Checkbox id="hd" checked={isHd} />
                 </Label>
                 <Label

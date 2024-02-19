@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 
 import "./globals.css";
 
@@ -7,7 +8,6 @@ import { Toaster } from "react-hot-toast";
 
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -32,6 +32,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Script
+          strategy="beforeInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6808814529890463"
+          crossOrigin="anonymous"
+          async
+        />
         <Toaster position="top-center" />
         <Navbar />
         <main className="">{children}</main>
