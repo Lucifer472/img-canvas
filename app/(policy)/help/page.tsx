@@ -38,7 +38,10 @@ const HelpPage = () => {
         <div className="col-span-1 flex flex-col items-center justify-center gap-y-4 w-full border-r border-black my-4">
           <Image src={"/wp.svg"} alt="Wp" width={60} height={60} />
           <span>WhatsApp</span>
-          <Link href={"tel:+919979451189"} className="text-sky-600">
+          <Link
+            href={"https://api.whatsapp.com/send?phone=+919979451189"}
+            className="text-sky-600"
+          >
             +91 997 945 1189
           </Link>
         </div>
