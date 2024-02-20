@@ -68,7 +68,7 @@ const TermsPage = () => {
           <li>
             Knowingly or negligently use this website or its related services in
             a way that abuses or interferes with our network or other services
-            that Twibbonize provides;
+            that Photos Frame Maker provides;
           </li>
           <li>
             Use this website or its related services to post or publish material
@@ -138,9 +138,9 @@ const TermsPage = () => {
         </h2>
         <p className="w-full text-left">
           You retain intellectual property rights for content submitted to
-          Twibbonize. We require a license to use it, but we don&apos;t claim
-          ownership. By posting content, you grant us a non-exclusive, worldwide
-          license.
+          Photos Frame Maker. We require a license to use it, but we don&apos;t
+          claim ownership. By posting content, you grant us a non-exclusive,
+          worldwide license.
         </p>
         <p className="w-full text-left">
           You can terminate this license by deleting your content or account.

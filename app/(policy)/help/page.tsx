@@ -31,29 +31,32 @@ const HelpPage = () => {
         Contact Us
       </span>
       <p className="w-full text-center text-lg">
-        If you have any questions about Twibbonize, please contact our team. We
-        will be happy to assist you as soon as possible.
+        If you have any questions about PhotosFrameMaker, please contact our
+        team. We will be happy to assist you as soon as possible.
       </p>
       <div className="w-full p-4 mt-4 border-t border-b border-black grid grid-cols-3 items-center">
         <div className="col-span-1 flex flex-col items-center justify-center gap-y-4 w-full border-r border-black my-4">
           <Image src={"/wp.svg"} alt="Wp" width={60} height={60} />
           <span>WhatsApp</span>
-          <Link href={"tel"} className="text-sky-600">
-            +62 812 8000 7325
+          <Link href={"tel:+919979451189"} className="text-sky-600">
+            +91 997 945 1189
           </Link>
         </div>
         <div className="col-span-1 flex flex-col items-center justify-center gap-y-4 w-full border-r border-black my-4">
           <Image src={"/call.svg"} alt="Wp" width={60} height={60} />
           <span>Hotline</span>
-          <Link href={"tel"} className="text-sky-600">
-            +62 812 8000 7325
+          <Link href={"tel:+919979451189"} className="text-sky-600">
+            +91 997 945 1189
           </Link>
         </div>
         <div className="col-span-1 flex flex-col items-center justify-center gap-y-4 w-full  my-4">
           <Image src={"/email.svg"} alt="Wp" width={60} height={60} />
           <span>E-Mail</span>
-          <Link href={"tel"} className="text-sky-600">
-            hi@twibbonize.com
+          <Link
+            href={"mailto:support@truepubmedia.com"}
+            className="text-sky-600"
+          >
+            support@truepubmedia.com
           </Link>
         </div>
       </div>
