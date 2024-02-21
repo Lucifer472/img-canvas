@@ -50,7 +50,7 @@ export const FrameCard = ({
               src={img}
               alt="Image"
               fill
-              className="object-cover aspect-square rounded-md hover:scale-125 transition-transform duration-300"
+              className="object-contain aspect-square rounded-md hover:scale-125 transition-transform duration-300"
             />
           </div>
         </div>
