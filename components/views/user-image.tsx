@@ -25,10 +25,13 @@ export const UserImage = ({
 
   const imgRef = useRef<HTMLCanvasElement | null>(null);
 
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    setIsDragging(true);
-    setStartPosition({ x: e.clientX, y: e.clientY });
-  }, []);
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      setIsDragging(true);
+      setStartPosition({ x: e.clientX, y: e.clientY });
+    },
+    [setIsDragging]
+  );
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
@@ -49,7 +52,7 @@ export const UserImage = ({
 
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
-  }, []);
+  }, [setIsDragging]);
 
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
@@ -85,7 +88,7 @@ export const UserImage = ({
     setTimeout(() => {
       setReduceOp(false);
     }, 1000);
-  }, [scale, rotation]);
+  }, [scale, rotation, setIsDragging, setReduceOp]);
 
   useEffect(() => {
     const canvas = imgRef.current;
@@ -112,23 +115,26 @@ export const UserImage = ({
     };
   }, [handleMouseDown, handleMouseMove, handleMouseUp, handleWheel]);
 
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    if (e.touches.length === 1) {
-      // Single touch, handle like mouse down
-      const touch = e.touches[0];
-      setIsDragging(true);
-      setStartPosition({ x: touch.clientX, y: touch.clientY });
-    } else if (e.touches.length === 2) {
-      // Two touches, calculate initial pinch distance for scaling
-      const touch1 = e.touches[0];
-      const touch2 = e.touches[1];
-      const distance = Math.hypot(
-        touch2.clientX - touch1.clientX,
-        touch2.clientY - touch1.clientY
-      );
-      setPinchDistance(distance);
-    }
-  }, []);
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      if (e.touches.length === 1) {
+        // Single touch, handle like mouse down
+        const touch = e.touches[0];
+        setIsDragging(true);
+        setStartPosition({ x: touch.clientX, y: touch.clientY });
+      } else if (e.touches.length === 2) {
+        // Two touches, calculate initial pinch distance for scaling
+        const touch1 = e.touches[0];
+        const touch2 = e.touches[1];
+        const distance = Math.hypot(
+          touch2.clientX - touch1.clientX,
+          touch2.clientY - touch1.clientY
+        );
+        setPinchDistance(distance);
+      }
+    },
+    [setIsDragging]
+  );
 
   const handleTouchMove = useCallback(
     (e: React.TouchEvent) => {
@@ -170,7 +176,7 @@ export const UserImage = ({
   const handleTouchEnd = useCallback(() => {
     setIsDragging(false);
     setPinchDistance(null);
-  }, []);
+  }, [setIsDragging]);
 
   useEffect(() => {
     const canvas = imgRef.current;
