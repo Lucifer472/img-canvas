@@ -28,7 +28,8 @@ export const NavLinks = ({ user }: { user: Session | null }) => {
           {user ? (
             <>
               <Link
-                href={"/profile/" + user.user?.id}
+                // @ts-ignore
+                href={"/profile/" + user.user?.username}
                 className="w-full py-2 px-2 hover:bg-sky-100/60 font-medium"
               >
                 My Account

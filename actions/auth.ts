@@ -16,7 +16,6 @@ export const LoginMethod = async (
   } else {
     await signIn(provider, {
       redirect: true,
-      redirectTo: "/",
     });
   }
   return;

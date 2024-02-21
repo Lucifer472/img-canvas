@@ -51,7 +51,8 @@ export const MobileNav = ({ user }: { user: Session | null }) => {
         <span className="text-xs text-center w-full mt-2">Create</span>
       </Link>
       <Link
-        href={user ? "/profile/" + user.user?.id : "/login"}
+        // @ts-ignore
+        href={user ? "/profile/" + user.user?.username : "/login"}
         className={cn(
           "flex flex-col items-center justify-center min-w-[23%] w-full h-full cursor-pointer "
         )}

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
       "https://img.missiongujarat.in/i/blogs/Screenshot 2024-02-09 at 6.24.06â¯PM.png",
     ],
   },
-  metadataBase: new URL(process.env.NEXTAUTH_URL as string),
+  metadataBase: new URL(process.env.AUTH_NEXTAUTH_URL as string),
 };
 
 export default function RootLayout({
