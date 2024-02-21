@@ -14,6 +14,12 @@ const nextConfig = {
         pathname: "/a/**",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "platform-lookaside.fbsbx.com",
+        pathname: "/platform/**",
+        port: "",
+      },
     ],
   },
 };

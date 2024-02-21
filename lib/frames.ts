@@ -55,18 +55,15 @@ export const getFrame = async (id: string) => {
   }
 };
 
-export const addSupport = async (
-  id: string,
-  userId: string,
-  prevSup: number,
-  prevSupd: number
-) => {
+export const addSupport = async (id: string, userId: string) => {
   await db.frames.update({
     where: {
       id,
     },
     data: {
-      supporter: prevSup + 1,
+      supporter: {
+        increment: 1,
+      },
     },
   });
 
@@ -75,7 +72,9 @@ export const addSupport = async (
       id: userId,
     },
     data: {
-      supported: prevSupd + 1,
+      supported: {
+        increment: 1,
+      },
     },
   });
 };

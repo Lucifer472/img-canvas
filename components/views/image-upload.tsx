@@ -1,19 +1,23 @@
 "use client";
-import { useEffect, useMemo, useState, useTransition } from "react";
-import { Poppins } from "next/font/google";
+import { useEffect, useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { CameraIcon, ChevronLeft, RotateCw } from "lucide-react";
+import download from "downloadjs";
+import { toPng } from "html-to-image";
 
-import { cn } from "@/lib/utils";
+import { Poppins } from "next/font/google";
+import Image from "next/image";
+import { RotateCw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
-import ImageCanvas from "@/components/views/imge-canvas";
+
+import Loader from "@/components/loader";
+import { UserImage } from "@/components/views/user-image";
 
 import { supportAdded } from "@/actions/frames";
-import Loader from "../loader";
+
+import { cn } from "@/lib/utils";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,80 +28,67 @@ interface ImageViewProps {
   img: string;
   id: string;
   userId: string;
-  prevSup: number;
-  prevSupd: number;
 }
 
-export const ImageView = ({
-  img,
-  id,
-  userId,
-  prevSup,
-  prevSupd,
-}: ImageViewProps) => {
-  const [file, setFile] = useState<File | null>(null);
-  const [userImg, setUserImg] = useState<string | null>(null);
-  const [cw, setCw] = useState(0);
-  const [finalFile, setFinalFile] = useState<any>(null);
+export const ImageView = ({ img, id, userId }: ImageViewProps) => {
   const [down, setDown] = useState(false);
+  const [hd, setHd] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [watermark, setWatermark] = useState(true);
 
-  const [isHd, setIsHd] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [reduceOp, setReduceOp] = useState(false);
+  const [rotation, setRotation] = useState(0);
+  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
 
-  const [size, setSize] = useState(1);
-
-  // scale and posting
-  const [scale, setScale] = useState(1);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  const [frameImage, setFrameImage] = useState<HTMLImageElement | null>(null);
-  const [userImage, setUserImage] = useState<HTMLImageElement | null>(null);
+  const [userImg, setUserImg] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
 
   const [isPending, setIsPending] = useState(false);
+  const [isGetting, setIsGetting] = useState(false);
+
+  const mainDiv = useRef<HTMLDivElement | null>(null);
 
   const formData = useMemo(() => {
-    return new FormData();
-  }, []);
+    const data = new FormData();
+    data.append("folder", "users");
+    if (file) {
+      data.append("img", file);
+    }
+    return data;
+  }, [file]);
 
   useEffect(() => {
-    const picture1 = new window.Image();
-    picture1.crossOrigin = "anonymous";
-    picture1.src = img;
-    picture1.onload = () => {
-      setFrameImage(picture1);
+    const picture = new window.Image();
+    picture.src = img;
+
+    const handleImageLoad = () => {
+      setImageSize({
+        width: picture.width,
+        height: picture.height,
+      });
     };
 
-    const picture2 = new window.Image();
-    picture2.crossOrigin = "anonymous";
-    picture2.src = userImg as string;
-    picture2.onload = () => {
-      setUserImage(picture2);
+    picture.onload = handleImageLoad;
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      picture.onload = null;
     };
-  }, [img, userImg]);
+  }, [img]);
 
   useEffect(() => {
     if (file) {
-      if (formData.get("img")) {
-        formData.delete("img");
-      }
-      formData.append("img", file);
-      formData.append("folder", "users");
-    }
-
-    if (formData.get("img")) {
       setIsPending(true);
       fetch("https://img.missiongujarat.in/api/upload", {
         method: "POST",
         body: formData,
       }).then((res) => {
-        if (res.status === 200) {
-          res.text().then((r) => {
-            setUserImg(r);
+        if (res.ok) {
+          res.text().then((res) => {
+            setUserImg(res);
           });
-        }
-
-        if (res.status === 400) {
-          setUserImage(null);
+        } else {
           toast.error("Something Went Wrong!");
         }
         setIsPending(false);
@@ -105,30 +96,7 @@ export const ImageView = ({
     }
   }, [file, formData]);
 
-  useEffect(() => {
-    if (finalFile) {
-      if (finalFile.width < 500) {
-        if (finalFile.width < 400) {
-          setSize(2);
-        }
-
-        if (finalFile.width < 400 && isHd) {
-          setSize(4);
-        }
-        if (isHd) {
-          setSize(2.5);
-        }
-
-        setSize(1.65);
-      } else if (isHd) {
-        setSize(2);
-      } else {
-        setSize(1);
-      }
-    }
-  }, [finalFile, isHd]);
-
-  const previewDownload = () => {
+  const handlePreviewDownload = () => {
     setDown(!down);
     if (down === true) {
       setLoading(false);
@@ -141,82 +109,124 @@ export const ImageView = ({
   };
 
   const handleDownload = () => {
-    supportAdded(id, userId, prevSup, prevSupd).then(() => {
-      if (finalFile) {
-        // Create a new canvas with double the width
-        const tempCanvas = document.createElement("canvas");
-        tempCanvas.width = finalFile.width * size;
-        tempCanvas.height = finalFile.height * size;
-
-        // Redraw the content on the new canvas
-        const ctx = tempCanvas.getContext("2d");
-
-        if (tempCanvas && ctx) {
-          ctx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-
-          if (userImage) {
-            let drawWidth = userImage.width * scale * size;
-            let drawHeight = userImage.height * scale * size;
-
-            // Save the current state of the context
-            ctx.save();
-
-            // Translate the context to the center of the image
-            ctx.translate(
-              position.x * size + drawWidth / 2,
-              position.y * size + drawHeight / 2
-            );
-
-            // Rotate the context by 15 degrees
-            ctx.rotate((cw * Math.PI) / 180);
-
-            // Draw the rotated user image with calculated dimensions and position
-            ctx.drawImage(
-              userImage,
-              -drawWidth / 2,
-              -drawHeight / 2,
-              drawWidth,
-              drawHeight
-            );
-
-            // Restore the context to its original state
-            ctx.restore();
-          }
-          // Draw the frame image
-          if (frameImage) {
-            ctx.drawImage(
-              frameImage,
-              0,
-              0,
-              tempCanvas.width,
-              tempCanvas.height
-            );
-          }
-
-          const dataURL = tempCanvas.toDataURL("image/png");
-
-          // Create a link element
-          const link = document.createElement("a");
-
-          // Set the href attribute to the data URL
-          link.href = dataURL;
-
-          // Set the download attribute to the desired filename
-          link.download = file?.name || "1.png";
-
-          // Trigger a click event on the link to start the download
-          link.click();
-        }
-      }
-    });
+    setIsGetting(true);
+    if (mainDiv.current) {
+      toPng(mainDiv.current, {
+        includeQueryParams: true,
+        canvasWidth: hd ? imageSize.width * 2 : imageSize.width,
+        canvasHeight: hd ? imageSize.height * 2 : imageSize.height,
+      }).then((dataUrl) => {
+        supportAdded(id, userId).then((res) => {
+          download(dataUrl, "data.png");
+          setIsGetting(false);
+        });
+      });
+    }
   };
 
   return (
-    <div className="flex flex-col gap-y-2 xss:gap-y-6 items-center bg-white min-w-[320px] xss:w-[480px] sm:w-[540px] h-full rounded-md py-4 px-1 xss:py-8 xss:px-4">
+    <div className="w-[320px] xxs:w-[360px] xss:w-[450px] sm:w-[520px] h-full mx-auto">
       <Loader isOpen={isPending} />
-      {down ? (
-        <div className="flex flex-col items-center w-full px-2">
-          <div className="w-[300px] h-[300px] my-4 bg-red-500"></div>
+      <div className="bg-white rounded-lg w-full h-full">
+        <div className="flex flex-col w-full h-full py-4 px-2">
+          <div className="border-2 border-dashed border-border ">
+            <div className="relative overflow-hidden" ref={mainDiv}>
+              {watermark && (
+                <Image
+                  src={"/logo.png"}
+                  alt="watermark"
+                  width={100}
+                  height={50}
+                  className="absolute object-contain z-20 bottom-2 right-2"
+                />
+              )}
+              <Image
+                src={img}
+                alt="Image"
+                width={500}
+                height={500}
+                className={cn(
+                  "object-contain pointer-events-none relative z-10",
+                  isDragging && "opacity-50",
+                  reduceOp && "opacity-50"
+                )}
+              />
+              <UserImage
+                img={userImg}
+                isDragging={isDragging}
+                rotation={rotation}
+                setIsDragging={setIsDragging}
+                setReduceOp={setReduceOp}
+              />
+            </div>
+          </div>
+          {!userImg && (
+            <Button className="mt-4 bg-sky-500 hover:bg-sky-600" asChild>
+              <Label htmlFor="userImg">
+                Upload Image
+                <Input
+                  disabled={userImg === null ? false : true}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  id="userImg"
+                  name="userImg"
+                  onChange={(e: any) => setFile(e.target.files?.[0])}
+                />
+              </Label>
+            </Button>
+          )}
+          {userImg && (
+            <div className="w-full flex items-start mt-4 justify-center gap-x-2">
+              <Button
+                className="bg-sky-500 hover:bg-sky-600 cursor-pointer"
+                onClick={() => setRotation((prev) => prev + 5)}
+              >
+                <RotateCw />
+              </Button>
+              <Button
+                className={cn(
+                  "bg-sky-500 hover:bg-sky-600 cursor-pointer",
+                  hd && "bg-sky-600"
+                )}
+                onClick={() => setHd(!hd)}
+              >
+                HD Quality
+              </Button>
+              <Button
+                className={cn(
+                  "bg-sky-500 hover:bg-sky-600 cursor-pointer",
+                  !watermark && "bg-sky-600"
+                )}
+                onClick={() => setWatermark(!watermark)}
+              >
+                Remove Watermark
+              </Button>
+            </div>
+          )}
+          {userImg && (
+            <Button
+              className="mt-4 bg-sky-500 hover:bg-sky-600"
+              size={"lg"}
+              onClick={handlePreviewDownload}
+            >
+              Download Image
+            </Button>
+          )}
+        </div>
+        <div
+          className={cn(
+            "w-full h-full min-w-[100vw] min-h-[100vh] z-40 top-0 left-0 bg-black bg-opacity-70",
+            down ? "fixed" : "hidden"
+          )}
+        ></div>
+        <div
+          className={cn(
+            "px-2 py-4 bg-white flex flex-col gap-y-4 items-center justify-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md z-50",
+            down ? "fixed" : "hidden"
+          )}
+        >
+          <div className="w-[300px] h-[300px] bg-red-500"></div>
           <div
             className={cn(
               "relative w-full my-1 h-[80px] overflow-hidden",
@@ -242,112 +252,27 @@ export const ImageView = ({
               Processing Photo...
             </span>
           </div>
-          <div
-            className={cn(
-              "w-full items-center justify-start gap-x-2",
-              !loading ? "flex" : "hidden"
-            )}
-          >
-            <Button
-              onClick={previewDownload}
-              className="flex items-center justify-start gap-x-2 py-6 text-sky-500 hover:text-sky-600 bg-transparent hover:bg-transparent"
-              variant={"outline"}
-              size={"lg"}
-            >
-              <ChevronLeft />
-              <span className="pr-2">Back</span>
-            </Button>
-            <Button
-              onClick={handleDownload}
-              className={cn(
-                "text-lg w-full py-6 bg-sky-500 hover:bg-sky-600",
-                poppins.className
-              )}
-            >
-              Download
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <>
-          <ImageCanvas
-            cw={cw}
-            setFile={setFinalFile}
-            img1={img}
-            img2={userImg}
-            scale={scale}
-            position={position}
-            setPosition={setPosition}
-            setScale={setScale}
-          />
-          <Input
-            className="hidden"
-            type="file"
-            id="upload-img"
-            disabled={isPending}
-            onChange={(e: any) => setFile(e.target?.files[0])}
-          />
-          {!file ? (
-            <Button disabled={isPending} asChild>
-              <Label
-                htmlFor="upload-img"
-                className="flex items-center justify-center gap-x-2 py-6 px-4 w-[320px] xss:w-[460px] sm:w-[490px] mt-4"
+          {!loading && (
+            <div className="w-full flex items-center justify-center gap-x-2">
+              <Button
+                className="mt-4 bg-sky-500 hover:bg-sky-600"
+                size={"lg"}
+                onClick={() => setDown(false)}
               >
-                <CameraIcon />
-                <span className={cn("text-xl", poppins.className)}>
-                  Choose A Photo
-                </span>
-              </Label>
-            </Button>
-          ) : (
-            <div className="flex flex-col items-start justify-start w-full gap-y-4">
-              <div className="w-full flex gap-x-2 items-center justify-evenly">
-                <Button
-                  className="flex items-center gap-1 px-4 h-[45px] bg-emerald-100 hover:bg-emerald-200 text-emerald-600"
-                  size={"lg"}
-                  onClick={() => setCw((prev) => prev + 15)}
-                >
-                  <RotateCw />
-                </Button>
-                <Label
-                  className="flex items-center justify-center gap-x-2 h-[45px] py-4 px-2 rounded-md bg-emerald-100 hover:bg-emerald-200  text-emerald-600"
-                  htmlFor="hd"
-                  onClick={() => setIsHd(!isHd)}
-                >
-                  HD Quality
-                  <Checkbox id="hd" checked={isHd} />
-                </Label>
-                <Label
-                  className="flex items-center justify-center gap-x-2 h-[45px] p-4 rounded-md bg-emerald-100 hover:bg-emerald-200  text-emerald-600"
-                  htmlFor="removeW"
-                >
-                  Remove Watermark
-                  <Checkbox id="removeW" />
-                </Label>
-              </div>
-              <div className="w-full flex items-center justify-start gap-x-2">
-                <Label
-                  htmlFor="upload-img"
-                  onClick={() => setIsHd(false)}
-                  className="bg-white p-4 rounded-md border-2 border-emerald-600 cursor-pointer"
-                >
-                  <CameraIcon className="w-6 h-6 text-emerald-600" />
-                </Label>
-                <Button
-                  size={"lg"}
-                  className={cn(
-                    "w-full min-h-[60px] text-white bg-emerald-600 hover:bg-emerald-800 text-xl",
-                    poppins.className
-                  )}
-                  onClick={previewDownload}
-                >
-                  Download
-                </Button>
-              </div>
+                Go Back
+              </Button>
+              <Button
+                className="mt-4 bg-sky-500 hover:bg-sky-600"
+                size={"lg"}
+                onClick={handleDownload}
+                disabled={isGetting}
+              >
+                Download Image
+              </Button>
             </div>
           )}
-        </>
-      )}
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,161 +1,38 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
-interface ImageCanvasProps {
-  img1: string;
-  img2: string | null;
-  setFile: (value: any) => void;
-  cw: number;
-  scale: number;
-  setScale: (value: number) => void;
-  position: { x: number; y: number };
-  setPosition: (value: any) => void;
+interface UserImageProps {
+  isDragging: boolean;
+  setIsDragging: (v: boolean) => void;
+  setReduceOp: (v: boolean) => void;
+  rotation: number;
+  img: string | null;
 }
 
-const ImageCanvas = ({
-  img1,
-  img2,
-  setFile,
-  cw,
-  scale,
-  setScale,
-  position,
-  setPosition,
-}: ImageCanvasProps) => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [frameImage, setFrameImage] = useState<HTMLImageElement | null>(null);
-  const [userImage, setUserImage] = useState<HTMLImageElement | null>(null);
-  const [dragging, setDragging] = useState(false);
+export const UserImage = ({
+  isDragging,
+  setIsDragging,
+  setReduceOp,
+  rotation,
+  img,
+}: UserImageProps) => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
   const [pinchDistance, setPinchDistance] = useState<number | null>(null);
+  const [scale, setScale] = useState(1);
 
-  const [width, setWidth] = useState(500);
-  const [height, setHeight] = useState(500);
-
-  const [windowWidth, setWindowWidth] = useState(1000);
-  const [initialRender, setInitialRender] = useState(true);
-
-  const handleResize = () => {
-    setWindowWidth(window.innerWidth);
-  };
-
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, []);
-
-  useEffect(() => {
-    // Set up event listener on component mount
-    window.addEventListener("resize", handleResize);
-
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (windowWidth < 640) {
-      setWidth(450);
-      setHeight(450);
-    }
-
-    if (windowWidth < 460) {
-      setWidth(350);
-      setHeight(350);
-    }
-
-    if (windowWidth < 360) {
-      setWidth(300);
-      setHeight(300);
-    }
-  }, [windowWidth]);
-
-  useEffect(() => {
-    const picture1 = new window.Image();
-    picture1.crossOrigin = "anonymous";
-    picture1.src = img1;
-    picture1.onload = () => {
-      setFrameImage(picture1);
-    };
-  }, [img1]);
-
-  useEffect(() => {
-    const picture2 = new window.Image();
-    picture2.crossOrigin = "anonymous";
-    if (img2) {
-      picture2.src = img2;
-      picture2.onload = () => {
-        setUserImage(picture2);
-      };
-    }
-  }, [img2]);
-
-  useEffect(() => {
-    if (frameImage) {
-      const canvas = canvasRef.current;
-      const ctx = canvas?.getContext("2d");
-
-      if (canvas && ctx) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        if (userImage) {
-          let drawWidth = initialRender
-            ? userImage.width / 2
-            : userImage.width * scale;
-          let drawHeight = initialRender
-            ? userImage.height / 2
-            : userImage.height * scale;
-
-          setInitialRender(false);
-          // Save the current state of the context
-          ctx.save();
-
-          // Translate the context to the center of the image
-          ctx.translate(
-            position.x + drawWidth / 2,
-            position.y + drawHeight / 2
-          );
-
-          // Rotate the context by 15 degrees
-          ctx.rotate((cw * Math.PI) / 180);
-
-          // Draw the rotated user image with calculated dimensions and position
-          ctx.drawImage(
-            userImage,
-            -drawWidth / 2,
-            -drawHeight / 2,
-            drawWidth,
-            drawHeight
-          );
-
-          // Restore the context to its original state
-          ctx.restore();
-        }
-
-        ctx.globalAlpha = 0.5;
-        // Draw the frame image
-        ctx.drawImage(frameImage, 0, 0, canvas.width, canvas.height);
-        ctx.globalAlpha = 1;
-
-        setTimeout(() => {
-          // Draw the frame image
-          ctx.drawImage(frameImage, 0, 0, canvas.width, canvas.height);
-        }, 1000);
-
-        setFile(canvas);
-      }
-    }
-  }, [frameImage, userImage, scale, position, setFile, cw, initialRender]);
+  const imgRef = useRef<HTMLCanvasElement | null>(null);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    setDragging(true);
+    setIsDragging(true);
     setStartPosition({ x: e.clientX, y: e.clientY });
   }, []);
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
-      if (!dragging) return;
+      if (!isDragging) return;
 
       const deltaX = e.clientX - startPosition.x;
       const deltaY = e.clientY - startPosition.y;
@@ -167,18 +44,18 @@ const ImageCanvas = ({
 
       setStartPosition({ x: e.clientX, y: e.clientY });
     },
-    [dragging, startPosition, setPosition]
+    [isDragging, startPosition, setPosition]
   );
 
   const handleMouseUp = useCallback(() => {
-    setDragging(false);
+    setIsDragging(false);
   }, []);
 
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
       e.preventDefault();
       // Check if the mouse is over the canvas
-      const canvas = canvasRef.current;
+      const canvas = imgRef.current;
       if (canvas) {
         const rect = canvas.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
@@ -204,7 +81,14 @@ const ImageCanvas = ({
   );
 
   useEffect(() => {
-    const canvas = canvasRef.current;
+    setReduceOp(true);
+    setTimeout(() => {
+      setReduceOp(false);
+    }, 1000);
+  }, [scale, rotation]);
+
+  useEffect(() => {
+    const canvas = imgRef.current;
 
     const handleMouseDownEvent = (e: MouseEvent) => handleMouseDown(e as any);
     const handleMouseMoveEvent = (e: MouseEvent) => handleMouseMove(e as any);
@@ -232,7 +116,7 @@ const ImageCanvas = ({
     if (e.touches.length === 1) {
       // Single touch, handle like mouse down
       const touch = e.touches[0];
-      setDragging(true);
+      setIsDragging(true);
       setStartPosition({ x: touch.clientX, y: touch.clientY });
     } else if (e.touches.length === 2) {
       // Two touches, calculate initial pinch distance for scaling
@@ -249,7 +133,7 @@ const ImageCanvas = ({
   const handleTouchMove = useCallback(
     (e: React.TouchEvent) => {
       e.preventDefault();
-      if (e.touches.length === 1 && dragging) {
+      if (e.touches.length === 1 && isDragging) {
         // Single touch, handle like mouse move
         const touch = e.touches[0];
         const deltaX = touch.clientX - startPosition.x;
@@ -280,16 +164,16 @@ const ImageCanvas = ({
         setPinchDistance(distance);
       }
     },
-    [dragging, startPosition, pinchDistance, setPosition, setScale]
+    [isDragging, startPosition, pinchDistance, setPosition, setScale]
   );
 
   const handleTouchEnd = useCallback(() => {
-    setDragging(false);
+    setIsDragging(false);
     setPinchDistance(null);
   }, []);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
+    const canvas = imgRef.current;
 
     const handleTouchStartEvent = (e: TouchEvent) => handleTouchStart(e as any);
     const handleTouchMoveEvent = (e: TouchEvent) => handleTouchMove(e as any);
@@ -310,9 +194,19 @@ const ImageCanvas = ({
     };
   }, [handleTouchStart, handleTouchMove, handleTouchEnd]);
 
+  if (!img) return null;
+
   return (
-    <div
-      style={{ position: "relative" }}
+    <Image
+      ref={imgRef as any}
+      src={img}
+      alt="Image"
+      fill
+      className="object-contain"
+      style={{
+        transform: `translate(${position.x}px, ${position.y}px) rotate(${rotation}deg) scale(${scale})`,
+        cursor: isDragging ? "grabbing" : "grab",
+      }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -320,15 +214,6 @@ const ImageCanvas = ({
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-    >
-      <canvas
-        ref={canvasRef}
-        width={width}
-        height={height}
-        className="border-dashed border-2 border-black rounded-md cursor-move"
-      />
-    </div>
+    />
   );
 };
-
-export default ImageCanvas;

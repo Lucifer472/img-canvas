@@ -6,13 +6,8 @@ import { addSupport, createFrameUsingId, getFrame } from "@/lib/frames";
 import { auth } from "@/auth";
 import { FrameSchema } from "@/schema";
 
-export const supportAdded = async (
-  id: string,
-  userId: string,
-  prevSup: number,
-  prevSupd: number
-) => {
-  await addSupport(id, userId, prevSup, prevSupd);
+export const supportAdded = async (id: string, userId: string) => {
+  await addSupport(id, userId);
   return null;
 };
 

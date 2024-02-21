@@ -93,13 +93,7 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
             img={frame.img}
           />
         </div>
-        <ImageView
-          img={frame.img}
-          id={frame.id}
-          userId={frame.user.id}
-          prevSup={frame.supporter}
-          prevSupd={frame.user.supported}
-        />
+        <ImageView img={frame.img} id={frame.id} userId={frame.user.id} />
         {popular && <PopularFrames frameData={popular} />}
       </div>
     </section>

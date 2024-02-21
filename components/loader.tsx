@@ -9,7 +9,6 @@ const poppins = Poppins({
 });
 
 const Loader = ({ isOpen }: { isOpen: boolean }) => {
-  console.log(isOpen);
   return (
     <>
       <div
