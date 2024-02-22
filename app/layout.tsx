@@ -9,6 +9,8 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
 
+import { auth } from "@/auth";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -25,11 +27,12 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXTAUTH_URL as string),
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await auth();
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -40,8 +43,8 @@ export default function RootLayout({
           async
         />
         <Toaster position="top-center" />
-        <Navbar />
-        <main className="">{children}</main>
+        <Navbar user={user} />
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

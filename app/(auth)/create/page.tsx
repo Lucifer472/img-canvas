@@ -13,8 +13,6 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-export const dynamic = "force-static";
-
 const FrameCreatePage = () => {
   return (
     <div className="w-full h-full flex items-center justify-center my-6">

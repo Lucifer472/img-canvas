@@ -3,11 +3,7 @@ import { SearchBar } from "@/components/navbar/search";
 import { NavLinks } from "@/components/navbar/nav-links";
 import { MobileNav } from "@/components/navbar/mobile-nav";
 
-import { auth } from "@/auth";
-
-const Navbar = async () => {
-  const user = await auth();
-
+const Navbar = ({ user }: { user: any }) => {
   return (
     <>
       <header className="w-full h-20 bg-white border-b border-slate-100 shadow-sm">

@@ -20,14 +20,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 import { checkUrl, createFrames } from "@/actions/frames";
-import { FormError, FormSuccess } from "../message";
+import { FormError, FormSuccess } from "@/components/message";
 import { FrameSchema } from "@/schema";
 
 export const FrameForm = () => {
   const [img, setImg] = useState("/img-upload-demo.jpg");
   const [file, setFile] = useState<null | File>(null);
 
-  const [isPending, startTranstion] = useTransition();
+  const [isPending, startTransition] = useTransition();
 
   const [error, setError] = useState<null | string>(null);
   const [success, setSuccess] = useState<null | string>(null);
@@ -51,7 +51,7 @@ export const FrameForm = () => {
   const debounceUrlChecker = debounce(() => {
     checkUrl(form.getValues("url")).then((res) => {
       if (!res) {
-        setUrlError("Url Alredy Exists!");
+        setUrlError("Url Already Exists!");
       }
       if (res) {
         setUrlError(null);
@@ -71,7 +71,7 @@ export const FrameForm = () => {
             form.setValue("frame", res);
           });
         } else {
-          setError("Something Went Wrong!");
+          setError("Something went wrong!");
         }
       });
     }
@@ -91,7 +91,7 @@ export const FrameForm = () => {
 
   const onSubmit = (values: z.infer<typeof FrameSchema>) => {
     if (urlError) return null;
-    startTranstion(() => {
+    startTransition(() => {
       createFrames(values).then((res) => {
         setError(null);
         setSuccess(null);
