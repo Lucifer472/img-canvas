@@ -10,7 +10,7 @@ const Navbar = async () => {
 
   return (
     <>
-      <header className="w-full h-20 bg-white border-b boder-slate-100 shadow-sm">
+      <header className="w-full h-20 bg-white border-b border-slate-100 shadow-sm">
         <nav className="basic-container w-full h-full flex items-center justify-between">
           <Logo />
           <SearchBar />

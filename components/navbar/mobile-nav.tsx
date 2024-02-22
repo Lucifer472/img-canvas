@@ -54,7 +54,8 @@ export const MobileNav = ({ user }: { user: Session | null }) => {
         // @ts-ignore
         href={user ? "/profile/" + user.user?.username : "/login"}
         className={cn(
-          "flex flex-col items-center justify-center min-w-[23%] w-full h-full cursor-pointer "
+          "flex flex-col items-center justify-center min-w-[23%] w-full h-full cursor-pointer",
+          pathname.startsWith("/profile") && "text-sky-500"
         )}
       >
         <User
