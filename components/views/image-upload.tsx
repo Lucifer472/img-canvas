@@ -109,7 +109,7 @@ export const ImageView = ({ img, id, userId }: ImageViewProps) => {
   };
 
   const handleDownload = () => {
-    setIsGetting(true);
+    // setIsGetting(true);
     if (mainDiv.current) {
       toPng(mainDiv.current, {
         includeQueryParams: true,
@@ -118,7 +118,7 @@ export const ImageView = ({ img, id, userId }: ImageViewProps) => {
       }).then((dataUrl) => {
         supportAdded(id, userId).then((res) => {
           download(dataUrl, "data.png");
-          setIsGetting(false);
+          // setIsGetting(false);
         });
       });
     }
@@ -208,7 +208,7 @@ export const ImageView = ({ img, id, userId }: ImageViewProps) => {
             <Button
               className="mt-4 bg-sky-500 hover:bg-sky-600"
               size={"lg"}
-              onClick={handlePreviewDownload}
+              onClick={handleDownload}
             >
               Download Image
             </Button>
