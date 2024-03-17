@@ -6,7 +6,7 @@ import { toPng } from "html-to-image";
 
 import { Poppins } from "next/font/google";
 import Image from "next/image";
-import { RotateCw } from "lucide-react";
+import { CopyIcon, RotateCw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -30,10 +30,15 @@ interface ImageViewProps {
   userId: string;
 }
 
+enum STEP {
+  "UPLOAD",
+  "PREVIEW",
+  "DOWNLOAD",
+  "SHARE",
+}
+
 export const ImageView = ({ img, id, userId }: ImageViewProps) => {
-  const [down, setDown] = useState(false);
   const [hd, setHd] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [watermark, setWatermark] = useState(true);
 
   const [isDragging, setIsDragging] = useState(false);
@@ -46,6 +51,10 @@ export const ImageView = ({ img, id, userId }: ImageViewProps) => {
 
   const [isPending, setIsPending] = useState(false);
   const [isGetting, setIsGetting] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const [step, setStep] = useState<STEP>(0);
+  const [ch, setCh] = useState("Your Name");
 
   const mainDiv = useRef<HTMLDivElement | null>(null);
 
@@ -87,6 +96,7 @@ export const ImageView = ({ img, id, userId }: ImageViewProps) => {
         if (res.ok) {
           res.text().then((res) => {
             setUserImg(res);
+            setStep(1);
           });
         } else {
           toast.error("Something Went Wrong!");
@@ -97,8 +107,8 @@ export const ImageView = ({ img, id, userId }: ImageViewProps) => {
   }, [file, formData]);
 
   const handlePreviewDownload = () => {
-    setDown(!down);
-    if (down === true) {
+    setStep(2);
+    if (step === 2) {
       setLoading(false);
     } else {
       setLoading(true);
@@ -109,7 +119,7 @@ export const ImageView = ({ img, id, userId }: ImageViewProps) => {
   };
 
   const handleDownload = () => {
-    // setIsGetting(true);
+    setIsGetting(true);
     if (mainDiv.current) {
       toPng(mainDiv.current, {
         includeQueryParams: true,
@@ -117,10 +127,44 @@ export const ImageView = ({ img, id, userId }: ImageViewProps) => {
         canvasHeight: hd ? imageSize.height * 2 : imageSize.height,
       }).then((dataUrl) => {
         supportAdded(id, userId).then((res) => {
-          download(dataUrl, "data.png");
-          // setIsGetting(false);
+          download(
+            dataUrl,
+            file ? file.name.slice(0, -4) + ".png" : "data.png"
+          );
+          setStep(3);
+          setIsGetting(false);
         });
       });
+    }
+  };
+
+  const resetState = () => {
+    setStep(0);
+    setUserImg(null);
+    setFile(null);
+    setImageSize({ width: 0, height: 0 });
+    setRotation(0);
+    setHd(false);
+    setWatermark(false);
+    setCh("Your Name");
+  };
+
+  const handleCopy = () => {
+    if (navigator) {
+      navigator.clipboard
+        .writeText(
+          "Hi, i'm " +
+            ch +
+            ", I'm ready to support this campaign " +
+            "Get yourself this Photoframemaker at https://photosframemaker.com/" +
+            id +
+            " Don't forget to follow @photoframemaker for further updates! #photosframemaker"
+        )
+        .then(() => {
+          toast.success("Text Copied!");
+        });
+    } else {
+      toast.error("Something Went Wrong!");
     }
   };
 
@@ -130,37 +174,70 @@ export const ImageView = ({ img, id, userId }: ImageViewProps) => {
       <div className="bg-white rounded-lg w-full h-full">
         <div className="flex flex-col w-full h-full py-4 px-2">
           <div className="border-2 border-dashed border-border ">
-            <div className="relative overflow-hidden" ref={mainDiv}>
-              {watermark && (
-                <Image
-                  src={"/logo.png"}
-                  alt="watermark"
-                  width={100}
-                  height={50}
-                  className="absolute object-contain z-20 bottom-2 right-2"
-                />
-              )}
-              <Image
-                src={img}
-                alt="Image"
-                width={500}
-                height={500}
-                className={cn(
-                  "object-contain pointer-events-none relative z-10",
-                  isDragging && "opacity-50",
-                  reduceOp && "opacity-50"
+            {step !== 3 && (
+              <div className="relative overflow-hidden" ref={mainDiv}>
+                {watermark && (
+                  <Image
+                    src={"/logo.png"}
+                    alt="watermark"
+                    width={100}
+                    height={50}
+                    className="absolute object-contain z-20 bottom-2 right-2"
+                  />
                 )}
-              />
-              <UserImage
-                img={userImg}
-                isDragging={isDragging}
-                rotation={rotation}
-                setIsDragging={setIsDragging}
-                setReduceOp={setReduceOp}
-              />
-            </div>
+                <Image
+                  src={img}
+                  alt="Image"
+                  width={500}
+                  height={500}
+                  className={cn(
+                    "object-contain pointer-events-none relative z-10",
+                    isDragging && "opacity-50",
+                    reduceOp && "opacity-50"
+                  )}
+                />
+                <UserImage
+                  img={userImg}
+                  isDragging={isDragging}
+                  rotation={rotation}
+                  setIsDragging={setIsDragging}
+                  setReduceOp={setReduceOp}
+                />
+              </div>
+            )}
+            {step === 3 && (
+              <div className="w-full min-h-[450px] bg-white flex flex-col gap-y-2 px-4 py-6">
+                <p className="flex items-center justify-start gap-x-1 text-sm break-words">
+                  Hi, I&apos;m{" "}
+                  <input
+                    type="text"
+                    className="border border-[#f0f0f0] min-w-[80px] rounded-sm px-2 py-1 text-sky-500 text-sm"
+                    style={{
+                      width: `${ch.length + 4}ch`,
+                    }}
+                    defaultValue={ch}
+                    onChange={(e) => setCh(e.target.value)}
+                  />{" "}
+                  , I&apos;m ready to support this campaign!
+                </p>
+                <p className="text-sm w-full mt-8">
+                  (Mention 3 of your friends or more here)
+                  <br />
+                  <br />
+                  Get yourself this Photoframemaker at{" "}
+                  {`photosframemaker.com/${id}`}
+                  <br />
+                  <br />
+                  Don&apos;t forget to follow @photoframemaker for further
+                  updates!
+                  <br />
+                  <br />
+                  #photoframemaker
+                </p>
+              </div>
+            )}
           </div>
-          {!userImg && (
+          {step === 0 && (
             <Button className="mt-4 bg-sky-500 hover:bg-sky-600" asChild>
               <Label htmlFor="userImg">
                 Upload Image
@@ -176,7 +253,7 @@ export const ImageView = ({ img, id, userId }: ImageViewProps) => {
               </Label>
             </Button>
           )}
-          {userImg && (
+          {step === 1 && (
             <div className="w-full flex items-start mt-4 justify-center gap-x-2">
               <Button
                 className="bg-sky-500 hover:bg-sky-600 cursor-pointer"
@@ -204,26 +281,50 @@ export const ImageView = ({ img, id, userId }: ImageViewProps) => {
               </Button>
             </div>
           )}
-          {userImg && (
+          {step === 1 && (
             <Button
               className="mt-4 bg-sky-500 hover:bg-sky-600"
               size={"lg"}
-              onClick={handleDownload}
+              onClick={handlePreviewDownload}
             >
               Download Image
             </Button>
+          )}
+          {step === 3 && (
+            <div className="w-full flex items-start mt-4 justify-center gap-x-2">
+              <Button
+                variant={"outline"}
+                className="border-sky-500 hover:border-sky-600 text-sky-500 hover:text-sky-600 cursor-pointer"
+                onClick={() => setStep(1)}
+              >
+                Go Back
+              </Button>{" "}
+              <Button
+                variant={"outline"}
+                className="border-sky-500 hover:border-sky-600 cursor-pointer"
+                onClick={handleCopy}
+              >
+                <CopyIcon className="text-sky-500" />
+              </Button>
+              <Button
+                className="bg-sky-500 hover:bg-sky-600 cursor-pointer w-full"
+                onClick={resetState}
+              >
+                DONE
+              </Button>
+            </div>
           )}
         </div>
         <div
           className={cn(
             "w-full h-full min-w-[100vw] min-h-[100vh] z-40 top-0 left-0 bg-black bg-opacity-70",
-            down ? "fixed" : "hidden"
+            step === 2 ? "fixed" : "hidden"
           )}
         ></div>
         <div
           className={cn(
             "px-2 py-4 bg-white flex flex-col gap-y-4 items-center justify-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md z-50",
-            down ? "fixed" : "hidden"
+            step === 2 ? "fixed" : "hidden"
           )}
         >
           <div className="w-[300px] h-[300px] bg-red-500"></div>
@@ -257,7 +358,7 @@ export const ImageView = ({ img, id, userId }: ImageViewProps) => {
               <Button
                 className="mt-4 bg-sky-500 hover:bg-sky-600"
                 size={"lg"}
-                onClick={() => setDown(false)}
+                onClick={() => setStep(1)}
               >
                 Go Back
               </Button>

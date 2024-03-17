@@ -165,3 +165,17 @@ export const findAllFrameUrl = async () => {
     return null;
   }
 };
+
+export const removeFrame = async (id: string) => {
+  try {
+    const data = await db.frames.delete({
+      where: {
+        id,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    return null;
+  }
+};

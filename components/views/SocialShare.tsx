@@ -50,7 +50,7 @@ export const FrameSharePop = ({ label, img }: FrameSharePopProps) => {
       <DialogTrigger>
         <div className="flex items-center justify-between w-[280px] sm:w-[340px] bg-sky-500 hover:bg-sky-600 rounded-full p-2 text-white">
           <span className="ml-2 text-[10px] xss:text-xs">
-            {truncateString(label, 40)}
+            {truncateString("https://photosframemaker.com/" + label, 40)}
           </span>
           <Share2 className="p-1 bg-sky-400 rounded-full" />
         </div>
@@ -79,8 +79,9 @@ export const FrameSharePop = ({ label, img }: FrameSharePopProps) => {
             <Link
               href={
                 "https://www.facebook.com/sharer/sharer.php?u=" +
-                encodeURIComponent(label)
+                encodeURIComponent("https://photosframemaker.com/" + label)
               }
+              target="_blank"
             >
               <Image
                 src={"/facebook.svg"}
@@ -92,12 +93,21 @@ export const FrameSharePop = ({ label, img }: FrameSharePopProps) => {
             <Link
               href={
                 "https://twitter.com/intent/tweet?url=" +
-                encodeURIComponent(label)
+                encodeURIComponent("https://photosframemaker.com/" + label)
               }
+              target="_blank"
             >
               <Image src={"/x.svg"} alt="Facebook" width={70} height={70} />
             </Link>
-            <Link href={"whatsapp://send?text=" + encodeURIComponent(label)}>
+            <Link
+              href={
+                "https://api.whatsapp.com/send/?text=" +
+                " Get yourself this Photoframemaker at " +
+                encodeURIComponent("https://photosframemaker.com/" + label) +
+                " Don't forget to follow @photoframemaker for further updates! #photoframemaker"
+              }
+              target="_blank"
+            >
               <Image src={"/wp-2.svg"} alt="Facebook" width={60} height={60} />
             </Link>
           </div>
@@ -117,7 +127,7 @@ export const FrameSharePop = ({ label, img }: FrameSharePopProps) => {
             onClick={handleCopy}
           >
             <span className="text-[10px] xss:text-xs">
-              {truncateString(label, 48)}
+              {truncateString("https://photosframemaker.com/" + label, 48)}
             </span>
             <CopyCheckIcon className="w-4 h-4 xss:w-6 xss:h-6" />
           </Button>

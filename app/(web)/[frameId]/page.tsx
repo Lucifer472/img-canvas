@@ -1,5 +1,9 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ClockIcon, UsersIcon } from "lucide-react";
+import Link from "next/link";
+
+import { auth } from "@/auth";
 
 import { getFrame, getPopularFrames } from "@/lib/frames";
 import { datehandler } from "@/lib/utils";
@@ -7,9 +11,7 @@ import { datehandler } from "@/lib/utils";
 import { ImageView } from "@/components/views/image-upload";
 import { PopularFrames } from "@/components/views/PopularFrames";
 import { FrameSharePop } from "@/components/views/SocialShare";
-import Link from "next/link";
-
-import type { Metadata } from "next";
+import DeleteFrameForm from "@/components/auth/delete-frame-form";
 
 export async function generateMetadata({
   params,
@@ -32,6 +34,8 @@ export async function generateMetadata({
 const FramePage = async ({ params }: { params: { frameId: string } }) => {
   const frame = await getFrame(decodeURIComponent(params.frameId));
   const popular = await getPopularFrames(0);
+
+  const session = await auth();
 
   if (!frame) return null;
 
@@ -76,6 +80,11 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
           >
             {frame.user.name}
           </Link>
+          {session &&
+            session.user &&
+            session.user.email === frame.user.email && (
+              <DeleteFrameForm id={frame.id} />
+            )}
           <h2 className="text-2xl font-medium text-center">{frame.name}</h2>
           <div className="flex items-center justify-center gap-x-2">
             <UsersIcon className="w-6 h-6 text-black" />
@@ -88,10 +97,7 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
             </span>
           </div>
           <p className="text-sm text-gray-800 text-center">{frame.desc}</p>
-          <FrameSharePop
-            label={"https://photosframemaker.com/" + frame.id}
-            img={frame.img}
-          />
+          <FrameSharePop label={frame.id} img={frame.img} />
         </div>
         <ImageView img={frame.img} id={frame.id} userId={frame.user.id} />
         {popular && <PopularFrames frameData={popular} />}

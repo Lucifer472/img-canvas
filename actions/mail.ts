@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sentReportCampain = async (
+export const sentReportCampaign = async (
   subject: string,
   email: string,
   message: string,

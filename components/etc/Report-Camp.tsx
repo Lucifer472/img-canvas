@@ -37,7 +37,7 @@ import { Button } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils";
 import { ReportSchema } from "@/schema";
-import { sentReportCampain } from "@/actions/mail";
+import { sentReportCampaign } from "@/actions/mail";
 import toast from "react-hot-toast";
 
 const poppins = Poppins({
@@ -59,7 +59,7 @@ export const ReportCampain = () => {
 
   const onSubmit = (v: z.infer<typeof ReportSchema>) => {
     startTransition(() => {
-      sentReportCampain(v.subject, v.email, v.mess, v.campLink).then((res) => {
+      sentReportCampaign(v.subject, v.email, v.mess, v.campLink).then((res) => {
         if (res) {
           toast.success("Email Sent Successfully!");
           form.reset();
@@ -74,7 +74,7 @@ export const ReportCampain = () => {
     <Dialog>
       <DialogTrigger className="flex items-center gap-x-1 hover:underline">
         <FlagIcon />
-        Report Campain
+        Report Campaign
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -103,14 +103,17 @@ export const ReportCampain = () => {
                       </FormControl>
                       <SelectContent>
                         <SelectItem value="Plagiarism">Plagiarism</SelectItem>
-                        <SelectItem value="Sensetive Content">
-                          Sensetive Content
+                        <SelectItem value="Sensitive Content">
+                          Sensitive Content
                         </SelectItem>
-                        <SelectItem value="Dengerous Content">
-                          Dengerous Content
+                        <SelectItem value="Dangerous Content">
+                          Dangerous Content
                         </SelectItem>
                         <SelectItem value="Spam Content">
                           Spam Content
+                        </SelectItem>
+                        <SelectItem value="Remove Campaign">
+                          Remove Campaign
                         </SelectItem>
                       </SelectContent>
                     </Select>
@@ -162,7 +165,7 @@ export const ReportCampain = () => {
                       <Input
                         {...field}
                         className="w-full"
-                        placeholder="Link of the Campain"
+                        placeholder="Link of the Campaign"
                       />
                     </FormControl>
                     <FormMessage />
