@@ -29,9 +29,11 @@ const poppins = Poppins({
 export const FrameSharePop = ({ label, img }: FrameSharePopProps) => {
   const handleCopy = () => {
     if (navigator) {
-      navigator.clipboard.writeText(label).then(() => {
-        toast.success("Text Copied!");
-      });
+      navigator.clipboard
+        .writeText("https://photosframemaker.com/" + label)
+        .then(() => {
+          toast.success("Text Copied!");
+        });
     } else {
       toast.error("Something Went Wrong!");
     }

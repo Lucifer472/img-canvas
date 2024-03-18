@@ -55,7 +55,7 @@ export const ImageView = ({ imgName, img, id, userId }: ImageViewProps) => {
   const [isGetting, setIsGetting] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const [step, setStep] = useState<STEP>(0);
+  const [step, setStep] = useState<STEP>(3);
   const [ch, setCh] = useState("Your Name");
 
   const mainDiv = useRef<HTMLDivElement | null>(null);
@@ -146,6 +146,21 @@ export const ImageView = ({ imgName, img, id, userId }: ImageViewProps) => {
     setHd(false);
     setWatermark(false);
     setCh("Your Name");
+  };
+
+  const handleCopy = () => {
+    if (navigator) {
+      navigator.clipboard
+        .writeText(
+          `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here)                                              
+Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
+        )
+        .then(() => {
+          toast.success("Text Copied!");
+        });
+    } else {
+      toast.error("Something Went Wrong!");
+    }
   };
 
   return (
@@ -271,35 +286,112 @@ export const ImageView = ({ imgName, img, id, userId }: ImageViewProps) => {
             </Button>
           )}
           {step === 3 && (
-            <div className="w-full flex items-start mt-4 justify-center gap-x-2">
-              <Button
-                variant={"outline"}
-                className="border-sky-500 hover:border-sky-600 text-sky-500 hover:text-sky-600 cursor-pointer"
-                onClick={() => setStep(1)}
-              >
-                Go Back
-              </Button>{" "}
-              <Button
-                variant={"outline"}
-                className="border-sky-500 hover:border-sky-600 cursor-pointer"
-                asChild
-              >
-                <Link
-                  href={
-                    "https://api.whatsapp.com/send/?text=" +
-                    `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here)                                              
-Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
-                  }
-                  target="_blank"
+            <div className="w-full flex flex-col items-start mt-4 justify-center gap-y-2">
+              <div className="w-full flex items-start justify-center gap-x-2">
+                <Button
+                  variant={"outline"}
+                  className="border-sky-500 hover:border-sky-600 text-sky-500 hover:text-sky-600 cursor-pointer"
+                  onClick={() => setStep(1)}
                 >
-                  <Image
-                    src={"/wp-2.svg"}
-                    alt="Facebook"
-                    width={40}
-                    height={40}
-                  />
-                </Link>
-              </Button>
+                  Go Back
+                </Button>
+                <Button
+                  variant={"outline"}
+                  className="border-sky-500 hover:border-sky-600 cursor-pointer"
+                  asChild
+                >
+                  <Link
+                    href={
+                      "https://api.whatsapp.com/send/?text=" +
+                      encodeURIComponent(
+                        `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here)                                              
+Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
+                      )
+                    }
+                    target="_blank"
+                  >
+                    <Image
+                      src={"/wp-2.svg"}
+                      alt="whatsapp"
+                      width={30}
+                      height={30}
+                    />
+                  </Link>
+                </Button>
+                <Button
+                  variant={"outline"}
+                  className="border-sky-500 hover:border-sky-600 cursor-pointer"
+                  asChild
+                >
+                  <Link
+                    href={
+                      "https://www.facebook.com/sharer/sharer.php?u=" +
+                      encodeURIComponent(
+                        `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here)                                              
+Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
+                      )
+                    }
+                    target="_blank"
+                  >
+                    <Image
+                      src={"/facebook.svg"}
+                      alt="Facebook"
+                      width={30}
+                      height={30}
+                    />
+                  </Link>
+                </Button>
+                {/* <Button
+                  variant={"outline"}
+                  className="border-sky-500 hover:border-sky-600 cursor-pointer"
+                  asChild
+                >
+                  <Link
+                    href={
+                      "instagram://library?AssetPath=" +
+                      encodeURIComponent(
+                        `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here)                                              
+Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
+                      )
+                    }
+                    target="_blank"
+                  >
+                    <Image
+                      src={"/instagram.svg"}
+                      alt="x"
+                      width={30}
+                      height={30}
+                    />
+                  </Link>
+                </Button> */}
+                <Button
+                  variant={"outline"}
+                  className="border-sky-500 hover:border-sky-600 cursor-pointer"
+                  asChild
+                >
+                  <Link
+                    href={
+                      "https://twitter.com/intent/tweet?text=" +
+                      encodeURIComponent(
+                        `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here)                                              
+Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
+                      )
+                    }
+                    target="_blank"
+                  >
+                    <Image src={"/x.svg"} alt="x" width={30} height={30} />
+                  </Link>
+                </Button>
+                <Button
+                  variant={"outline"}
+                  className="border-sky-500 hover:border-sky-600 cursor-pointer"
+                  onClick={handleCopy}
+                >
+                  <CopyIcon className="text-sky-500 hover:text-sky-600" />
+                  <span className="text-sky-500 hover:text-sky-600">Copy</span>
+                </Button>
+              </div>
+
               <Button
                 className="bg-sky-500 hover:bg-sky-600 cursor-pointer w-full"
                 onClick={resetState}
