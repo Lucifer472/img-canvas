@@ -55,7 +55,7 @@ export const ImageView = ({ imgName, img, id, userId }: ImageViewProps) => {
   const [isGetting, setIsGetting] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const [step, setStep] = useState<STEP>(0);
+  const [step, setStep] = useState<STEP>(3);
   const [ch, setCh] = useState("Your Name");
 
   const mainDiv = useRef<HTMLDivElement | null>(null);
@@ -287,12 +287,8 @@ export const ImageView = ({ imgName, img, id, userId }: ImageViewProps) => {
                 <Link
                   href={
                     "https://api.whatsapp.com/send/?text=" +
-                    "Hi, i'm " +
-                    ch +
-                    ", I'm ready to support this campaign " +
-                    "Get yourself this Photoframemaker at photosframemaker.com/" +
-                    id +
-                    " Don't forget to follow @photoframemaker for further updates! #photosframemaker"
+                    `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here)                                              
+Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
                   }
                   target="_blank"
                 >

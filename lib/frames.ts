@@ -6,7 +6,7 @@ export const getLatestFrames = async (skip: number) => {
       skip: skip,
       take: 15,
       orderBy: {
-        createdAt: "desc",
+        supporter: "desc",
       },
       include: {
         user: true, // Assuming your relationship is named "user"
