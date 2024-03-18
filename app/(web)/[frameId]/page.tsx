@@ -99,7 +99,7 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
           <p className="text-sm text-gray-800 text-center">{frame.desc}</p>
           <FrameSharePop label={frame.id} img={frame.img} />
         </div>
-        <ImageView img={frame.img} id={frame.id} userId={frame.user.id} />
+        <ImageView imgName={frame.name} img={frame.img} id={frame.id} userId={frame.user.id} />
         {popular && <PopularFrames frameData={popular} />}
       </div>
     </section>

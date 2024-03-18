@@ -18,6 +18,7 @@ import { UserImage } from "@/components/views/user-image";
 import { supportAdded } from "@/actions/frames";
 
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ const poppins = Poppins({
 });
 
 interface ImageViewProps {
+  imgName: string;
   img: string;
   id: string;
   userId: string;
@@ -37,7 +39,7 @@ enum STEP {
   "SHARE",
 }
 
-export const ImageView = ({ img, id, userId }: ImageViewProps) => {
+export const ImageView = ({ imgName, img, id, userId }: ImageViewProps) => {
   const [hd, setHd] = useState(false);
   const [watermark, setWatermark] = useState(true);
 
@@ -127,10 +129,7 @@ export const ImageView = ({ img, id, userId }: ImageViewProps) => {
         canvasHeight: hd ? imageSize.height * 2 : imageSize.height,
       }).then((dataUrl) => {
         supportAdded(id, userId).then((res) => {
-          download(
-            dataUrl,
-            file ? file.name.slice(0, -4) + ".png" : "data.png"
-          );
+          download(dataUrl, imgName + ".png");
           setStep(3);
           setIsGetting(false);
         });
@@ -147,25 +146,6 @@ export const ImageView = ({ img, id, userId }: ImageViewProps) => {
     setHd(false);
     setWatermark(false);
     setCh("Your Name");
-  };
-
-  const handleCopy = () => {
-    if (navigator) {
-      navigator.clipboard
-        .writeText(
-          "Hi, i'm " +
-            ch +
-            ", I'm ready to support this campaign " +
-            "Get yourself this Photoframemaker at https://photosframemaker.com/" +
-            id +
-            " Don't forget to follow @photoframemaker for further updates! #photosframemaker"
-        )
-        .then(() => {
-          toast.success("Text Copied!");
-        });
-    } else {
-      toast.error("Something Went Wrong!");
-    }
   };
 
   return (
@@ -302,9 +282,27 @@ export const ImageView = ({ img, id, userId }: ImageViewProps) => {
               <Button
                 variant={"outline"}
                 className="border-sky-500 hover:border-sky-600 cursor-pointer"
-                onClick={handleCopy}
+                asChild
               >
-                <CopyIcon className="text-sky-500" />
+                <Link
+                  href={
+                    "https://api.whatsapp.com/send/?text=" +
+                    "Hi, i'm " +
+                    ch +
+                    ", I'm ready to support this campaign " +
+                    "Get yourself this Photoframemaker at photosframemaker.com/" +
+                    id +
+                    " Don't forget to follow @photoframemaker for further updates! #photosframemaker"
+                  }
+                  target="_blank"
+                >
+                  <Image
+                    src={"/wp-2.svg"}
+                    alt="Facebook"
+                    width={40}
+                    height={40}
+                  />
+                </Link>
               </Button>
               <Button
                 className="bg-sky-500 hover:bg-sky-600 cursor-pointer w-full"
