@@ -38,7 +38,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Script
           strategy="beforeInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6808814529890463"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621221183097623"
           crossOrigin="anonymous"
           async
         />

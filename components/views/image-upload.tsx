@@ -19,6 +19,7 @@ import { supportAdded } from "@/actions/frames";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { ImgBtn } from "../etc/img-button";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -55,7 +56,7 @@ export const ImageView = ({ imgName, img, id, userId }: ImageViewProps) => {
   const [isGetting, setIsGetting] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const [step, setStep] = useState<STEP>(0);
+  const [step, setStep] = useState<STEP>(3);
   const [ch, setCh] = useState("Your Name");
 
   const mainDiv = useRef<HTMLDivElement | null>(null);
@@ -162,6 +163,10 @@ Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to 
       toast.error("Something Went Wrong!");
     }
   };
+
+  const textShare = encodeURIComponent(
+    `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here) Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
+  );
 
   return (
     <div className="w-[320px] xxs:w-[360px] xss:w-[450px] sm:w-[520px] h-full mx-auto">
@@ -288,59 +293,20 @@ Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to 
           {step === 3 && (
             <div className="w-full flex flex-col items-start mt-4 justify-center gap-y-2">
               <div className="w-full flex items-start justify-center gap-x-2">
-                <Button
-                  variant={"outline"}
-                  className="border-sky-500 hover:border-sky-600 text-sky-500 hover:text-sky-600 cursor-pointer"
-                  onClick={() => setStep(1)}
-                >
-                  Go Back
-                </Button>
-                <Button
-                  variant={"outline"}
-                  className="border-sky-500 hover:border-sky-600 cursor-pointer"
-                  asChild
-                >
-                  <Link
-                    href={
-                      "https://api.whatsapp.com/send/?text=" +
-                      encodeURIComponent(
-                        `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here)                                              
-Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
-                      )
-                    }
-                    target="_blank"
-                  >
-                    <Image
-                      src={"/wp-2.svg"}
-                      alt="whatsapp"
-                      width={30}
-                      height={30}
-                    />
-                  </Link>
-                </Button>
-                <Button
-                  variant={"outline"}
-                  className="border-sky-500 hover:border-sky-600 cursor-pointer"
-                  asChild
-                >
-                  <Link
-                    href={
-                      "https://www.facebook.com/sharer/sharer.php?u=" +
-                      encodeURIComponent(
-                        `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here)                                              
-Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
-                      )
-                    }
-                    target="_blank"
-                  >
-                    <Image
-                      src={"/facebook.svg"}
-                      alt="Facebook"
-                      width={30}
-                      height={30}
-                    />
-                  </Link>
-                </Button>
+                <ImgBtn
+                  src="/wp-2.svg"
+                  href={"https://api.whatsapp.com/send/?text=" + textShare}
+                />
+                <ImgBtn
+                  src="/facebook.svg"
+                  href={
+                    "https://www.facebook.com/sharer/sharer.php?u=" + textShare
+                  }
+                />
+                <ImgBtn
+                  src="/x.svg"
+                  href={"https://twitter.com/intent/tweet?text=" + textShare}
+                />
                 {/* <Button
                   variant={"outline"}
                   className="border-sky-500 hover:border-sky-600 cursor-pointer"
@@ -367,37 +333,27 @@ Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to 
                 <Button
                   variant={"outline"}
                   className="border-sky-500 hover:border-sky-600 cursor-pointer"
-                  asChild
-                >
-                  <Link
-                    href={
-                      "https://twitter.com/intent/tweet?text=" +
-                      encodeURIComponent(
-                        `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here)                                              
-Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
-                      )
-                    }
-                    target="_blank"
-                  >
-                    <Image src={"/x.svg"} alt="x" width={30} height={30} />
-                  </Link>
-                </Button>
-                <Button
-                  variant={"outline"}
-                  className="border-sky-500 hover:border-sky-600 cursor-pointer"
                   onClick={handleCopy}
                 >
                   <CopyIcon className="text-sky-500 hover:text-sky-600" />
                   <span className="text-sky-500 hover:text-sky-600">Copy</span>
                 </Button>
               </div>
-
-              <Button
-                className="bg-sky-500 hover:bg-sky-600 cursor-pointer w-full"
-                onClick={resetState}
-              >
-                DONE
-              </Button>
+              <div className="w-full flex items-center justify-start gap-x-2">
+                <Button
+                  variant={"outline"}
+                  className="border-sky-500 hover:border-sky-600 text-sky-500 hover:text-sky-600 cursor-pointer"
+                  onClick={() => setStep(1)}
+                >
+                  Go Back
+                </Button>
+                <Button
+                  className="bg-sky-500 hover:bg-sky-600 cursor-pointer w-full"
+                  onClick={resetState}
+                >
+                  DONE
+                </Button>
+              </div>
             </div>
           )}
         </div>
