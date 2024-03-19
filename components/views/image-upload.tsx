@@ -300,7 +300,7 @@ Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't fo
                 <ImgBtn
                   src="/facebook.svg"
                   href={
-                    "https://www.facebook.com/sharer/sharer.php?u=" + textShare
+                    "https://www.facebook.com/sharer.php?u=" + `${textShare}`
                   }
                 />
                 <ImgBtn
