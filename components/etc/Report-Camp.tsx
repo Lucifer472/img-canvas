@@ -21,7 +21,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import {
@@ -34,6 +33,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
 import { cn } from "@/lib/utils";
 import { ReportSchema } from "@/schema";
@@ -91,7 +91,7 @@ export const ReportCampain = () => {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Subject</FormLabel>
+                    <Label className="w-full text-left block">Subject</Label>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -126,7 +126,7 @@ export const ReportCampain = () => {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Email:</FormLabel>
+                    <Label className="w-full text-left block">Email:</Label>
                     <FormControl>
                       <Input
                         {...field}
@@ -143,7 +143,7 @@ export const ReportCampain = () => {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Message:</FormLabel>
+                    <Label className="w-full text-left block">Message:</Label>
                     <FormControl>
                       <Textarea
                         {...field}
@@ -160,7 +160,7 @@ export const ReportCampain = () => {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Link:</FormLabel>
+                    <Label className="w-full text-left block">Link:</Label>
                     <FormControl>
                       <Input
                         {...field}
