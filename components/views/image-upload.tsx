@@ -164,9 +164,7 @@ Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't fo
     }
   };
 
-  const textShare = encodeURIComponent(
-    `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here) Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
-  );
+  const textShare = `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here) Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`;
 
   return (
     <div className="w-[320px] xxs:w-[360px] xss:w-[450px] sm:w-[520px] h-full mx-auto">
