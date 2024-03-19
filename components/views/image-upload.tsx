@@ -154,7 +154,7 @@ export const ImageView = ({ imgName, img, id, userId }: ImageViewProps) => {
       navigator.clipboard
         .writeText(
           `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here)                                              
-Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
+Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
         )
         .then(() => {
           toast.success("Text Copied!");
@@ -165,7 +165,7 @@ Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to 
   };
 
   const textShare = encodeURIComponent(
-    `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here) Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
+    `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here) Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
   );
 
   return (
@@ -307,29 +307,6 @@ Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to 
                   src="/x.svg"
                   href={"https://twitter.com/intent/tweet?text=" + textShare}
                 />
-                {/* <Button
-                  variant={"outline"}
-                  className="border-sky-500 hover:border-sky-600 cursor-pointer"
-                  asChild
-                >
-                  <Link
-                    href={
-                      "instagram://library?AssetPath=" +
-                      encodeURIComponent(
-                        `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here)                                              
-Get yourself this Photoframemaker at photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
-                      )
-                    }
-                    target="_blank"
-                  >
-                    <Image
-                      src={"/instagram.svg"}
-                      alt="x"
-                      width={30}
-                      height={30}
-                    />
-                  </Link>
-                </Button> */}
                 <Button
                   variant={"outline"}
                   className="border-sky-500 hover:border-sky-600 cursor-pointer"
