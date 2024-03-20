@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { footerLinks } from "@/constant";
 
-import { ReportCampain } from "@/components/etc/Report-Camp";
+import { ReportCampaign } from "@/components/etc/Report-Camp";
 
 const Footer = () => {
   return (
@@ -17,7 +17,7 @@ const Footer = () => {
         </Link>
         <ul className="flex items-center justify-center gap-x-4 flex-wrap">
           <li>
-            <ReportCampain />
+            <ReportCampaign />
           </li>
           {footerLinks.map((l) => (
             <li key={l.label}>

@@ -11,15 +11,15 @@ import { CopyIcon, RotateCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 
 import Loader from "@/components/loader";
 import { UserImage } from "@/components/views/user-image";
+import { ImgBtn } from "@/components/etc/img-button";
 
 import { supportAdded } from "@/actions/frames";
 
 import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { ImgBtn } from "../etc/img-button";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -31,6 +31,7 @@ interface ImageViewProps {
   img: string;
   id: string;
   userId: string;
+  userName?: string | null;
 }
 
 enum STEP {
@@ -38,9 +39,16 @@ enum STEP {
   "PREVIEW",
   "DOWNLOAD",
   "SHARE",
+  "BACK",
 }
 
-export const ImageView = ({ imgName, img, id, userId }: ImageViewProps) => {
+export const ImageView = ({
+  imgName,
+  img,
+  id,
+  userId,
+  userName,
+}: ImageViewProps) => {
   const [hd, setHd] = useState(false);
   const [watermark, setWatermark] = useState(true);
 
@@ -57,7 +65,7 @@ export const ImageView = ({ imgName, img, id, userId }: ImageViewProps) => {
   const [loading, setLoading] = useState(true);
 
   const [step, setStep] = useState<STEP>(0);
-  const [ch, setCh] = useState("Your Name");
+  const [ch, setCh] = useState(userName ? userName : "Your Name");
 
   const mainDiv = useRef<HTMLDivElement | null>(null);
 
@@ -146,14 +154,13 @@ export const ImageView = ({ imgName, img, id, userId }: ImageViewProps) => {
     setRotation(0);
     setHd(false);
     setWatermark(false);
-    setCh("Your Name");
   };
 
   const handleCopy = () => {
     if (navigator) {
       navigator.clipboard
         .writeText(
-          `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here)                                              
+          `Hi, I'm ${ch}, I'm ready to support this campaign! (Mention 3 of your friends or more here)                                              
 Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
         )
         .then(() => {
@@ -164,7 +171,7 @@ Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't fo
     }
   };
 
-  const textShare = `Hi, I'm asd, I'm ready to support this campaign! (Mention 3 of your friends or more here) Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`;
+  const textShare = `Hi, I'm ${ch}, I'm ready to support this campaign! (Mention 3 of your friends or more here) Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`;
 
   return (
     <div className="w-[320px] xxs:w-[360px] xss:w-[450px] sm:w-[520px] h-full mx-auto">
@@ -172,7 +179,7 @@ Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't fo
       <div className="bg-white rounded-lg w-full h-full">
         <div className="flex flex-col w-full h-full py-4 px-2">
           <div className="border-2 border-dashed border-border ">
-            {step !== 3 && (
+            {step !== 3 && step !== 4 && (
               <div className="relative overflow-hidden" ref={mainDiv}>
                 {watermark && (
                   <Image
@@ -234,6 +241,27 @@ Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't fo
                 </p>
               </div>
             )}
+            {step === 4 && (
+              <div className="relative overflow-hidden">
+                <Image
+                  src={"/bg-share.png"}
+                  alt="Image"
+                  width={500}
+                  height={500}
+                  className={cn(
+                    "object-contain pointer-events-none relative z-10",
+                    isDragging && "opacity-50",
+                    reduceOp && "opacity-50"
+                  )}
+                />
+                <Image
+                  src={img}
+                  alt="Image"
+                  fill
+                  className="object-contain scale-50"
+                />
+              </div>
+            )}
           </div>
           {step === 0 && (
             <Button className="mt-4 bg-sky-500 hover:bg-sky-600" asChild>
@@ -261,21 +289,29 @@ Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't fo
               </Button>
               <Button
                 className={cn(
-                  "bg-sky-500 hover:bg-sky-600 cursor-pointer",
+                  "bg-sky-500 hover:bg-sky-600 cursor-pointer flex items-center justify-center gap-x-1",
                   hd && "bg-sky-600"
                 )}
                 onClick={() => setHd(!hd)}
               >
-                HD Quality
+                <Checkbox
+                  className="border-white data-[state=checked]:bg-white data-[state=checked]:text-sky-600"
+                  checked={hd}
+                />
+                <span>HD</span>
               </Button>
               <Button
                 className={cn(
-                  "bg-sky-500 hover:bg-sky-600 cursor-pointer",
+                  "bg-sky-500 hover:bg-sky-600 cursor-pointer flex items-center justify-center gap-x-1",
                   !watermark && "bg-sky-600"
                 )}
                 onClick={() => setWatermark(!watermark)}
               >
-                Remove Watermark
+                <Checkbox
+                  className="border-white data-[state=checked]:bg-white data-[state=checked]:text-sky-600"
+                  checked={!watermark}
+                />{" "}
+                <span>Watermark</span>
               </Button>
             </div>
           )}
@@ -324,11 +360,30 @@ Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't fo
                 </Button>
                 <Button
                   className="bg-sky-500 hover:bg-sky-600 cursor-pointer w-full"
-                  onClick={resetState}
+                  onClick={() => setStep(4)}
                 >
                   DONE
                 </Button>
               </div>
+            </div>
+          )}
+          {step === 4 && (
+            <div className="w-full flex items-center justify-center gap-x-2">
+              <Button
+                className="mt-4 text-sky-500 hover:text-sky-600 border-sky-500 hover:border-sky-600 "
+                size={"lg"}
+                onClick={() => setStep(3)}
+                variant={"outline"}
+              >
+                Go Back
+              </Button>
+              <Button
+                className="mt-4 bg-sky-500 hover:bg-sky-600 w-full"
+                size={"lg"}
+                onClick={resetState}
+              >
+                Done
+              </Button>
             </div>
           )}
         </div>

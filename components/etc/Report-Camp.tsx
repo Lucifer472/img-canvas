@@ -45,7 +45,7 @@ const poppins = Poppins({
   weight: ["600"],
 });
 
-export const ReportCampain = () => {
+export const ReportCampaign = () => {
   const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof ReportSchema>>({
     resolver: zodResolver(ReportSchema),

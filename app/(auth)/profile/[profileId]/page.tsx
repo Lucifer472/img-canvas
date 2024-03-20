@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import { CalendarRange, Users2 } from "lucide-react";
 
-import { DropDownMenu } from "@/components/etc/dropdown-menu";
 import { FrameCard } from "@/components/views/frame-card";
 
 import { findUserbyUsername } from "@/lib/user";
@@ -12,6 +11,9 @@ import { findFramesWithId } from "@/lib/frames";
 import { timeFormatOptions } from "@/constant";
 
 import type { Metadata } from "next";
+import { Button } from "@/components/ui/button";
+import { auth, signOut } from "@/auth";
+import { LogOutMethod } from "@/actions/auth";
 
 const poppins = Poppins({
   weight: ["500"],
@@ -35,6 +37,7 @@ export async function generateMetadata({
 }
 
 const ProfilePage = async ({ params }: { params: { profileId: string } }) => {
+  const session = await auth();
   const profileId = decodeURIComponent(params.profileId);
   if (!profileId) redirect("/");
 
@@ -85,7 +88,18 @@ const ProfilePage = async ({ params }: { params: { profileId: string } }) => {
               <span className="text-muted-foreground">{userData.username}</span>
             </div>
           </div>
-          <DropDownMenu />
+          {session?.user && (
+            <form action={LogOutMethod}>
+              <Button
+                variant={"outline"}
+                size={"sm"}
+                type="submit"
+                className="text-sky-500 hover:text-sky-600 border-sky-500 hover:border-sky-600"
+              >
+                Log Out
+              </Button>
+            </form>
+          )}
         </div>
       </div>
       <div className="p-4 flex flex-wrap md:flex-nowrap gap-x-4 max-w-[1024px] mx-auto">
@@ -116,7 +130,7 @@ const ProfilePage = async ({ params }: { params: { profileId: string } }) => {
               poppins.className
             )}
           >
-            Campains
+            Campaigns
           </h2>
           <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-6 flex-wrap">
             {frameData &&

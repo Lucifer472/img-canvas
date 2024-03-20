@@ -1,12 +1,12 @@
 import { FrameCard } from "@/components/views/frame-card";
 import { Title } from "@/components/views/title";
 
-import { getLatestFrames } from "@/lib/frames";
+import { getPopularFrames } from "@/lib/frames";
 
 export const revalidate = 360;
 
 const HomePage = async () => {
-  const frameData = await getLatestFrames(0);
+  const frameData = await getPopularFrames(0);
 
   if (!frameData) return null;
 
@@ -56,7 +56,7 @@ const HomePage = async () => {
       ></script>
       <Title
         label=" Campaigns that gained the most supports in the last 24 hours."
-        link="/explore"
+        link="/popular"
         linkText="View All"
         title=" Trending in India "
       />

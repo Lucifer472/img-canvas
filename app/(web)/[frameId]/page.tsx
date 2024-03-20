@@ -104,6 +104,7 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
           img={frame.img}
           id={frame.id}
           userId={frame.user.id}
+          userName={session?.user?.name}
         />
         {popular && <PopularFrames frameData={popular} />}
       </div>

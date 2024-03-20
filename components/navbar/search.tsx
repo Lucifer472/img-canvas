@@ -14,7 +14,9 @@ export const SearchBar = () => {
   const router = useRouter();
 
   const handleSearch = () => {
-    router.push("/search/" + search);
+    if (search) {
+      router.push("/search/" + encodeURIComponent(search));
+    }
   };
 
   return (

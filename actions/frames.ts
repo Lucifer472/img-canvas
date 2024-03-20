@@ -43,7 +43,7 @@ export const createFrames = async (v: z.infer<typeof FrameSchema>) => {
 
   if (!frame) return { error: "Something Went Wrong!" };
 
-  return { success: "Frame Created Succefully!" };
+  return { success: "Frame Created Successfully!" };
 };
 
 export const checkUrl = async (url: string) => {

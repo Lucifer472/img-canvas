@@ -14,14 +14,14 @@ export async function generateMetadata({
   params: { search: string[] };
 }): Promise<Metadata> {
   return {
-    title: `${params.search[0]} | Photos Frame Maker`,
+    title: `${decodeURIComponent(params.search[0])} | Photos Frame Maker`,
   };
 }
 
 const SearchPage = async ({ params }: { params: { search: string[] } }) => {
-  if (!params.search) redirect("/");
+  if (!params.search || params.search[0] === "null") redirect("/");
 
-  const frameData = await findFrames(0, params.search[0]);
+  const frameData = await findFrames(0, decodeURIComponent(params.search[0]));
 
   const jsonLd = `
   {
@@ -49,7 +49,7 @@ const SearchPage = async ({ params }: { params: { search: string[] } }) => {
       ></script>
       <Title
         label="Campaigns that matches you're search."
-        title={"Result for: " + params.search[0]}
+        title={"Result for: " + decodeURIComponent(params.search[0])}
       />
       <div className="w-full flex items-center justify-center gap-1 sm:gap-2 md:gap-4 lg:gap-6 xl:gap-8 flex-wrap">
         {frameData && frameData.length > 0 ? (

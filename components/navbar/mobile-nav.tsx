@@ -12,7 +12,7 @@ export const MobileNav = ({ user }: { user: Session | null }) => {
   const pathname = usePathname();
 
   return (
-    <div className="flex md:hidden items-center justify-evenly gap-x-4 w-full h-[80px] px-4 bg-white fixed bottom-0 left-0 z-10 rounded-t-sm border-t border-slate-100 shadow-md">
+    <div className="flex md:hidden items-center justify-evenly gap-x-4 w-full h-[80px] px-4 bg-white fixed bottom-0 left-0 z-50 rounded-t-sm border-t border-slate-100 shadow-md">
       <Link
         href={"/"}
         className={cn(

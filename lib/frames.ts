@@ -5,9 +5,6 @@ export const getLatestFrames = async (skip: number) => {
     const data = await db.frames.findMany({
       skip: skip,
       take: 15,
-      orderBy: {
-        supporter: "desc",
-      },
       include: {
         user: true, // Assuming your relationship is named "user"
       },
