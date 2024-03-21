@@ -44,7 +44,7 @@ export const NavLinks = ({ user }: { user: Session | null }) => {
           ) : (
             <>
               <Link
-                href={"/sing-up"}
+                href={"/sign-up"}
                 className="w-full py-2 px-2 hover:bg-sky-100/60 font-medium"
               >
                 Sign up
