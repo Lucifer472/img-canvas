@@ -64,7 +64,7 @@ export const ImageView = ({
   const [isGetting, setIsGetting] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const [step, setStep] = useState<STEP>(0);
+  const [step, setStep] = useState<STEP>(3);
   const [ch, setCh] = useState(userName ? userName : "Your Name");
 
   const mainDiv = useRef<HTMLDivElement | null>(null);
@@ -160,7 +160,7 @@ export const ImageView = ({
     if (navigator) {
       navigator.clipboard
         .writeText(
-          `Hi, I'm ${ch}, I'm ready to support this campaign! (Mention 3 of your friends or more here)                                              
+          `Hi, I'm ${ch}, I'm ready to support ${imgName}! (Mention 3 of your friends or more here)                                              
 Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't forget to follow @photoframemaker for further updates! #photosframemaker`
         )
         .then(() => {
@@ -212,8 +212,8 @@ Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't fo
             )}
             {step === 3 && (
               <div className="w-full min-h-[450px] bg-white flex flex-col gap-y-2 px-4 py-6">
-                <p className="flex items-center justify-start gap-x-1 text-sm break-words">
-                  Hi, I&apos;m{" "}
+                <p className="flex items-center justify-start gap-x-1 text-sm">
+                  <span className="whitespace-nowrap">Hi, I&apos;m</span>
                   <input
                     type="text"
                     className="border border-[#f0f0f0] min-w-[80px] rounded-sm px-2 py-1 text-sky-500 text-sm"
@@ -223,7 +223,7 @@ Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't fo
                     defaultValue={ch}
                     onChange={(e) => setCh(e.target.value)}
                   />{" "}
-                  , I&apos;m ready to support this campaign!
+                  <span>, I&apos;m ready to support {imgName}</span>
                 </p>
                 <p className="text-sm w-full mt-8">
                   (Mention 3 of your friends or more here)
