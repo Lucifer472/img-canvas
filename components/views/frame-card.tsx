@@ -44,7 +44,7 @@ export const FrameCard = ({
       className="border border-slate-100 rounded-md shadow-sm w-[300px] h-[490px] xx:w-[340px] xx:h-[525px] xss:w-[230px] xss:h-[390px] hover:shadow-lg"
     >
       <div className="w-full flex flex-col items-start gap-y-4 p-2">
-        <div className="relative w-[300px] h-[300px] xx:w-[340px] xx:h-[525px] xss:w-[210px] xss:h-[210px]">
+        <div className="relative w-[300px] h-[300px] xx:w-[340px] xx:h-[340px] xss:w-[210px] xss:h-[210px]">
           <div className="absolute w-[280px] h-[280px] xx:w-[320px] xx:h-[320px] xss:w-[210px] xss:h-[210px] overflow-hidden">
             <Image
               src={img}
