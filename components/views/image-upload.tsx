@@ -64,7 +64,7 @@ export const ImageView = ({
   const [isGetting, setIsGetting] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const [step, setStep] = useState<STEP>(3);
+  const [step, setStep] = useState<STEP>(0);
   const [ch, setCh] = useState(userName ? userName : "Your Name");
 
   const mainDiv = useRef<HTMLDivElement | null>(null);
