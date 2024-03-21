@@ -244,15 +244,16 @@ export const RegisterModal = ({
             </span>
           </Button>
         </div>
-        <p className="w-full flex items-center justify-center gap-2">
-          {text}
-          <Link
-            href={link}
-            className="text-sky-500 hover:border-b border-sky-500"
-          >
+        <Button
+          onClick={handleFacebook}
+          variant={"outline"}
+          size={"lg"}
+          asChild
+        >
+          <Link href={link} className="w-full min-h-[50px]">
             {linkLabel}
           </Link>
-        </p>
+        </Button>
       </div>
     </div>
   );

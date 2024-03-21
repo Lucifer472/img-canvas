@@ -12,6 +12,9 @@ import { ImageView } from "@/components/views/image-upload";
 import { PopularFrames } from "@/components/views/PopularFrames";
 import { FrameSharePop } from "@/components/views/SocialShare";
 import DeleteFrameForm from "@/components/auth/delete-frame-form";
+import Comments from "@/components/views/comments";
+import { SessionProvider } from "next-auth/react";
+import GoogleCaptchaWrapper from "@/components/auth/goole-rechaptcha-wrapper";
 
 export async function generateMetadata({
   params,
@@ -56,6 +59,8 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
       }]
     }
   `;
+
+  const url = "http://localhost:3000/" + params.frameId;
 
   return (
     <section className="w-full h-full bg-sky-50">
@@ -106,6 +111,11 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
           userId={frame.user.id}
           userName={session?.user?.name}
         />
+        <SessionProvider>
+          <GoogleCaptchaWrapper>
+            <Comments />
+          </GoogleCaptchaWrapper>
+        </SessionProvider>
         {popular && <PopularFrames frameData={popular} />}
       </div>
     </section>

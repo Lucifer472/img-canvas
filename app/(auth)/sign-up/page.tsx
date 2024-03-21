@@ -12,9 +12,9 @@ const SingUpPage = () => {
     <div className="w-full my-8 min-h-[600px] flex items-center justify-center">
       <RegisterModal
         label="Sing up For an Account"
-        text="Alredy Have an Account?"
+        text="Already Have an Account?"
         link="/login"
-        linkLabel="Sing In"
+        linkLabel="Login to Account!"
       />
     </div>
   );

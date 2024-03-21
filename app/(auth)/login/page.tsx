@@ -14,8 +14,8 @@ const LoginPage = () => {
       <LoginModal
         label="Sign in to your account"
         text="Don't have an account?"
-        link="/sing-up"
-        linkLabel="Sing Up"
+        link="/sign-up"
+        linkLabel="Create an Account"
       />
     </div>
   );

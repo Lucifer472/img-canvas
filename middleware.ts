@@ -18,7 +18,7 @@ export default auth(async (req) => {
 
   if (
     nextUrl.pathname.startsWith("/login") ||
-    nextUrl.pathname.startsWith("/sing-up")
+    nextUrl.pathname.startsWith("/sign-up")
   ) {
     if (isLoggedIn) {
       return Response.redirect(new URL("/", nextUrl));

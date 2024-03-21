@@ -23,6 +23,8 @@ model Frames{
 
   userId    String      
   user      User        @relation(fields: [userId],references:[id],onDelete: Cascade)
+
+  comment Comment[]
 }
 
 
@@ -61,4 +63,19 @@ model User{
 
   frames    Frames[]
   accounts  Account[]
+
+  comment   Comment[]
+}
+
+model Comment{
+  id    Int       @id     @default(autoincrement())
+
+  text  String    @db.VarChar(255)
+  createdAt   DateTime   @default(now())
+
+  userId  String
+  user    User   @relation(fields:[userId], references:[id],onDelete: Cascade)
+
+  frameId String
+  frame   Frames  @relation(fields: [frameId], references: [id],onDelete:Cascade)
 }
