@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -39,32 +39,63 @@ import { cn } from "@/lib/utils";
 import { ReportSchema } from "@/schema";
 import { sentReportCampaign } from "@/actions/mail";
 import toast from "react-hot-toast";
+import { useParams } from "next/navigation";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["600"],
 });
 
-export const ReportCampaign = () => {
+interface ReportCampaignProps {
+  label?: string;
+  commentId?: number;
+}
+
+export const ReportCampaign = ({ label, commentId }: ReportCampaignProps) => {
   const [isPending, startTransition] = useTransition();
+  const [campId, setCampId] = useState<null | string>(null);
+
+  const params = useParams();
+
+  useEffect(() => {
+    if (params.frameId) {
+      setCampId(params.frameId as string);
+    }
+  }, []);
+
   const form = useForm<z.infer<typeof ReportSchema>>({
     resolver: zodResolver(ReportSchema),
     defaultValues: {
       email: "",
       mess: "",
-      subject: "",
+      subject: commentId ? "remove comment" : "",
       campLink: "",
+      commentId: commentId,
     },
   });
 
+  useEffect(() => {
+    if (campId) {
+      form.setValue("campLink", `https://photosframemaker.com/${campId}`);
+    }
+  }, [campId, form]);
+
   const onSubmit = (v: z.infer<typeof ReportSchema>) => {
     startTransition(() => {
-      sentReportCampaign(v.subject, v.email, v.mess, v.campLink).then((res) => {
-        if (res) {
+      sentReportCampaign(
+        v.subject,
+        v.email,
+        v.mess,
+        v.campLink,
+        v.commentId
+      ).then((res) => {
+        if (res.error) {
+          toast.error(res.error as string);
+        }
+
+        if (res.success) {
           toast.success("Email Sent Successfully!");
           form.reset();
-        } else {
-          toast.error("Something Went Wrong!");
         }
       });
     });
@@ -72,9 +103,14 @@ export const ReportCampaign = () => {
 
   return (
     <Dialog>
-      <DialogTrigger className="flex items-center gap-x-1 hover:underline">
-        <FlagIcon />
-        Report Campaign
+      <DialogTrigger
+        className={cn(
+          "flex items-center gap-x-1 hover:underline",
+          label && "text-xs font-medium"
+        )}
+      >
+        {!label && <FlagIcon />}
+        {label ? label : "Report Campaign"}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -95,6 +131,7 @@ export const ReportCampaign = () => {
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
+                      disabled={commentId !== undefined}
                     >
                       <FormControl className="w-full">
                         <SelectTrigger className="w-full">
@@ -166,6 +203,10 @@ export const ReportCampaign = () => {
                         {...field}
                         className="w-full"
                         placeholder="Link of the Campaign"
+                        defaultValue={
+                          campId ? `https://photosframemaker.com/${campId}` : ""
+                        }
+                        disabled={commentId !== undefined}
                       />
                     </FormControl>
                     <FormMessage />

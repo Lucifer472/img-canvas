@@ -42,7 +42,7 @@ export const getCommentByFrameId = async (frameId: string, skip: number) => {
   try {
     const data = await db.comment.findMany({
       skip,
-      take: 10,
+      take: 1000,
       where: {
         frameId,
       },

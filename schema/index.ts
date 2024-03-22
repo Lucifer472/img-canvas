@@ -28,6 +28,7 @@ export const ReportSchema = z.object({
   email: z.string().email(),
   mess: z.string().min(50).max(255),
   campLink: z.string().min(10),
+  commentId: z.number().optional(),
 });
 
 export const SingUpSchema = z.object({

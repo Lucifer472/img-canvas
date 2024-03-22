@@ -11,6 +11,8 @@ import { cn } from "@/lib/utils";
 import { addComment, fetchComments } from "@/actions/comments";
 import Image from "next/image";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { Button } from "../ui/button";
+import { ReportCampaign } from "../etc/Report-Camp";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -106,9 +108,11 @@ const Comments = () => {
         }
 
         if (res.success && res.success.length > 0) {
-          // setData((prev) =>
-          //   prev ? [...prev, ...res.success] : [...res.success]
-          // );
+          setData((prev) =>
+            prev && prev !== res.success
+              ? [...prev, ...res.success]
+              : [...res.success]
+          );
           setData(res.success);
         }
       });
@@ -179,6 +183,7 @@ const Comments = () => {
                       {data.text.toString()}
                     </span>
                   </div>
+                  <ReportCampaign label="report" commentId={data.id} />
                 </div>
               </div>
             ))}
