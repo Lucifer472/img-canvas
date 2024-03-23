@@ -42,6 +42,12 @@ export default async function RootLayout({
           crossOrigin="anonymous"
           async
         />
+        <Script
+          strategy="beforeInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7658847507664367"
+          crossOrigin="anonymous"
+          async
+        />
         <Toaster position="top-center" />
         <Navbar user={user} />
         <main>{children}</main>
