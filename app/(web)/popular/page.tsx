@@ -57,7 +57,7 @@ const PopularPage = async () => {
           />
         ))}
       </div>
-      <Pagination baseLink="/popular" isBack={true} isNext={true} page={1} />
+      <Pagination baseLink="/popular/" isBack={true} isNext={true} page={1} />
     </section>
   );
 };

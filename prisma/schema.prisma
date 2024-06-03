@@ -10,7 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Frames{
   id    String          @id 
 
@@ -26,8 +25,6 @@ model Frames{
 
   comment Comment[]
 }
-
-
 
 model Account {
   id                 String  @id @default(cuid())
@@ -78,4 +75,22 @@ model Comment{
 
   frameId String
   frame   Frames  @relation(fields: [frameId], references: [id],onDelete:Cascade)
+}
+
+model blog {
+  id          Int      @id @default(autoincrement())
+  date        DateTime @default(now())
+  title       String    
+  url         String   @unique
+  img         String     
+  keywords    String    
+  description String    
+  author      String    
+  authorImg   String    
+  blog        Json      
+  faq         Json?     
+  category    String    
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

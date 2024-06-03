@@ -20,6 +20,18 @@ const nextConfig = {
         pathname: "/platform/**",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "images.drivingexamexpert.com",
+        pathname: "/**",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "img.missiongujarat.in",
+        pathname: "/**",
+        port: "",
+      },
     ],
   },
 };

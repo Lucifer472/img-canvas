@@ -4,7 +4,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import authConfig from "@/auth.config";
 import db from "@/lib/db";
 
-import { addUserName, findUser, findUserbyEmail } from "@/lib/user";
+import { addUserName, findUser } from "@/lib/user";
 import { extractUsername } from "@/lib/utils";
 
 export const {

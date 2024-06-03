@@ -104,3 +104,126 @@
     }
   }
 }
+
+@layer components {
+  .text-color-gradient {
+    background: linear-gradient(112.64deg, #0284c7 22.73%, #0d5ce5 188.41%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* blogs class */
+  .blog-styles p {
+    @apply text-base sm:text-lg;
+    color: black;
+    font-weight: 400;
+    margin: 0.5em 0;
+    text-align: justify;
+  }
+
+  .blog-styles a {
+    color: crimson;
+    text-decoration: underline;
+  }
+
+  .blog-styles h1 {
+    @apply text-2xl sm:text-3xl md:text-4xl mt-1 mb-1 font-[800];
+  }
+
+  .blog-styles h2 {
+    @apply text-xl sm:text-2xl md:text-3xl mt-1 mb-1 font-bold;
+  }
+
+  .blog-styles h3 {
+    @apply text-lg sm:text-xl md:text-2xl mt-1 mb-1 font-semibold;
+  }
+
+  .blog-styles h4 {
+    @apply text-base sm:text-lg md:text-xl mt-1 mb-1 font-medium;
+  }
+
+  .blog-styles h5 {
+    @apply text-sm sm:text-base md:text-lg mt-1 mb-1 font-normal;
+  }
+
+  .blog-styles h6 {
+    @apply text-xs sm:text-sm md:text-base mt-1 mb-1 font-light;
+  }
+
+  .blog-styles ul,
+  .blog-styles ol {
+    margin: 0.3em 0;
+    padding: 0 0.4em;
+  }
+
+  .blog-styles ol li {
+    @apply text-base sm:text-lg;
+    list-style: decimal;
+    margin: 0.6em 0;
+    line-height: 1.75;
+    font-weight: 300;
+    color: rgb(43, 53, 75);
+  }
+
+  .blog-styles ul li {
+    @apply text-base sm:text-lg;
+    list-style: disc;
+    margin: 0.6em 0;
+    line-height: 1.75;
+    font-weight: 300;
+    color: rgb(43, 53, 75);
+  }
+
+  .blog-styles ul a,
+  .blog-styles ol a {
+    color: darkblue;
+  }
+
+  .blog-styles mark {
+    background-color: rgb(255, 255, 190);
+  }
+
+  .blog-styles img {
+    object-fit: cover;
+    margin: 0.2em auto;
+  }
+
+  .blog-styles blockquote {
+    padding: 0.2em;
+    margin: 0.2em 0;
+    border-left: 2px solid black;
+    font-size: 1rem;
+    font-weight: 300;
+    font-style: italic;
+    background-color: rgb(241, 241, 241);
+  }
+
+  .blog-styles table {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    color: black;
+  }
+
+  .blog-styles table th {
+    padding: 0.2em;
+    text-align: left;
+    font-weight: 700;
+    border: 1px solid black;
+    background-color: crimson;
+    color: white;
+  }
+
+  .blog-styles table td {
+    padding: 0.2em;
+    text-align: left;
+    border: 1px solid black;
+  }
+
+  .blog-styles table tr:nth-of-type(2n) {
+    background-color: rgb(240, 240, 240);
+  }
+}

@@ -29,3 +29,18 @@ export const timeFormatOptions = {
   month: "long",
   year: "numeric",
 };
+
+export const Category = [
+  {
+    value: "car",
+    label: "Car Loan",
+  },
+  {
+    value: "personal",
+    label: "Personal Loan",
+  },
+  {
+    value: "home",
+    label: "Home Loan",
+  },
+];

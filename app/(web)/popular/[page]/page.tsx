@@ -68,7 +68,7 @@ const PopularPage = async ({ params }: { params: { page: string } }) => {
         ))}
       </div>
       <Pagination
-        baseLink="/popular"
+        baseLink="/popular/"
         isBack={pageNumber === 1}
         isNext={frameData.length === 15}
         page={pageNumber}

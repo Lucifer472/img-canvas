@@ -42,3 +42,12 @@ export const loginSchema = z.object({
   username: z.string().min(3).max(20),
   password: z.string().min(6),
 });
+
+export const BlogSchema = z.object({
+  title: z.string().min(3).max(100),
+  keywords: z.string().max(100),
+  desc: z.string().max(100),
+  category: z.string().min(1).max(50),
+  blog: z.string(),
+  faq: z.string(),
+});

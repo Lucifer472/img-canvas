@@ -12,7 +12,7 @@ import { timeFormatOptions } from "@/constant";
 
 import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
-import { auth, signOut } from "@/auth";
+import { auth } from "@/auth";
 import { LogOutMethod } from "@/actions/auth";
 
 const poppins = Poppins({
@@ -79,7 +79,7 @@ const ProfilePage = async ({ params }: { params: { profileId: string } }) => {
               alt="Profile Picture"
               width={80}
               height={80}
-              className="rounded-full object-cover"
+              className="rounded-full object-cover aspect-square object-center"
             />
             <div className="flex items-start flex-col">
               <h1 className={cn("text-lg", poppins.className)}>

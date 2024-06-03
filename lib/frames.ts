@@ -16,11 +16,11 @@ export const getLatestFrames = async (skip: number) => {
   }
 };
 
-export const getPopularFrames = async (skip: number) => {
+export const getPopularFrames = async (skip: number, take?: number) => {
   try {
     const data = await db.frames.findMany({
       skip: skip,
-      take: 15,
+      take: take ? take : 15,
       orderBy: {
         supporter: "desc",
       },

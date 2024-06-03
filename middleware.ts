@@ -8,7 +8,10 @@ export default auth(async (req) => {
   const isLoggedIn = !!req.auth;
   const { nextUrl } = req;
 
-  if (nextUrl.pathname.startsWith("/create")) {
+  if (
+    nextUrl.pathname.startsWith("/create") ||
+    nextUrl.pathname.startsWith("/admin")
+  ) {
     if (isLoggedIn) {
       return null;
     }

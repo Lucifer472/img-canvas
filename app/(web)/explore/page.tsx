@@ -57,7 +57,7 @@ const ExplorePage = async () => {
           />
         ))}
       </div>
-      <Pagination baseLink="/explore" isBack={true} isNext={true} page={1} />
+      <Pagination baseLink="/explore/" isBack={true} isNext={true} page={1} />
     </section>
   );
 };

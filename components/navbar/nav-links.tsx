@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Session } from "next-auth";
-import { Compass, Menu, PlusSquare, UserRound } from "lucide-react";
+import { Compass, Menu, Newspaper, PlusSquare, UserRound } from "lucide-react";
 
 import {
   Popover,
@@ -18,6 +18,9 @@ export const NavLinks = ({ user }: { user: Session | null }) => {
       </Link>
       <Link href={"/create"}>
         <PlusSquare className="h-8 w-8" />
+      </Link>
+      <Link href={"/blog"}>
+        <Newspaper className="h-8 w-8" />
       </Link>
       <Popover>
         <PopoverTrigger className="flex items-center justify-center gap-x-2 p-2 rounded-full border border-slate-100 hover:shadow-md">

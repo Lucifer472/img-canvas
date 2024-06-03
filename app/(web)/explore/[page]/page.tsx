@@ -67,7 +67,7 @@ const ExplorePage = async ({ params }: { params: { page: string } }) => {
         ))}
       </div>
       <Pagination
-        baseLink="/explore"
+        baseLink="/explore/"
         isBack={pageNumber === 1}
         isNext={frameData.length === 15}
         page={pageNumber}
