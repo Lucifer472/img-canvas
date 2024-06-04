@@ -171,19 +171,23 @@ const Comments = () => {
                 </div>
                 <div className="overflow-hidden w-full flex flex-col ">
                   <div className="mb-1 flex items-center justify-between">
-                    <h2 className={cn("text-sm font-[600]", poppins.className)}>
-                      {data.user.name}
-                    </h2>
-                    <span className="text-xs text-slate-500">
-                      {data.createdAt.toDateString()}
-                    </span>
+                    <div>
+                      <h2
+                        className={cn("text-sm font-[600]", poppins.className)}
+                      >
+                        {data.user.name}
+                      </h2>
+                      <span className="break-words text-sm ">
+                        {data.text.toString()}
+                      </span>
+                    </div>
+                    <div className="flex items-end justify-end flex-col gap-y-2">
+                      <span className="text-xs text-slate-500">
+                        {data.createdAt.toDateString()}
+                      </span>
+                      <ReportCampaign label="Report" commentId={data.id} />
+                    </div>
                   </div>
-                  <div>
-                    <span className="break-words text-sm ">
-                      {data.text.toString()}
-                    </span>
-                  </div>
-                  <ReportCampaign label="report" commentId={data.id} />
                 </div>
               </div>
             ))}
