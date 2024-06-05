@@ -61,20 +61,20 @@ const HomePage = async () => {
           <h1 className="text-5xl text-center md:text-left sm:text-6xl md:text-7xl font-[900] text-color-gradient 2xl:w-1/2">
             Where Campaign Meets You
           </h1>
-          <h2 className="text-color-gradient text-center md:text-left text-base sm:text-lg mt-2 sm:mt-6 font-bold 2xl:w-1/2">
+          <h2 className="text-color-gradient text-center md:text-left text-base sm:text-lg mt-2 sm:mt-6  2xl:w-1/2">
             Photosframemaker helps you bring every idea, aspiration, and
             creativity to life.
           </h2>
           <div className="flex items-center justify-start gap-x-4 mt-2 sm:mt-6 w-full 2xl:w-1/2">
             <Link
               href={"/explore"}
-              className="py-4 w-full flex items-center justify-center bg-sky-600 hover:bg-sky-700 rounded-md text-white"
+              className="py-4 w-full flex items-center justify-center bg-sky-600 hover:bg-sky-700 rounded-md font-bold text-white"
             >
               Explore Campaign
             </Link>
             <Link
               href={"/create"}
-              className="py-4 w-full flex items-center justify-center bg-white rounded-md text-sky-600 border border-sky-600"
+              className="py-4 w-full flex items-center justify-center bg-white rounded-md text-sky-600 border font-bold border-sky-600"
             >
               Create Campaign
             </Link>
@@ -120,14 +120,14 @@ const HomePage = async () => {
               {" "}
               Make It for Everything{" "}
             </h2>
-            <h2 className="text-color-gradient text-center md:text-left text-base sm:text-lg mt-6 font-bold">
+            <h2 className="text-color-gradient text-center md:text-left text-base sm:text-lg mt-6">
               No matter what you want to do, from movements tackling huge,
               serious causes—to anything just for fun. We can help you turn it
               into something big.
             </h2>
             <Link
               href={"/create"}
-              className="py-4 px-16 flex items-center justify-center bg-sky-600 hover:bg-sky-700 rounded-md text-white mt-6"
+              className="py-4 px-16 flex items-center justify-center font-bold bg-sky-600 hover:bg-sky-700 rounded-md text-white mt-6"
             >
               Create Your Campaign
             </Link>

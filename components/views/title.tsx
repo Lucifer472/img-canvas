@@ -16,18 +16,16 @@ interface TitleProps {
 
 export const Title = ({ title, link, linkText, label }: TitleProps) => {
   return (
-    <div className="w-full flex flex-col gap-y-1 sm:gap-y-2 md:gap-y-4 my-2 md:my-4">
+    <div className="w-full flex flex-col px-4 gap-y-4 md:gap-y-4 my-4">
       <div className="w-full flex items-center justify-between">
-        <h1
-          className={cn("text-xl sm:text-2xl md:text-3xl", poppins.className)}
-        >
+        <h1 className={cn("text-2xl md:text-3xl", poppins.className)}>
           {title}
         </h1>
         {link && linkText && (
           <Link
             href={link}
             className={cn(
-              "text-sm sm:text-normal md:text-lg text-sky-600",
+              "text-normal md:text-lg text-sky-600",
               poppins.className
             )}
           >
@@ -35,11 +33,7 @@ export const Title = ({ title, link, linkText, label }: TitleProps) => {
           </Link>
         )}
       </div>
-      {label && (
-        <p className="text-muted-foreground text-xs sm:text-sm md:text-normal">
-          {label}
-        </p>
-      )}
+      {label && <p className="text-muted-foreground">{label}</p>}
     </div>
   );
 };
