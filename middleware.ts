@@ -4,6 +4,7 @@ import authConfig from "@/auth.config";
 
 const { auth } = NextAuth(authConfig);
 
+// @ts-ignore
 export default auth(async (req) => {
   const isLoggedIn = !!req.auth;
   const { nextUrl } = req;

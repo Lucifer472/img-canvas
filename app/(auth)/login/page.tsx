@@ -6,8 +6,6 @@ export const metadata: Metadata = {
   title: "Login Page | Photos Frame Maker",
 };
 
-export const dynamic = "force-static";
-
 const LoginPage = () => {
   return (
     <div className="w-full my-6 min-h-[600px] flex items-center justify-center">

@@ -22,6 +22,7 @@ export const {
     // @ts-ignore
     async session({ session, token }) {
       if (session.user) {
+        // @ts-ignore
         session.user.id = token.sub;
 
         const mainUser = await findUser(session.user.id as string);
