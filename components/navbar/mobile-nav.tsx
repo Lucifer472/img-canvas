@@ -18,11 +18,11 @@ export const MobileNav = ({ user }: { user: Session | null }) => {
   const pathname = usePathname();
 
   return (
-    <div className="flex md:hidden items-center justify-evenly gap-x-2 w-full h-[80px] px-4 bg-white fixed bottom-0 left-0 z-50 rounded-t-sm border-t border-slate-100 shadow-md">
+    <div className="grid grid-cols-5 md:hidden items-center justify-evenly gap-x-2 w-full h-[80px] bg-white fixed bottom-0 left-0 z-50 rounded-t-sm border-t border-slate-100 shadow-md">
       <Link
         href={"/"}
         className={cn(
-          "flex flex-col items-center justify-center min-w-[20%] w-full h-full cursor-pointer"
+          "flex flex-col items-center justify-center col-span-1 w-full h-full cursor-pointer"
         )}
       >
         <HomeIcon
@@ -33,7 +33,7 @@ export const MobileNav = ({ user }: { user: Session | null }) => {
       <Link
         href={"/explore"}
         className={cn(
-          "flex flex-col items-center justify-center min-w-[20%] w-full h-full cursor-pointer "
+          "flex flex-col items-center justify-center col-span-1 w-full h-full cursor-pointer "
         )}
       >
         <CompassIcon
@@ -48,7 +48,7 @@ export const MobileNav = ({ user }: { user: Session | null }) => {
       <Link
         href={"/blog"}
         className={cn(
-          "flex flex-col items-center justify-center min-w-[20%] w-full h-full cursor-pointer "
+          "flex flex-col items-center justify-center col-span-1 w-full h-full cursor-pointer "
         )}
       >
         <Newspaper
@@ -59,7 +59,7 @@ export const MobileNav = ({ user }: { user: Session | null }) => {
       <Link
         href={"/create"}
         className={cn(
-          "flex flex-col items-center justify-center min-w-[20%] w-full h-full cursor-pointer "
+          "flex flex-col items-center justify-center col-span-1 w-full h-full cursor-pointer "
         )}
       >
         <PlusSquareIcon
@@ -71,7 +71,7 @@ export const MobileNav = ({ user }: { user: Session | null }) => {
         // @ts-ignore
         href={user ? "/profile/" + user.user?.username : "/login"}
         className={cn(
-          "flex flex-col items-center justify-center min-w-[20%] w-full h-full cursor-pointer",
+          "flex flex-col items-center justify-center col-span-1 w-full h-full cursor-pointer",
           pathname.startsWith("/profile") && "text-sky-500"
         )}
       >

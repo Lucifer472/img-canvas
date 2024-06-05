@@ -61,11 +61,11 @@ const HomePage = async () => {
           <h1 className="text-5xl text-center md:text-left sm:text-6xl md:text-7xl font-[900] text-color-gradient 2xl:w-1/2">
             Where Campaign Meets You
           </h1>
-          <h2 className="text-color-gradient text-center md:text-left text-base sm:text-lg mt-6 font-bold 2xl:w-1/2">
+          <h2 className="text-color-gradient text-center md:text-left text-base sm:text-lg mt-2 sm:mt-6 font-bold 2xl:w-1/2">
             Photosframemaker helps you bring every idea, aspiration, and
             creativity to life.
           </h2>
-          <div className="flex items-center justify-start gap-x-4 mt-6 w-full 2xl:w-1/2">
+          <div className="flex items-center justify-start gap-x-4 mt-2 sm:mt-6 w-full 2xl:w-1/2">
             <Link
               href={"/explore"}
               className="py-4 w-full flex items-center justify-center bg-sky-600 hover:bg-sky-700 rounded-md text-white"
@@ -104,7 +104,7 @@ const HomePage = async () => {
           ))}
         </div>
       </div>
-      <div className="w-full bg-gray-50 py-6 flex items-center justify-center basic-container">
+      <div className="w-full bg-[#EAF7F6] py-6 flex items-center justify-center basic-container">
         <div className="flex flex-col-reverse md:flex-row items-center justify-center gap-x-4 mt-6">
           <video
             autoPlay
@@ -115,7 +115,7 @@ const HomePage = async () => {
           >
             <source src="/asset/home-vid.mp4" type="video/mp4" />
           </video>
-          <div className="flex flex-col md:items-start items-center justify-center md:justify-start gap-y-2">
+          <div className="flex flex-col md:items-start items-center justify-center md:justify-start gap-y-2 mb-6">
             <h2 className="text-5xl text-center md:text-left sm:text-6xl md:text-7xl font-[900] text-color-gradient">
               {" "}
               Make It for Everything{" "}
