@@ -20,7 +20,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
       <Separator className="my-2" />
       <BlogList data={blogs} title="Related Posts" /> */}
       <div className="flex flex-col justify-center pl-4 py-4 ">
-        <h1 className="text-3xl font-bold tracking-tight">What's New</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Whats New</h1>
         <span className="text-3xl text-[#717275] tracking-normal font-light mb-3">
           Latest updates on Twibbonize, fresh from our product team.
         </span>
@@ -50,7 +50,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -89,7 +89,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -128,7 +128,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -169,7 +169,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -208,7 +208,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -247,7 +247,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -288,7 +288,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -327,7 +327,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -366,7 +366,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -407,7 +407,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -446,7 +446,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -485,7 +485,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -526,7 +526,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -565,7 +565,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -604,7 +604,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -645,7 +645,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
@@ -684,7 +684,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
               href="#"
               className="py-1 px-2 rounded-2xl bg-[#e9e9eb] tracking-tight text-black text-xs"
             >
-              WHAT'S NEW
+              WHATS NEW
             </a>
           </div>
           <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
