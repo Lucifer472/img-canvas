@@ -32,15 +32,15 @@ export const timeFormatOptions = {
 
 export const Category = [
   {
-    value: "car",
-    label: "Car Loan",
+    value: "news",
+    label: "News",
   },
   {
-    value: "personal",
-    label: "Personal Loan",
+    value: "trending",
+    label: "Trending",
   },
   {
-    value: "home",
-    label: "Home Loan",
+    value: "features",
+    label: "Features",
   },
 ];
