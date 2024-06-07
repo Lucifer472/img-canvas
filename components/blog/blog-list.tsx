@@ -1,5 +1,5 @@
 import { CategoryCombobox } from "../etc/combobox-category";
-import { BlogCard } from "./blog-card";
+import { BlogCardMain } from "./blog-card";
 
 export const BlogList = ({
   title,
@@ -20,17 +20,15 @@ export const BlogList = ({
         {isCat && <CategoryCombobox />}
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2">
-        {data.map((b: any) => (
-          <BlogCard
+        {/* {data.map((b: any) => (
+          <BlogCardMain
             key={b.id}
-            authorImg={b.authorImg}
-            authorName={b.author}
             img={b.img}
             link={`/blog/${b.url}`}
             updatedAt={b.updatedAt}
             title={b.title}
           />
-        ))}
+        ))} */}
       </div>
     </div>
   );
