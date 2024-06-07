@@ -14,9 +14,9 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <section className="px-2 py-4 basic-container">
-      <BlogMain blog={blog} link="/" />
+      {/* <BlogMain blog={blog} link="/" />
       <Separator className="my-2" />
-      <BlogList data={blogs} title="Related Posts" />
+      <BlogList data={blogs} title="Related Posts" /> */}
     </section>
   );
 };
