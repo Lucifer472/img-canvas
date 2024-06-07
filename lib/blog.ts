@@ -52,8 +52,8 @@ export const fetchBlogs = async (page: number, limit: number | undefined) => {
 
 export const fetchBlogsByCategory = async (
   page: number,
-  limit: number | undefined,
-  category: string
+  category: string,
+  limit?: number
 ) => {
   try {
     const data = await db.blog.findMany({

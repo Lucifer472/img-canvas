@@ -1,16 +1,26 @@
-import { BlogList } from "@/components/blog/blog-list";
-import BlogMain from "@/components/blog/blog-main";
-import NoBlog from "@/components/blog/no-blog";
-import { Separator } from "@/components/ui/separator";
-import { fetchBlogByUrl, fetchBlogs } from "@/lib/blog";
+import { fetchBlogByUrl, fetchBlogs, fetchBlogsByCategory } from "@/lib/blog";
 import Image from "next/image";
 import { Clock } from "lucide-react";
+import { Category } from "@/constant";
+import { redirect } from "next/navigation";
 
-const BlogPage = async ({ params }: { params: { slug: string } }) => {
-  const slug = params.slug;
-  const blog = await fetchBlogByUrl(slug);
+const BlogPage = async ({ params }: { params: { data: string[] } }) => {
+  const slug = params.data[0];
+  const page = parseInt(params.data[1]) | 1;
 
-  const blogs = await fetchBlogs(1, 4);
+  const mainBlog = await fetchBlogByUrl(slug);
+
+  if (mainBlog) {
+    return <h2>Blog Exists</h2>;
+  }
+
+  const isCategory = Category.findIndex((c) => c.value === slug);
+
+  if (isCategory === -1) {
+    return redirect("/");
+  }
+
+  const blogs = await fetchBlogsByCategory(page, slug);
 
   // if (!blog) return <NoBlog />;
 

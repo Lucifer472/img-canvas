@@ -8,7 +8,7 @@ const AdminPage = async () => {
   const session = await auth();
 
   if (session) {
-    if (session.user?.email !== "hardiksadhu472@gmail.com") {
+    if (session.user?.email !== "shubhkhatri0000@gmail.com") {
       return redirect("/");
     }
   } else {
