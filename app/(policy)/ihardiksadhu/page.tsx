@@ -1,4 +1,4 @@
-import { BlogList } from "@/components/blog/blog-list";
+// import { BlogList } from "@/components/blog/blog-list";
 import { fetchBlogs } from "@/lib/blog";
 import Image from "next/image";
 import Link from "next/link";
@@ -62,7 +62,7 @@ const AuthorPage = async () => {
           </Link>
         </div>
       </div>
-      <BlogList data={blogs} title="Related Posts" />
+      {/* <BlogList data={blogs} title="Related Posts" /> */}
     </div>
   );
 };
