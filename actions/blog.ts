@@ -34,12 +34,12 @@ export const createBlog = async (v: z.infer<typeof BlogSchema>) => {
 
   const blog = await addBlog(
     data,
+    "shubhkhatri0000",
     data.title
       .toLowerCase()
       .replace(/[^\w\s]|_/g, "")
       .replace(/\s+/g, "-"),
-    img,
-    "shubhkhatri0000"
+    img
   );
 
   if (!blog) {
