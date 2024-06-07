@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ClockIcon, UsersIcon } from "lucide-react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { SessionProvider } from "next-auth/react";
 
 import { auth } from "@/auth";
 
@@ -13,7 +15,6 @@ import { PopularFrames } from "@/components/views/PopularFrames";
 import { FrameSharePop } from "@/components/views/SocialShare";
 import DeleteFrameForm from "@/components/auth/delete-frame-form";
 import Comments from "@/components/views/comments";
-import { SessionProvider } from "next-auth/react";
 import GoogleCaptchaWrapper from "@/components/auth/goole-rechaptcha-wrapper";
 
 export async function generateMetadata({
@@ -22,6 +23,10 @@ export async function generateMetadata({
   params: { frameId: string };
 }): Promise<Metadata> {
   const frame = await getFrame(params.frameId);
+
+  if (frame === null) {
+    return redirect("/");
+  }
 
   const newTitle = frame?.name + " | Photos Frame Maker";
 
