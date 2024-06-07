@@ -5,22 +5,18 @@ import TopBlogs from "@/components/views/top-blog";
 import { fetchBlogs } from "@/lib/blog";
 
 const BlogPage = async () => {
-  const blogs = await fetchBlogs(1, 15);
+  const blogs = await fetchBlogs(1, 8);
 
   if (!blogs) return <NoBlog />;
 
+  const blog1 = blogs.splice(0, 4);
+  const blog2 = blogs.splice(4, 8);
+
   return (
     <>
-      {/* <BlogList data={blogs} title="All Blogs" isCat />
-      <Pagination
-        baseLink="/blog?page="
-        isBack={page < 2}
-        isNext={blogs.length > 14}
-        page={page}
-      /> */}
-      <TopBlogs blogData={blogs} />
-      <LatestBlogs blogData={blogs} />
-      <RecentBlogs blogData={blogs} />
+      <TopBlogs blogData={blog1} />
+      <LatestBlogs blogData={blog2} />
+      <RecentBlogs />
     </>
   );
 };

@@ -8,7 +8,7 @@ import {
 
 const BlogGen = ({ blog, faq }: { blog: any; faq: any }) => {
   return (
-    <div className="padding flex flex-col items-start justify-center gap-y-1 max-w-full xxs:max-w-[400px] xs:max-w-[500px] sm:max-[600px] md:max-w-[750px] mx-auto prose blog-styles ">
+    <div className="flex flex-col items-start justify-center gap-y-1 max-w-full xxs:max-w-[400px] xs:max-w-[500px] sm:max-[600px] md:max-w-7xl serif basic-container mx-auto prose blog-styles ">
       {
         // @ts-ignore
         blog.map((b: any, index) => {

@@ -7,6 +7,8 @@ import { BlogCardSecond } from "../blog/blog-card";
 import { convertDateFormat } from "@/lib/date";
 
 const LatestBlogs = ({ blogData }: { blogData: Blog[] }) => {
+  if (blogData.length < 1) return;
+
   return (
     <section className="bg-black flex flex-col gap-y-2 justify-between">
       <div className="sm:px-2 sm:pb-4  sm:basic-container max-w-[599px] px-4 py-4 w-full grid sm:grid-cols-2 gap-x-2">

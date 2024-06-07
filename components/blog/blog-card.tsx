@@ -42,7 +42,7 @@ export const BlogCardMain = ({
           href={"/blog/" + category}
           className="py-1 px-2 mr-2 rounded-2xl bg-[#e9e9eb] tracking-wider text-black text-xs hover:text-white hover:bg-[#a3a3a3] capitalize"
         >
-          {category.slice(1).replace("-", " ")}
+          {category}
         </Link>
         <Link href={link}>
           {" "}
@@ -93,7 +93,7 @@ export const BlogCardSecond = ({
           href={"/blog/" + category}
           className="py-1 px-2 mr-2 w-fit rounded-2xl bg-[#e9e9eb] tracking-wider text-black text-xs hover:text-white hover:bg-[#a3a3a3]"
         >
-          {category.slice(1).replace("-", " ")}
+          {category}
         </Link>
         <Link href={link} className="flex flex-col">
           <h2 className="mt-4 text-xl font-bold hover:underline cursor-pointer tracking-tight">
@@ -141,7 +141,7 @@ export const BlogCardExtra = ({
           href={"/blog/" + category}
           className="py-1 px-2 mr-2 w-fit rounded-2xl bg-[#e9e9eb] tracking-wider text-black text-xs hover:text-white hover:bg-[#a3a3a3]"
         >
-          {category.slice(1).replace("-", " ")}
+          {category}
         </Link>
         <Link href={link}>
           <h2 className=" mt-4 text-xl font-bold">{title}</h2>
@@ -156,6 +156,53 @@ export const BlogCardExtra = ({
           </div>
         </Link>
       </div>
+    </div>
+  );
+};
+
+export const BlogCardFinal = ({
+  link,
+  img,
+  title,
+  description,
+  updatedAt,
+  category,
+}: BlogCardProps) => {
+  return (
+    <div className="flex col-span-1 flex-col mb-3  gap-y-3 gap-x-5 ">
+      <Link href={link}>
+        <Image
+          src={img}
+          width={283}
+          height={159}
+          className="rounded-xl w-full cursor-pointer  max-w-[599px] sm:w-[283px] sm:h-[159px]"
+          style={{
+            objectFit: "cover",
+          }}
+          alt={title}
+        />
+      </Link>
+
+      <Link
+        href={"/blog/" + category}
+        className="py-1 px-2 mr-2 w-fit rounded-2xl bg-[#e9e9eb] tracking-wider text-black text-xs hover:text-white hover:bg-[#a3a3a3]"
+      >
+        {category}
+      </Link>
+      <Link href={link}>
+        <span className="block  mt-4 sm:my-4 text-black  hover:underline hover:decoration-[#a3a3a3] cursor-pointer">
+          <h2 className=" text-3xl  tracking-tight font-bold  ">{title}</h2>
+          <p className="text-3xl text-[#717275] font-light">{description}</p>
+        </span>
+        <div className="flex gap-2 ">
+          <h1 className="text-xs  font-medium text-black mr-1">
+            {convertDateFormat(updatedAt)} --
+          </h1>
+          <span className="flex items-center gap-x-1 text-xs text-black">
+            <Clock className="h-3 w-3 " />2 minute read
+          </span>
+        </div>
+      </Link>
     </div>
   );
 };

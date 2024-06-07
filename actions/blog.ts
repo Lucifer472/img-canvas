@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 import { auth } from "@/auth";
-import { addBlog } from "@/lib/blog";
+import { addBlog, fetchBlogs } from "@/lib/blog";
 import { BlogSchema } from "@/schema";
 
 export const createBlog = async (v: z.infer<typeof BlogSchema>) => {
@@ -47,4 +47,10 @@ export const createBlog = async (v: z.infer<typeof BlogSchema>) => {
   }
 
   return { success: "blog added successfully!" };
+};
+
+export const fetchNewBlogs = async (page: number) => {
+  const blogs = await fetchBlogs(page + 1, 8);
+
+  return blogs;
 };

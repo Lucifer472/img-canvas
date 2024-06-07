@@ -5,8 +5,11 @@ import Link from "next/link";
 
 import { BlogCardExtra } from "../blog/blog-card";
 import { convertDateFormat } from "@/lib/date";
+import NoBlog from "../blog/no-blog";
 
 const TopBlogs = ({ blogData }: { blogData: Blog[] }) => {
+  if (blogData.length < 1) return <NoBlog />;
+
   return (
     <section className="sm:px-2 sm:pb-4 basic-container w-full">
       <div className="grid sm:grid-cols-2 justify-center sm:gap-x-7  gap-y-7 px-4 py-4">
@@ -28,7 +31,7 @@ const TopBlogs = ({ blogData }: { blogData: Blog[] }) => {
               href={"/blog/" + blogData[0].category}
               className="py-1 px-2 my-2 rounded-2xl bg-[#e9e9eb] tracking-wider text-black text-xs hover:text-white hover:bg-[#a3a3a3] capitalize"
             >
-              {blogData[0].category.slice(1).replace("-", " ")}
+              {blogData[0].category}
             </Link>
             <Link href={`/blog/${blogData[0].url}`}>
               <span className="font-bold  capitalize leading-6 tracking-tight text-3xl sm:text-2xl text-[#292929]  hover:underline">
