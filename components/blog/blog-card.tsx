@@ -1,51 +1,161 @@
 import Image from "next/image";
 import Link from "next/link";
-import textSlice from "@/lib/text";
+import { Clock } from "lucide-react";
+
 import { convertDateFormat } from "@/lib/date";
+import textSlice from "@/lib/text";
 
 interface BlogCardProps {
   link: string;
-  img: any;
+  img: string;
   title: string;
-  authorImg: any;
-  authorName: String | null | undefined;
+  description: string;
   updatedAt: Date;
+  category: string;
 }
 
-export const BlogCard = ({
+export const BlogCardMain = ({
   link,
   img,
   title,
-  authorImg,
-  authorName,
+  description,
   updatedAt,
+  category,
 }: BlogCardProps) => {
   return (
-    <Link href={link} className="py-2">
-      <article className="flex flex-col items-start w-full max-w-[300px] relative p-2 [&>h2]:hover:underline hover:shadow border rounded-md">
-        <div className="relative w-full h-[200px]">
-          <Image src={img} alt="Fallback" fill style={{ objectFit: "cover" }} />
-        </div>
-        <h2 className="font-medium h-[60px] mt-2 mb-2">
-          {textSlice(title, 60)}
-        </h2>
-        <div className="flex items-center justify-between gap-2 w-full">
-          <div className="flex gap-1 items-center">
-            <div className="relative w-6 h-6 rounded-full">
-              <Image
-                src={authorImg as string}
-                alt="Author"
-                fill
-                className="rounded-full object-cover"
-              />
-            </div>
-            <span className="text-xs font-light text-sky-700">{`By ${authorName}`}</span>
+    <article className="flex sm:flex-row flex-col w-full  gap-y-3 gap-x-5">
+      <Link href={link}>
+        <Image
+          src={img}
+          width={283}
+          height={159}
+          className="rounded-xl w-full cursor-pointer  max-w-[599px] sm:w-[432px] sm:h-[243px]"
+          style={{
+            objectFit: "cover",
+          }}
+          alt={title}
+        />
+      </Link>
+
+      <div>
+        <Link
+          href={"/blog/" + category}
+          className="py-1 px-2 mr-2 rounded-2xl bg-[#e9e9eb] tracking-wider text-black text-xs hover:text-white hover:bg-[#a3a3a3] capitalize"
+        >
+          {category.slice(1).replace("-", " ")}
+        </Link>
+        <Link href={link}>
+          {" "}
+          <h2 className=" text-xl text-black tracking-tight font-semibold  mt-3 ">
+            {title}
+          </h2>
+          <p className="text-xl text-[#717275]  font-light">{description}</p>
+          <div className="flex mt-4 items-center">
+            <h1 className="text-xs font-medium text-[#292929] mr-1">
+              {convertDateFormat(updatedAt)} --
+            </h1>
+            <span className="flex items-center gap-x-1 text-xs">
+              <Clock className="h-3 w-3" />
+              Awesome read
+            </span>
           </div>
-          <time className="text-xs font-light text-sky-700">
-            {convertDateFormat(updatedAt)}
-          </time>
-        </div>
-      </article>
-    </Link>
+        </Link>
+      </div>
+    </article>
+  );
+};
+
+export const BlogCardSecond = ({
+  link,
+  img,
+  title,
+  updatedAt,
+  category,
+}: BlogCardProps) => {
+  return (
+    <article className="pb-5 flex flex-col sm:flex-row gap-5 border-b-2 border-white">
+      <Link
+        href={link}
+        className="relative w-full h-fit aspect-video sm:w-[80px] sm:h-[60px]"
+      >
+        <Image
+          src={img}
+          fill
+          className="rounded-2xl cursor-pointer hover:opacity-90 z-1"
+          style={{
+            objectFit: "contain",
+          }}
+          alt={title}
+        />
+      </Link>
+      <div className="text-white flex flex-col">
+        <Link
+          href={"/blog/" + category}
+          className="py-1 px-2 mr-2 w-fit rounded-2xl bg-[#e9e9eb] tracking-wider text-black text-xs hover:text-white hover:bg-[#a3a3a3]"
+        >
+          {category.slice(1).replace("-", " ")}
+        </Link>
+        <Link href={link} className="flex flex-col">
+          <h2 className="mt-4 text-xl font-bold hover:underline cursor-pointer tracking-tight">
+            {textSlice(title, 120)}
+          </h2>
+          <div className="flex mt-4 items-center flex-wrap gap-2">
+            <h1 className="text-xs font-medium">
+              {convertDateFormat(updatedAt)} --
+            </h1>
+            <span className="flex items-center gap-x-1 text-xs">
+              <Clock className="h-3 w-3" />
+              Excellent read
+            </span>
+          </div>
+        </Link>
+      </div>
+    </article>
+  );
+};
+
+export const BlogCardExtra = ({
+  link,
+  img,
+  title,
+  updatedAt,
+  category,
+}: BlogCardProps) => {
+  return (
+    <div className="flex sm:flex-row flex-col w-full gap-y-3 gap-x-5 ">
+      <Link href={link}>
+        <Image
+          src={img}
+          width={283}
+          height={159}
+          className="rounded-xl w-full cursor-pointer  max-w-[599px] sm:w-[283px] sm:h-[159px]"
+          style={{
+            objectFit: "cover",
+          }}
+          alt={title}
+        />
+      </Link>
+
+      <div>
+        <Link
+          href={"/blog/" + category}
+          className="py-1 px-2 mr-2 w-fit rounded-2xl bg-[#e9e9eb] tracking-wider text-black text-xs hover:text-white hover:bg-[#a3a3a3]"
+        >
+          {category.slice(1).replace("-", " ")}
+        </Link>
+        <Link href={link}>
+          <h2 className=" mt-4 text-xl font-bold">{title}</h2>
+          <div className="flex mt-4 items-center">
+            <h1 className="text-xs font-medium text-[#292929] mr-1">
+              {convertDateFormat(updatedAt)} --
+            </h1>
+            <span className="flex items-center gap-x-1 text-xs">
+              <Clock className="h-3 w-3" />
+              Best read
+            </span>
+          </div>
+        </Link>
+      </div>
+    </div>
   );
 };

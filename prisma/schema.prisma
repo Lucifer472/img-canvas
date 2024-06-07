@@ -10,87 +10,104 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Frames{
-  id    String          @id 
+model Frames {
+  id String @id
 
-  img   String          @db.Text 
-  name  String          
-  desc  String?         @db.Text
-  supporter Int         @default(0)
+  img       String  @db.Text
+  name      String
+  desc      String? @db.Text
+  supporter Int     @default(0)
 
-  createdAt DateTime    @default(now())
+  createdAt DateTime @default(now())
 
-  userId    String      
-  user      User        @relation(fields: [userId],references:[id],onDelete: Cascade)
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   comment Comment[]
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
-model User{
-  id  String            @id    @default(cuid())
+enum gender {
+  Male
+  Female
+}
 
-  name      String?      @db.VarChar(45)
-  email     String       @unique
+model User {
+  id String @id @default(cuid())
+
+  name          String?   @db.VarChar(45)
+  email         String    @unique
   emailVerified DateTime? @default(now())
-  username  String?     @db.VarChar(45)  @unique
-  password String?
-  image  String         @db.Text
-  supported   Int       @default(0)
+  username      String?   @unique @db.VarChar(45)
+  password      String?
+  image         String    @db.Text
+  supported     Int       @default(0)
 
-  createdAt  DateTime   @default(now())
+  createdAt DateTime @default(now())
 
-  frames    Frames[]
-  accounts  Account[]
+  frames   Frames[]
+  accounts Account[]
 
   comment   Comment[]
+  bio       String?
+  gender    gender    @default(Male)
+  dob       String    @default("2000-01-01")
+  facebook  String?
+  instagram String?
+  linkedin  String?
+  twitter   String?
+  blogs     Blog[]
 }
 
-model Comment{
-  id    Int       @id     @default(autoincrement())
+model Comment {
+  id Int @id @default(autoincrement())
 
-  text  String    @db.VarChar(255)
-  createdAt   DateTime   @default(now())
+  text      String   @db.VarChar(255)
+  createdAt DateTime @default(now())
 
-  userId  String
-  user    User   @relation(fields:[userId], references:[id],onDelete: Cascade)
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   frameId String
-  frame   Frames  @relation(fields: [frameId], references: [id],onDelete:Cascade)
+  frame   Frames @relation(fields: [frameId], references: [id], onDelete: Cascade)
 }
 
-model blog {
+model Blog {
   id          Int      @id @default(autoincrement())
   date        DateTime @default(now())
-  title       String    
+  title       String
   url         String   @unique
-  img         String     
-  keywords    String    
-  description String    
-  author      String    
-  authorImg   String    
-  blog        Json      
-  faq         Json?     
-  category    String    
+  img         String
+  keywords    String
+  description String
+  author      String?
+  blog        Json
+  category    String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  Author User? @relation(fields: [author], references: [username])
+
+  faq Json?
+
+  @@index([author])
 }
