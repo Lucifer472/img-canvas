@@ -16,7 +16,7 @@ export const addBlog = async (
     const data = await db.blog.create({
       data: {
         author,
-        authorImg,
+
         blog,
         category,
         description,
