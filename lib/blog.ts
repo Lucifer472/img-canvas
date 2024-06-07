@@ -1,37 +1,33 @@
+import { BlogSchema } from "@/schema";
+import * as z from "zod";
 import db from "./db";
 
 export const addBlog = async (
+  value: z.infer<typeof BlogSchema>,
   author: string,
-  authorImg: string,
-  blog: string,
-  category: string,
-  description: string,
-  img: string,
-  keywords: string,
-  title: string,
   url: string,
-  faq: string
+  img: string
 ) => {
   try {
     const data = await db.blog.create({
       data: {
+        title: value.title,
+        url: url,
+        img: img,
+        keywords: value.keywords,
+        description: value.desc,
+        blog: value.blog,
+        faq: value.faq,
+        category: value.category,
         author,
-
-        blog,
-        category,
-        description,
-        img,
-        keywords,
-        title,
-        url,
-        faq,
       },
     });
 
-    if (!data) return null;
-    return data;
+    if (!data) return { error: "Something went wrong" };
+
+    return { success: data };
   } catch (error) {
-    return null;
+    return { error: "Something went wrong!" };
   }
 };
 

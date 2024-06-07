@@ -11,7 +11,7 @@ export const createBlog = async (v: z.infer<typeof BlogSchema>) => {
   if (
     !session ||
     !session.user ||
-    session.user.email !== "hardiksadhu472@gmail.com"
+    session.user.email !== "shubhkhatri0000@gmail.com"
   ) {
     return { error: "You are not authorized" };
   }
@@ -33,19 +33,13 @@ export const createBlog = async (v: z.infer<typeof BlogSchema>) => {
   }
 
   const blog = await addBlog(
-    "Hardik Sadhu",
-    "https://images.drivingexamexpert.com/blogs/658bf7dce0f4b.PNG",
-    data.blog,
-    data.category,
-    data.desc,
-    img,
-    data.keywords,
-    data.title,
+    data,
     data.title
       .toLowerCase()
       .replace(/[^\w\s]|_/g, "")
       .replace(/\s+/g, "-"),
-    data.faq
+    img,
+    "shubhkhatri0000"
   );
 
   if (!blog) {
