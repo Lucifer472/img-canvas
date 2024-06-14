@@ -67,14 +67,16 @@ const FramePage = async () => {
             className="object-cover w-20 h-20 rounded-full"
           />
           <div className="text-sm text-center font-medium hover:border-b border-black cursor-pointer">
-            Yog Board
+            Gujarat state yog board
           </div>
           {session &&
             session.user &&
             session.user.email === frame.user.email && (
               <DeleteFrameForm id={frame.id} />
             )}
-          <h2 className="text-2xl font-medium text-center">{frame.name}</h2>
+          <h2 className="text-2xl font-medium text-center">
+            Gujarat state yog board
+          </h2>
           <div className="flex items-center justify-center gap-x-2">
             <UsersIcon className="w-6 h-6 text-black" />
             <span className="text-[14px] text-gray-800">
@@ -85,7 +87,9 @@ const FramePage = async () => {
               {datehandler(frame.createdAt)}
             </span>
           </div>
-          <p className="text-sm text-gray-800 text-center">{frame.desc}</p>
+          <p className="text-sm text-gray-800 text-center">
+            Gujarat state yog board
+          </p>
           <FrameSharePop label={frame.id} img={frame.img} />
         </div>
         <ImageView
