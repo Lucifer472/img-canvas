@@ -202,7 +202,7 @@ Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't fo
             {step !== 3 && step !== 4 && (
               <div className="relative overflow-hidden" ref={mainDiv}>
                 <p className="absolute text-[8px] xss:text-xs font-medium top-[6%] right-[6%] z-50">
-                  Name:{name}
+                  {name}
                 </p>
                 <Image
                   src={img}
