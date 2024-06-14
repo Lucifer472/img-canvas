@@ -2,16 +2,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import download from "downloadjs";
-import { toPng } from "html-to-image";
-
-import { Poppins } from "next/font/google";
 import Image from "next/image";
+import { toPng } from "html-to-image";
+import { Poppins } from "next/font/google";
 import { CopyIcon, RotateCw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 
 import Loader from "@/components/loader";
 import { UserImage } from "@/components/views/user-image";
@@ -201,7 +199,7 @@ Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't fo
           <div className="border-2 border-dashed border-border ">
             {step !== 3 && step !== 4 && (
               <div className="relative overflow-hidden" ref={mainDiv}>
-                <p className="absolute text-xs z-50 top-8 right-7">
+                <p className="absolute text-[8px] sm:text-xs z-50 top-[21px] right-5 sm:top-6 md:top-8 sm:right-7">
                   Name:{name}
                 </p>
                 <Image
