@@ -6,7 +6,7 @@ import { ReportCampaign } from "@/components/etc/Report-Camp";
 
 const Footer = () => {
   return (
-    <footer className="h-full max-h-[290px] w-full py-8 bg-sky-50 mb-[80px] md:mb-0">
+    <footer className="h-full max-h-[290px] w-full py-8 bg-sky-50  md:mb-0">
       <div className="w-full h-full flex flex-col gap-y-6 items-center">
         <Link
           href={"/"}

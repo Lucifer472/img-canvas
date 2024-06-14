@@ -201,7 +201,7 @@ Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't fo
           <div className="border-2 border-dashed border-border ">
             {step !== 3 && step !== 4 && (
               <div className="relative overflow-hidden" ref={mainDiv}>
-                <p className="absolute text-[8px] sm:text-xs z-50 top-[21px] right-5 sm:top-6 md:top-8 sm:right-7">
+                <p className="absolute text-[8px] xss:text-xs font-medium top-[6%] right-[6%] z-50">
                   Name:{name}
                 </p>
                 <Image
