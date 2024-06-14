@@ -153,8 +153,9 @@ export const ImageView = ({
     if (mainDiv.current) {
       toPng(mainDiv.current, {
         includeQueryParams: true,
-        canvasWidth: imageSize.width,
-        canvasHeight: imageSize.height,
+        canvasWidth: imageSize.width / 2,
+        canvasHeight: imageSize.height / 2,
+        quality: 0.2,
       }).then((dataUrl) => {
         supportAdded(id, userId).then((res) => {
           download(dataUrl, imgName + ".png");
