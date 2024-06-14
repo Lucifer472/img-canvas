@@ -111,3 +111,9 @@ model Blog {
 
   @@index([author])
 }
+
+model YogBoardData {
+  id Int   @id   @default(autoincrement())
+  name      String
+  number    String
+}

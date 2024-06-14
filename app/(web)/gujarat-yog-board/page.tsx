@@ -2,31 +2,18 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ClockIcon, UsersIcon } from "lucide-react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { SessionProvider } from "next-auth/react";
 
 import { auth } from "@/auth";
 
-import { getFrame, getPopularFrames } from "@/lib/frames";
+import { getFrame } from "@/lib/frames";
 import { datehandler } from "@/lib/utils";
 
-import { ImageView } from "@/components/views/image-upload";
-import { PopularFrames } from "@/components/views/PopularFrames";
+import { ImageView } from "./_image";
 import { FrameSharePop } from "@/components/views/SocialShare";
 import DeleteFrameForm from "@/components/auth/delete-frame-form";
-import Comments from "@/components/views/comments";
-import GoogleCaptchaWrapper from "@/components/auth/goole-rechaptcha-wrapper";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { frameId: string };
-}): Promise<Metadata> {
-  const frame = await getFrame(params.frameId);
-
-  if (frame === null) {
-    return redirect("/");
-  }
+export async function generateMetadata(): Promise<Metadata> {
+  const frame = await getFrame("gujarat-yog-board");
 
   const newTitle = frame?.name + " | Photos Frame Maker";
 
@@ -39,9 +26,8 @@ export async function generateMetadata({
   };
 }
 
-const FramePage = async ({ params }: { params: { frameId: string } }) => {
-  const frame = await getFrame(decodeURIComponent(params.frameId));
-  const popular = await getPopularFrames(0);
+const FramePage = async () => {
+  const frame = await getFrame("gujarat-yog-board");
 
   const session = await auth();
 
@@ -74,20 +60,15 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
       <div className="flex flex-col items-center gap-y-8 py-8 basic-container w-full h-full">
         <div className="w-full h-full flex flex-col gap-y-4 items-center">
           <Image
-            src={frame.user.image as string}
+            src={"/asset/images/gujarat-yog.png"}
             alt="Profile Image"
             width={80}
             height={80}
             className="object-cover w-20 h-20 rounded-full"
           />
-          <Link
-            href={
-              "/profile/" + encodeURIComponent(frame.user.username as string)
-            }
-            className="text-sm text-center font-medium hover:border-b border-black cursor-pointer"
-          >
-            {frame.user.name}
-          </Link>
+          <div className="text-sm text-center font-medium hover:border-b border-black cursor-pointer">
+            Yog Board
+          </div>
           {session &&
             session.user &&
             session.user.email === frame.user.email && (
@@ -114,12 +95,6 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
           userId={frame.user.id}
           userName={session?.user?.name}
         />
-        <SessionProvider>
-          <GoogleCaptchaWrapper>
-            <Comments />
-          </GoogleCaptchaWrapper>
-        </SessionProvider>
-        {popular && <PopularFrames frameData={popular} />}
       </div>
     </section>
   );
