@@ -156,6 +156,7 @@ export const ImageView = ({
         canvasWidth: imageSize.width / 2,
         canvasHeight: imageSize.height / 2,
         quality: 0.2,
+        pixelRatio: 0.8,
       }).then((dataUrl) => {
         supportAdded(id, userId).then((res) => {
           download(dataUrl, imgName + ".png");
