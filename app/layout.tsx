@@ -49,7 +49,7 @@ export default async function RootLayout({
           async
         />
         <Toaster position="top-center" />
-        {/* <Navbar user={user} /> */}
+        <Navbar user={user} />
         <main>{children}</main>
         <Footer />
       </body>
