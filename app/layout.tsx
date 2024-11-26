@@ -10,6 +10,7 @@ import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
 
 import { auth } from "@/auth";
+import AdsScript from "@/components/ads";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,24 +39,13 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Script
           strategy="beforeInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621221183097623"
-          crossOrigin="anonymous"
-          async
-        />
-        <Script
-          strategy="beforeInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7658847507664367"
-          crossOrigin="anonymous"
-          async
-        />
-        <Script
-          strategy="beforeInteractive"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6808814529890463"
           crossOrigin="anonymous"
           async
         />
         <Toaster position="top-center" />
         <Navbar user={user} />
+        <AdsScript />
         <main>{children}</main>
         <Footer />
       </body>
