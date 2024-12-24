@@ -153,9 +153,9 @@ export const ImageView = ({
     if (mainDiv.current) {
       toPng(mainDiv.current, {
         includeQueryParams: true,
-        canvasWidth: imageSize.width / 2,
-        canvasHeight: imageSize.height / 2,
-        quality: 0.2,
+        canvasWidth: imageSize.width,
+        canvasHeight: imageSize.height,
+        quality: 0.6,
         pixelRatio: 0.8,
       }).then((dataUrl) => {
         supportAdded(id, userId).then((res) => {
