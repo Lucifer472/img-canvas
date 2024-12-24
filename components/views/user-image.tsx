@@ -203,12 +203,12 @@ export const UserImage = ({
   if (!img) return null;
 
   return (
-    <Image
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
       ref={imgRef as any}
       src={img}
       alt="Image"
-      fill
-      className="object-contain"
+      className="object-contain absolute w-full h-full inset-0"
       style={{
         transform: `translate(${position.x}px, ${position.y}px) rotate(${rotation}deg) scale(${scale})`,
         cursor: isDragging ? "grabbing" : "grab",
