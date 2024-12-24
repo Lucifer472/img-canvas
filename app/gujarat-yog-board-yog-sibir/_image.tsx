@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import download from "downloadjs";
 import Image from "next/image";
-import { toPng } from "html-to-image";
+import { toJpeg, toPng } from "html-to-image";
 import { Poppins } from "next/font/google";
 import { CopyIcon, RotateCw } from "lucide-react";
 
@@ -151,13 +151,15 @@ export const ImageView = ({
   const handleDownload = () => {
     setIsGetting(true);
     if (mainDiv.current) {
-      toPng(mainDiv.current, {
+      toJpeg(mainDiv.current, {
         includeQueryParams: true,
         canvasWidth: imageSize.width,
         canvasHeight: imageSize.height,
+        quality: 1,
+        pixelRatio: 1,
       }).then((dataUrl) => {
-        supportAdded(id, userId).then(() => {
-          download(dataUrl, imgName + ".png");
+        supportAdded(id, userId).then((res) => {
+          download(dataUrl, imgName + ".jpg");
           setStep(3);
           setIsGetting(false);
         });

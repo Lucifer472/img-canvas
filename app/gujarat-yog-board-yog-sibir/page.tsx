@@ -97,7 +97,6 @@ const FramePage = async () => {
           img={frame.img}
           id={frame.id}
           userId={frame.user.id}
-          userName={session?.user?.name}
         />
       </div>
     </section>
