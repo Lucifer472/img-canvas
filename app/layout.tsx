@@ -37,15 +37,15 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Script
+        {/* <Script
           strategy="beforeInteractive"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6808814529890463"
           crossOrigin="anonymous"
           async
         />
-        <Toaster position="top-center" />
+        <Toaster position="top-center" /> */}
         <Navbar user={user} />
-        <AdsScript />
+        {/* <AdsScript /> */}
         <main>{children}</main>
         <Footer />
       </body>
