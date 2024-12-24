@@ -155,10 +155,10 @@ export const ImageView = ({
         includeQueryParams: true,
         canvasWidth: imageSize.width,
         canvasHeight: imageSize.height,
-        quality: 1,
-        pixelRatio: 1,
+        width: 500,
+        height: 500,
       }).then((dataUrl) => {
-        supportAdded(id, userId).then((res) => {
+        supportAdded(id, userId).then(() => {
           download(dataUrl, imgName + ".png");
           setStep(3);
           setIsGetting(false);
