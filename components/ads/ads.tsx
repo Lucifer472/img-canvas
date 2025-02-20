@@ -4,7 +4,7 @@ import { AdUnit } from "next-google-adsense";
 
 export const Ads1 = () => {
   return (
-    <div className="w-full my-4">
+    <div className="w-full my-4 min-w-[350px] min-h-[300px]">
       <h2 className="text-center w-full text-sm font-medium text-gray-900 mb-2">
         Sponsored
       </h2>
@@ -19,7 +19,7 @@ export const Ads1 = () => {
 
 export const Ads2 = () => {
   return (
-    <div className="w-full my-4">
+    <div className="w-full my-4 min-w-[350px] min-h-[300px]">
       <h2 className="text-center w-full text-sm font-medium text-gray-900 mb-2">
         Sponsored
       </h2>
