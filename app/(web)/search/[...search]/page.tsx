@@ -7,6 +7,7 @@ import { findFrames } from "@/lib/frames";
 import { NoFrameFound } from "@/components/views/no-frame";
 
 import type { Metadata } from "next";
+import { Ads1, Ads2 } from "@/components/ads/ads";
 
 export async function generateMetadata({
   params,
@@ -47,6 +48,7 @@ const SearchPage = async ({ params }: { params: { search: string[] } }) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       ></script>
+      <Ads1 />
       <Title
         label="Campaigns that matches you're search."
         title={"Result for: " + decodeURIComponent(params.search[0])}
@@ -68,6 +70,7 @@ const SearchPage = async ({ params }: { params: { search: string[] } }) => {
         ) : (
           <NoFrameFound />
         )}
+        <Ads2 />
       </div>
     </section>
   );

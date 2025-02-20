@@ -6,6 +6,7 @@ import { FrameCard } from "@/components/views/frame-card";
 import { getPopularFrames } from "@/lib/frames";
 
 import type { Metadata } from "next";
+import { Ads1, Ads2 } from "@/components/ads/ads";
 
 export const revalidate = 360;
 
@@ -53,6 +54,7 @@ const PopularPage = async ({ params }: { params: { page: string } }) => {
       <div className="w-full flex justify-end my-2 md:my-8 px-2 sm:px-0">
         <Combobox />
       </div>
+      <Ads1 />
       <div className="w-full flex items-center justify-center gap-1 sm:gap-2 md:gap-4 lg:gap-6 xl:gap-8 flex-wrap">
         {frameData.map((f) => (
           <FrameCard
@@ -67,6 +69,7 @@ const PopularPage = async ({ params }: { params: { page: string } }) => {
           />
         ))}
       </div>
+      <Ads2 />
       <Pagination
         baseLink="/popular/"
         isBack={pageNumber === 1}

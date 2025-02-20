@@ -20,6 +20,7 @@ import { ImgBtn } from "@/components/etc/img-button";
 import { supportAdded } from "@/actions/frames";
 
 import { cn } from "@/lib/utils";
+import { Ads3 } from "../ads/ads";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -399,7 +400,7 @@ Get yourself this Photoframemaker at https://photosframemaker.com/${id} Don't fo
             step === 2 ? "fixed" : "hidden"
           )}
         >
-          <div className="w-[300px] h-[300px] bg-red-500"></div>
+          <Ads3 />
           <div
             className={cn(
               "relative w-full my-1 h-[80px] overflow-hidden",

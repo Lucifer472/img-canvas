@@ -1,3 +1,4 @@
+import { Ads1, Ads2 } from "@/components/ads/ads";
 import { FrameCard } from "@/components/views/frame-card";
 import { Title } from "@/components/views/title";
 
@@ -83,6 +84,7 @@ const HomePage = async () => {
         <div className="col-span-1 hidden md:flex"></div>
       </div>
       <div className="px-2 w-full basic-container">
+        <Ads1 />
         <Title
           label=" Campaigns that gained the most supports in the last 24 hours."
           link="/popular"
@@ -135,6 +137,7 @@ const HomePage = async () => {
         </div>
       </div>
       <div className="px-2 w-full basic-container">
+        <Ads2 />
         <Title
           label="The most popular and viral campaigns on Photosframemaker"
           link="/popular"

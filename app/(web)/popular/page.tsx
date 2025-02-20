@@ -1,3 +1,4 @@
+import { Ads1, Ads2 } from "@/components/ads/ads";
 import { Combobox } from "@/components/etc/combobox";
 import { Pagination } from "@/components/etc/pagination";
 
@@ -40,6 +41,7 @@ const PopularPage = async () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       ></script>
+      <Ads1 />
       <div className="w-full flex justify-end my-2 md:my-8 px-2 sm:px-0">
         <Combobox />
       </div>
@@ -57,6 +59,7 @@ const PopularPage = async () => {
           />
         ))}
       </div>
+      <Ads2 />
       <Pagination baseLink="/popular/" isBack={true} isNext={true} page={1} />
     </section>
   );

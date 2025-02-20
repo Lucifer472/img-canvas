@@ -16,6 +16,7 @@ import { FrameSharePop } from "@/components/views/SocialShare";
 import DeleteFrameForm from "@/components/auth/delete-frame-form";
 import Comments from "@/components/views/comments";
 import GoogleCaptchaWrapper from "@/components/auth/goole-rechaptcha-wrapper";
+import { Ads1, Ads2 } from "@/components/ads/ads";
 
 export async function generateMetadata({
   params,
@@ -88,6 +89,7 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
           >
             {frame.user.name}
           </Link>
+
           {session &&
             session.user &&
             session.user.email === frame.user.email && (
@@ -107,6 +109,7 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
           <p className="text-sm text-gray-800 text-center">{frame.desc}</p>
           <FrameSharePop label={frame.id} img={frame.img} />
         </div>
+        <Ads1 />
         <ImageView
           imgName={frame.name}
           img={frame.img}
@@ -114,6 +117,7 @@ const FramePage = async ({ params }: { params: { frameId: string } }) => {
           userId={frame.user.id}
           userName={session?.user?.name}
         />
+        <Ads2 />
         <SessionProvider>
           <GoogleCaptchaWrapper>
             <Comments />
